@@ -1,9 +1,16 @@
-﻿Imports System.Text.RegularExpressions
+﻿' '*****************************************************************************************
+' Student Names: Laurie Shields (034448142)
+'                Mark Lindan (063336143)
+' CVB815 - Record.vb
+' Last Updated On: Feb 21, 2015
+'*******************************************************************************************
+Imports System.Text.RegularExpressions
 Imports CSLib
 
 <Serializable()> Public MustInherit Class Record : Implements IValidator : Implements IRecord
 
     Protected m_ID As UInteger
+    Protected MustOverride ReadOnly Property fieldcount As UInt16
 
     Public Sub New()
 

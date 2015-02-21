@@ -1,11 +1,17 @@
-﻿Imports System.IO
+﻿' '*****************************************************************************************
+' Student Names: Laurie Shields (034448142)
+'                Mark Lindan (063336143)
+' CVB815 - Book.vb
+' Last Updated On: Feb 21, 2015
+'*******************************************************************************************
+Imports System.IO
 Imports CSLib
 
 <Serializable()> Public MustInherit Class Book(Of T As IRecord)
 
     Protected Book As New ArrayList
     Protected header As String
-    Protected MustOverride ReadOnly Property fieldcount As UInt16
+
 
     Public Sub New()
 
@@ -46,16 +52,11 @@ Imports CSLib
             ' Loop over each line in file
             Do While (Not line Is Nothing)
                 If line.Trim() <> "" Then
-                    Dim fields() As String = line.Split(",")
-                    If fields.Length = fieldcount Then
-                        Try
-                            Interpret(fields)
-                        Catch e As ArgumentException
-                            Console.WriteLine(e.Message)
-                        End Try
-                    Else
-                        Throw New InvalidDataException("File does not contain valid data")
-                    End If
+                    Try
+                        Interpret(line)
+                    Catch e As ArgumentException
+                        Console.WriteLine(e.Message)
+                    End Try
                 End If
 
                 ' Read in the next line.
@@ -65,7 +66,7 @@ Imports CSLib
         End Using
     End Function
 
-    Protected MustOverride Sub Interpret(fields As String())
+    Protected MustOverride Sub Interpret(line As String)
 
     Public Sub SaveCSV(Path As String)
         Using sw As New StreamWriter(Path)

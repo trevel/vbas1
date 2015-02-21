@@ -1,4 +1,10 @@
-﻿Public Class Address : Inherits Record
+﻿' '*****************************************************************************************
+' Student Names: Laurie Shields (034448142)
+'                Mark Lindan (063336143)
+' CVB815 - Address.vb
+' Last Updated On: Feb 21, 2015
+'*******************************************************************************************
+Public Class Address : Inherits Record
 
     Public Enum AddressType
         mailing_address
@@ -24,6 +30,11 @@
         Me.type = type
     End Sub
 
+    Protected Overrides ReadOnly Property fieldcount As UShort
+        Get
+            Return 6
+        End Get
+    End Property
 
     Public Property street As String
         Get

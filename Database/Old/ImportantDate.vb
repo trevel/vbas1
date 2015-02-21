@@ -1,8 +1,14 @@
-﻿Imports CSLib
+﻿' '*****************************************************************************************
+' Student Names: Laurie Shields (034448142)
+'                Mark Lindan (063336143)
+' CVB815 - ImportantDate.vb
+' Last Updated On: Feb 21, 2015
+'*******************************************************************************************
+Imports CSLib
+Imports System.IO
 
 <Serializable()> Public Class ImportantDate : Inherits Record
 
-    Const fieldcount = 4
     Private m_birthDate As Date
     Private m_anniversaryDate As Date
     Private m_comments As String
@@ -14,6 +20,24 @@
         Me.anniversaryDate = anniversaryDate
         Me.comments = comments
     End Sub
+
+    Sub New(line As String)
+        Dim fields() As String = line.Split(",")
+        If fields.Length = fieldcount Then
+            Me.ID = Convert.ToUInt32(fields(0))
+            Me.birthDate = Convert.ToDateTime(fields(1))
+            Me.anniversaryDate = Convert.ToDateTime(fields(2))
+            Me.comments = fields(3)
+        Else
+            Throw New InvalidDataException("File does not contain valid data")
+        End If
+    End Sub
+
+    Protected Overrides ReadOnly Property fieldcount As UShort
+        Get
+            Return 4
+        End Get
+    End Property
 
     Public Property birthDate As Date?
         Get

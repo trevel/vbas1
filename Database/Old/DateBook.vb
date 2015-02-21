@@ -1,12 +1,13 @@
-﻿<Serializable()> Public Class DateBook : Inherits Book(Of ImportantDate)
+﻿' '*****************************************************************************************
+' Student Names: Laurie Shields (034448142)
+'                Mark Lindan (063336143)
+' CVB815 - DateBook.vb
+' Last Updated On: Feb 21, 2015
+'*******************************************************************************************
+<Serializable()> Public Class DateBook : Inherits Book(Of ImportantDate)
 
-    Protected Overrides Sub Interpret(fields() As String)
-        Book.Add(New ImportantDate(Convert.ToUInt32(fields(0)), Convert.ToDateTime(fields(1)), Convert.ToDateTime(fields(2)), fields(3)))
+    Protected Overrides Sub Interpret(line As String)
+        Dim entry As New ImportantDate(line)
+        Book.Add(entry)
     End Sub
-
-    Protected Overrides ReadOnly Property fieldcount As UShort
-        Get
-            Return 4
-        End Get
-    End Property
 End Class

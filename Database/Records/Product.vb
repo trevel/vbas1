@@ -1,4 +1,11 @@
-﻿Public Class Product : Inherits Record
+﻿' '*****************************************************************************************
+' Student Names: Laurie Shields (034448142)
+'                Mark Lindan (063336143)
+' CVB815 - Product.vb
+' Last Updated On: Feb 21, 2015
+'*******************************************************************************************
+Imports System.IO
+Public Class Product : Inherits Record
     Protected _Description As String
     Protected _Price As Double
     Protected _Inventory As Integer
@@ -13,6 +20,25 @@
         Me.Price = Price
         Me.Inventory = Inventory
     End Sub
+
+    Public Sub New(line As String)
+        Dim fields() As String = line.Split(",")
+        If fields.Length = fieldcount Then
+            Me.ID = fields(0)
+            Me.Description = fields(1)
+            Me.Price = Convert.ToDouble(fields(2))
+            Me.Inventory = Convert.ToInt16(fields(3))
+        Else
+            Throw New InvalidDataException("File does not contain valid data")
+        End If
+    End Sub
+
+    Protected Overrides ReadOnly Property fieldcount As UShort
+        Get
+            Return 4
+        End Get
+    End Property
+
     Public Property Description As String
         Get
             Return _Description
@@ -65,4 +91,9 @@
             Throw New ArgumentException("We don't have enough")
         End If
     End Sub
+
+    Public Overrides Function ToString() As String
+        Return Me.ID & "," & Me.Description & "," & Me.Price & "," & Me.Inventory
+    End Function
+
 End Class
