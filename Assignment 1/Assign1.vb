@@ -54,16 +54,123 @@ Public Module Assign1
                 Case -1, 5
                     Exit Sub
                 Case 1
-                    Console.WriteLine("Implement Display all customers functionality!")
-                    ' Console.WriteLine(customerbook.tostring())
+                    CustomerDisplay()
                 Case 2
-                    Console.WriteLine("Implement customer add functionality!")
+                    CustomerAdd()
                 Case 3
-                    Console.WriteLine("Implement customer edit functionality!")
+                    CustomerEdit()
                 Case 4
-                    Console.WriteLine("Implement customer delete functionality!")
+                    CustomerRemove()
             End Select
         Loop
+    End Sub
+
+    Private Sub CustomerDisplay()
+        Console.WriteLine("Implement Display all customers functionality!")
+        ' LAURIE :: TODO
+        ' Console.WriteLine(customerbook.tostring())
+    End Sub
+
+    Private Sub CustomerAdd()
+        Dim input As String
+        Console.WriteLine("Enter Customer ID")
+        input = Console.ReadLine().Trim()
+        Dim id As Int16 = Convert.ToInt16(input)
+        Console.WriteLine("Enter Customer Name")
+        Dim name As String = Console.ReadLine().Trim()
+        Console.WriteLine("Enter Customer Email Address")
+        Dim email As String = Console.ReadLine().Trim()
+        Console.WriteLine("Enter Customer Phone number")
+        Dim phone_number As String = Console.ReadLine().Trim()
+        Console.WriteLine("Enter Customer Mailing Address")
+        Dim mail_address As String = Console.ReadLine().Trim()
+        Console.WriteLine("Enter Customer Shipping Address")
+        Dim ship_address As String = Console.ReadLine().Trim()
+        Console.WriteLine("Enter Customer Credit Limit")
+        input = Console.ReadLine().Trim()
+        Dim credit_limit As Double = Convert.ToDouble(input)
+
+        ' LAURIE :: TODO need to construct the address objects...all we have is a string from the console
+        Dim mailing_address As Address = Nothing
+        Dim shipping_address As Address = Nothing
+
+        ' LAURIE :: TODO
+        ' customerbook.Add(Dim entry As New Customer(id, name, email, mailing_address, shipping_address, phone_number, credit_limit)
+        ' 
+        Console.WriteLine("Implement customer add functionality!")
+    End Sub
+
+    Private Sub CustomerEdit()
+        Dim results As List(Of String) = Nothing
+        Dim searchString As String = GetSearchString("Enter the customer name (Regular expressions are allowed)")
+        Console.WriteLine("Implement customer edit functionality!")
+        ' LAURIE - TODO - need to deal with searchfield here
+        ' results = customerbook.Search(searchString, searchField)
+        If results Is Nothing OrElse results.Count = 0 Then
+            Console.WriteLine("No records found")
+            Exit Sub
+        End If
+        Dim recordtoedit As Short = GetChoice("Customer Search Results", results.ToArray)
+        If recordtoedit = -1 Then
+            Exit Sub
+        End If
+        ' LAURIE :: TODO
+        Dim record As Customer = Nothing ' = customerbook.GetByID(results(recordtoedit - 1).Split(",")(0))
+        If record Is Nothing Then
+            Console.WriteLine("Customer record not found -- something went wrong")
+        Else
+            Dim input As String
+            Console.WriteLine(results(recordtoedit - 1))
+            Select Case GetChoice("Edit Customer", {"Edit Name", "Edit Email Address", "Edit Phone Number", "Edit Mailing Address", "Edit Shipping Address", "Edit Credit Limit", "Exit"})
+                Case -1, 7
+                    Exit Sub
+                Case 1
+                    Console.WriteLine("Current name: " + record.name.ToString)
+                    record.name = Console.ReadLine().Trim()
+                Case 2
+                    Console.WriteLine("Current email address: " + record.email.ToString)
+                    record.email = Console.ReadLine().Trim()
+                Case 3
+                    Console.WriteLine("Current phone number: " + record.phone_number.ToString)
+                    record.phone_number = Console.ReadLine().Trim()
+                Case 4
+                    Console.WriteLine("Current mailing address :" + record.mailing_address.ToString)
+                    ' LAURIE :: TODO
+                    record.mailing_address = Nothing ' New Address(Console.ReadLine().Trim())
+                Case 5
+                    Console.WriteLine("Current shipping address: " + record.shipping_address.ToString)
+                    ' LAURIE :: TODO
+                    record.shipping_address = Nothing ' New Address(Console.ReadLine().Trim())
+                Case 6
+                    Console.WriteLine("Current credit limit: " + record.credit_limit.ToString)
+                    input = Console.ReadLine().Trim()
+                    record.credit_limit = Convert.ToDouble(input)
+            End Select
+        End If
+    End Sub
+
+    Private Sub CustomerRemove()
+        Dim results As List(Of String) = Nothing
+        Dim searchString As String = GetSearchString("Enter the customer name (Regular expressions are allowed)")
+        ' LAURIE - TODO - need to deal with searchfield here
+        'results = customerbook.Search(searchString, searchField)
+        If results Is Nothing OrElse results.Count = 0 Then
+            Console.WriteLine("No records found")
+            Exit Sub
+        End If
+        Dim recordtoedit As Short = GetChoice("Customer delete menu", results.ToArray)
+        If recordtoedit = -1 Then
+            Exit Sub
+        End If
+        ' LAURIE :: TODO
+        Dim record As Customer = Nothing ' = customerbook.GetByID(results(recordtoedit - 1).Split(",")(0))
+        If record Is Nothing Then
+            Console.WriteLine("Customer record not found -- something went wrong")
+        Else
+            ' LAURIE :: TODO
+            ' customerbook.Remove(record)
+            Console.WriteLine("Implement customer delete functionality!")
+        End If
     End Sub
 
     Private Sub ProductMenu()
@@ -72,15 +179,31 @@ Public Module Assign1
                 Case -1, 5
                     Exit Sub
                 Case 1
-                    Console.WriteLine(productbook.tostring())
+                    ProductDisplay()
                 Case 2
-                    Console.WriteLine("Implement product add functionality!")
+                    ProductAdd()
                 Case 3
-                    Console.WriteLine("Implement product edit functionality!")
+                    ProductEdit()
                 Case 4
-                    Console.WriteLine("Implement product delete functionality!")
+                    ProductRemove()
             End Select
         Loop
+    End Sub
+
+    Private Sub ProductDisplay()
+        Console.WriteLine(productbook.tostring())
+    End Sub
+
+    Private Sub ProductAdd()
+        Console.WriteLine("Implement product add functionality!")
+    End Sub
+
+    Private Sub ProductEdit()
+        Console.WriteLine("Implement product edit functionality!")
+    End Sub
+
+    Private Sub ProductRemove()
+        Console.WriteLine("Implement product delete functionality!")
     End Sub
 
     Private Sub OrderMenu()
@@ -89,17 +212,63 @@ Public Module Assign1
                 Case -1, 6
                     Exit Sub
                 Case 1
-                    Console.WriteLine(orderbook.tostring())
+                    OrderDisplay()
                 Case 2
-                    Console.WriteLine("Implement order add functionality!")
+                    OrderAdd()
                 Case 3
-                    Console.WriteLine("Implement order edit functionality!")
+                    OrderEdit()
                 Case 4
-                    Console.WriteLine("Implement order delete functionality!")
+                    OrderRemove()
                 Case 5
-                    Console.WriteLine("Implement order ship functionality!")
+                    OrderShip()
             End Select
         Loop
+    End Sub
+
+    Private Sub OrderDisplay()
+        Console.WriteLine(orderbook.tostring())
+    End Sub
+
+    Private Sub OrderAdd()
+        Console.WriteLine("Implement order add functionality!")
+        Dim input As String
+        Console.WriteLine("Enter Customer ID")
+        input = Console.ReadLine().Trim()
+        Dim id As Int16 = Convert.ToInt16(input)
+        Console.WriteLine("Enter Customer Name")
+        Dim name As String = Console.ReadLine().Trim()
+        Console.WriteLine("Enter Customer Email Address")
+        Dim email As String = Console.ReadLine().Trim()
+        Console.WriteLine("Enter Customer Phone number")
+        Dim phone_number As String = Console.ReadLine().Trim()
+        Console.WriteLine("Enter Customer Mailing Address")
+        Dim mail_address As String = Console.ReadLine().Trim()
+        Console.WriteLine("Enter Customer Shipping Address")
+        Dim ship_address As String = Console.ReadLine().Trim()
+        Console.WriteLine("Enter Customer Credit Limit")
+        input = Console.ReadLine().Trim()
+        Dim credit_limit As Double = Convert.ToDouble(input)
+
+        ' LAURIE :: TODO need to construct the address objects...all we have is a string from the console
+        Dim mailing_address As Address = Nothing
+        Dim shipping_address As Address = Nothing
+
+        ' LAURIE :: TODO
+        ' customerbook.Add(Dim entry As New Customer(id, name, email, mailing_address, shipping_address, phone_number, credit_limit)
+        ' 
+        Console.WriteLine("Implement customer add functionality!")
+    End Sub
+
+    Private Sub OrderEdit()
+        Console.WriteLine("Implement order edit functionality!")
+    End Sub
+
+    Private Sub OrderRemove()
+        Console.WriteLine("Implement order delete functionality!")
+    End Sub
+
+    Private Sub OrderShip()
+        Console.WriteLine("Implement order ship functionality!")
     End Sub
 
     Private Function GetChoice(title As String, choices As String()) As Int16
@@ -124,6 +293,20 @@ Public Module Assign1
             Catch ex As FormatException
                 Console.WriteLine("Invalid Choice")
             End Try
+        Loop
+    End Function
+
+    ' Gets user input for what search string they want to search by
+    Private Function GetSearchString(msg As String) As String
+        Dim inputline As String
+        Do
+            If msg Is Nothing Then
+                Console.WriteLine("Enter the search string (Regular expressions are allowed)")
+            Else
+                Console.WriteLine(msg)
+            End If
+            inputline = Console.ReadLine()
+            If inputline <> "" Then Return inputline
         Loop
     End Function
 

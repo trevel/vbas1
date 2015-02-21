@@ -22,6 +22,11 @@ Imports CSLib
     Public Sub Add(item As T)
         Book.Add(item)
     End Sub
+
+    Public Sub Remove(item As T)
+        Book.Remove(item)
+    End Sub
+
     Public Function GetByID(id As Integer) As T
         For Each item As T In Book
             If item.GetID() = id Then Return item
