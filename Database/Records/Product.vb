@@ -22,15 +22,7 @@ Public Class Product : Inherits Record
     End Sub
 
     Public Sub New(line As String)
-        Dim fields() As String = line.Split(",")
-        If fields.Length = fieldcount Then
-            Me.ID = fields(0)
-            Me.Description = fields(1)
-            Me.Price = Convert.ToDouble(fields(2))
-            Me.Inventory = Convert.ToInt16(fields(3))
-        Else
-            Throw New InvalidDataException("File does not contain valid data")
-        End If
+        InterpretCSV(line)
     End Sub
 
     Protected Overrides ReadOnly Property fieldcount As UShort
@@ -92,8 +84,24 @@ Public Class Product : Inherits Record
         End If
     End Sub
 
-    Public Overrides Function ToString() As String
+    Public Overrides Function GetCSV() As String
         Return Me.ID & "," & Me.Description & "," & Me.Price & "," & Me.Inventory
+    End Function
+
+    Public Overrides Sub InterpretCSV(csv As String)
+        Dim fields() As String = csv.Split(",")
+        If fields.Length = fieldcount Then
+            Me.ID = fields(0)
+            Me.Description = fields(1)
+            Me.Price = Convert.ToDouble(fields(2))
+            Me.Inventory = Convert.ToInt16(fields(3))
+        Else
+            Throw New InvalidDataException("File does not contain valid data")
+        End If
+    End Sub
+
+    Public Overrides Function ToString() As String
+        Return GetCSV()
     End Function
 
 End Class

@@ -63,17 +63,17 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address.vb" />
-    <Compile Include="OrderBook.vb" />
+    <Compile Include="Books\AddressBook.vb" />
+    <Compile Include="Books\CustomerBook.vb" />
+    <Compile Include="Books\ProductBook.vb" />
+    <Compile Include="Records\Address.vb" />
+    <Compile Include="Books\OrderBook.vb" />
     <Compile Include="Records\Customer.vb" />
     <Compile Include="Records\Order.vb" />
     <Compile Include="Records\OrderItem.vb" />
     <Compile Include="Records\Product.vb" />
-    <Compile Include="ProductBook.vb" />
-    <Compile Include="Book.vb" />
-    <Compile Include="Old\DateBook.vb" />
+    <Compile Include="Books\Book.vb" />
     <Compile Include="Records\Record.vb" />
-    <Compile Include="Old\ImportantDate.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

@@ -12,9 +12,9 @@ Imports CSLib
     Protected m_ID As UInteger
     Protected MustOverride ReadOnly Property fieldcount As UInt16
 
-    Public Sub New()
+    Public MustOverride Sub InterpretCSV(csv As String)
 
-    End Sub
+    Public MustOverride Function GetCSV() As String
 
     Public Function GetID() As Integer Implements IRecord.GetID
         Return Me.ID

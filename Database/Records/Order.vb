@@ -14,16 +14,10 @@ Public Class Order : Inherits Record
     Public Sub New(customer As Customer, Items As ArrayList, Quantity As Integer)
         Me.Customer = customer
         Me.Items = Items
-
     End Sub
 
-    Public Sub New(line As String)
-        Dim fields() As String = line.Split(",")
-        If fields.Length = fieldcount Then
-            ' assign the fields from the line
-        Else
-            Throw New InvalidDataException("File does not contain valid data")
-        End If
+    Public Sub New(csv As String)
+        InterpretCSV(csv)
     End Sub
 
     Protected Overrides ReadOnly Property fieldcount As UShort
@@ -31,5 +25,14 @@ Public Class Order : Inherits Record
             Return 7  ' TODO - figure out what this should be
         End Get
     End Property
+
+    Public Overrides Function GetCSV() As String
+        Throw New NotImplementedException
+        Return Nothing
+    End Function
+
+    Public Overrides Sub InterpretCSV(csv As String)
+        Throw New NotImplementedException
+    End Sub
 
 End Class
