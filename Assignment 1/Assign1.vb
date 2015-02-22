@@ -19,7 +19,7 @@ Public Module Assign1
     ' Allocate the books
     Dim orderbook As New OrderBook()
     Dim productbook As New ProductBook()
-    'Dim customerbook As New CustomerBook()
+    Dim customerbook As New CustomerBook()
 
     Sub Main()
         If LoadData() <> -1 Then
@@ -66,16 +66,12 @@ Public Module Assign1
     End Sub
 
     Private Sub CustomerDisplay()
-        Console.WriteLine("Implement Display all customers functionality!")
-        ' LAURIE :: TODO
-        ' Console.WriteLine(customerbook.tostring())
+        Console.WriteLine(customerbook.tostring())
     End Sub
 
     Private Sub CustomerAdd()
         Dim input As String
-        Console.WriteLine("Enter Customer ID")
-        input = Console.ReadLine().Trim()
-        Dim id As Int16 = Convert.ToInt16(input)
+        Dim credit_limit As Double = 0
         Console.WriteLine("Enter Customer Name")
         Dim name As String = Console.ReadLine().Trim()
         Console.WriteLine("Enter Customer Email Address")
@@ -87,17 +83,26 @@ Public Module Assign1
         Console.WriteLine("Enter Customer Shipping Address")
         Dim ship_address As String = Console.ReadLine().Trim()
         Console.WriteLine("Enter Customer Credit Limit")
-        input = Console.ReadLine().Trim()
-        Dim credit_limit As Double = Convert.ToDouble(input)
+        Do
+            input = Console.ReadLine().Trim()
+            Try
+                credit_limit = Convert.ToDouble(input)
+                Exit Do
+            Catch ex As FormatException
+                Console.WriteLine("Please enter a number for credit limit")
+            End Try
+        Loop
 
         ' LAURIE :: TODO need to construct the address objects...all we have is a string from the console
         Dim mailing_address As Address = Nothing
         Dim shipping_address As Address = Nothing
 
-        ' LAURIE :: TODO
-        ' customerbook.Add(Dim entry As New Customer(id, name, email, mailing_address, shipping_address, phone_number, credit_limit)
-        ' 
-        Console.WriteLine("Implement customer add functionality!")
+        ' LAURIE :: TODO - fix the addresses
+        Try
+            customerbook.Add(New Customer(name, email, 1, 1, phone_number, credit_limit))
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        End Try
     End Sub
 
     Private Sub CustomerEdit()
@@ -114,8 +119,7 @@ Public Module Assign1
         If recordtoedit = -1 Then
             Exit Sub
         End If
-        ' LAURIE :: TODO
-        Dim record As Customer = Nothing ' = customerbook.GetByID(results(recordtoedit - 1).Split(",")(0))
+        Dim record As Customer = customerbook.GetByID(results(recordtoedit - 1).Split(",")(0))
         If record Is Nothing Then
             Console.WriteLine("Customer record not found -- something went wrong")
         Else
@@ -143,8 +147,15 @@ Public Module Assign1
                     record.shipping_address = Nothing ' New Address(Console.ReadLine().Trim())
                 Case 6
                     Console.WriteLine("Current credit limit: " + record.credit_limit.ToString)
-                    input = Console.ReadLine().Trim()
-                    record.credit_limit = Convert.ToDouble(input)
+                    Do
+                        input = Console.ReadLine().Trim()
+                        Try
+                            record.credit_limit = Convert.ToDouble(input)
+                            Exit Do
+                        Catch ex As FormatException
+                            Console.WriteLine("Please enter a number for credit limit")
+                        End Try
+                    Loop
             End Select
         End If
     End Sub
@@ -152,7 +163,7 @@ Public Module Assign1
     Private Sub CustomerRemove()
         Dim results As List(Of String) = Nothing
         Dim searchString As String = GetSearchString("Enter the customer name (Regular expressions are allowed)")
-        ' LAURIE - TODO - need to deal with searchfield here
+        ' LAURIE :: TODO - need to deal with searchfield here
         'results = customerbook.Search(searchString, searchField)
         If results Is Nothing OrElse results.Count = 0 Then
             Console.WriteLine("No records found")
@@ -162,13 +173,11 @@ Public Module Assign1
         If recordtoedit = -1 Then
             Exit Sub
         End If
-        ' LAURIE :: TODO
-        Dim record As Customer = Nothing ' = customerbook.GetByID(results(recordtoedit - 1).Split(",")(0))
+        Dim record As Customer = customerbook.GetByID(results(recordtoedit - 1).Split(",")(0))
         If record Is Nothing Then
             Console.WriteLine("Customer record not found -- something went wrong")
         Else
-            ' LAURIE :: TODO
-            ' customerbook.Remove(record)
+            customerbook.Remove(record)
             Console.WriteLine("Implement customer delete functionality!")
         End If
     End Sub
@@ -231,32 +240,6 @@ Public Module Assign1
 
     Private Sub OrderAdd()
         Console.WriteLine("Implement order add functionality!")
-        Dim input As String
-        Console.WriteLine("Enter Customer ID")
-        input = Console.ReadLine().Trim()
-        Dim id As Int16 = Convert.ToInt16(input)
-        Console.WriteLine("Enter Customer Name")
-        Dim name As String = Console.ReadLine().Trim()
-        Console.WriteLine("Enter Customer Email Address")
-        Dim email As String = Console.ReadLine().Trim()
-        Console.WriteLine("Enter Customer Phone number")
-        Dim phone_number As String = Console.ReadLine().Trim()
-        Console.WriteLine("Enter Customer Mailing Address")
-        Dim mail_address As String = Console.ReadLine().Trim()
-        Console.WriteLine("Enter Customer Shipping Address")
-        Dim ship_address As String = Console.ReadLine().Trim()
-        Console.WriteLine("Enter Customer Credit Limit")
-        input = Console.ReadLine().Trim()
-        Dim credit_limit As Double = Convert.ToDouble(input)
-
-        ' LAURIE :: TODO need to construct the address objects...all we have is a string from the console
-        Dim mailing_address As Address = Nothing
-        Dim shipping_address As Address = Nothing
-
-        ' LAURIE :: TODO
-        ' customerbook.Add(Dim entry As New Customer(id, name, email, mailing_address, shipping_address, phone_number, credit_limit)
-        ' 
-        Console.WriteLine("Implement customer add functionality!")
     End Sub
 
     Private Sub OrderEdit()
@@ -317,11 +300,11 @@ Public Module Assign1
                 Case -1
                     Return -1
                 Case 1
-                    ' customerbook.Load(CUSTOMER_CSV_PATH)
+                    customerbook.Load(CUSTOMER_CSV_PATH)
                     productbook.Load(PRODUCTS_CSV_PATH)
                     orderbook.Load(ORDERS_CSV_PATH)
                 Case 2
-                    ' customerbook.Load(CUSTOMER_XML_PATH)
+                    customerbook.Load(CUSTOMER_XML_PATH)
                     productbook.Load(PRODUCTS_XML_PATH)
                     orderbook.Load(ORDERS_XML_PATH)
             End Select
@@ -340,10 +323,10 @@ Public Module Assign1
     Private Sub SaveData()
         ' write out the various books to csv and soap
         Console.WriteLine("Serialize all the books and save to csv files")
-        ' If Not customerbook Is Nothing Then
-        '   book.SaveCSV(CUSTOMER_CSV_PATH)
-        '   book.SaveXML(CUSTOMER_XML_PATH)
-        ' End If
+        If Not customerbook Is Nothing Then
+            customerbook.SaveCSV(CUSTOMER_CSV_PATH)
+            customerbook.SaveXML(CUSTOMER_XML_PATH)
+        End If
         If Not productbook Is Nothing Then
             productbook.SaveCSV(PRODUCTS_CSV_PATH)
             productbook.SaveXML(PRODUCTS_XML_PATH)

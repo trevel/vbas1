@@ -5,7 +5,7 @@
 ' Last Updated On: Feb 21, 2015
 '*******************************************************************************************
 Imports System.IO
-Public Class Product : Inherits Record
+<Serializable()> Public Class Product : Inherits Record
     Protected _Description As String
     Protected _Price As Double
     Protected _Inventory As Integer
@@ -99,9 +99,5 @@ Public Class Product : Inherits Record
             Throw New InvalidDataException("File does not contain valid data")
         End If
     End Sub
-
-    Public Overrides Function ToString() As String
-        Return GetCSV()
-    End Function
 
 End Class

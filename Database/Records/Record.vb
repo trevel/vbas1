@@ -33,5 +33,7 @@ Imports CSLib
         Return Regex.IsMatch(testData, searchstring)
     End Function
 
-
+    Public Overrides Function ToString() As String
+        Return GetCSV()
+    End Function
 End Class

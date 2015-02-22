@@ -7,7 +7,7 @@
 '*******************************************************************************************
 Imports System.IO
 
-Public Class Order : Inherits Record
+<Serializable()> Public Class Order : Inherits Record
     Public Property Customer As Customer
     Public Property Items As ArrayList ' List(Of OrderItem)
 
