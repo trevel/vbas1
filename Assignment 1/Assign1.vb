@@ -204,6 +204,37 @@ Public Module Assign1
     End Sub
 
     Private Sub ProductAdd()
+        Dim input As String
+        Dim price As Double = 0
+        Dim inv As Integer = 0
+        Console.WriteLine("Enter Product Description")
+        Dim desc As String = Console.ReadLine().Trim()
+        Console.WriteLine("Enter Product Price")
+        Do
+            input = Console.ReadLine().Trim()
+            Try
+                price = Convert.ToDouble(input)
+                Exit Do
+            Catch ex As FormatException
+                Console.WriteLine("Please enter a number for price")
+            End Try
+        Loop
+        Console.WriteLine("Enter Product Inventory")
+        Do
+            input = Console.ReadLine().Trim()
+            Try
+                inv = Integer.Parse(input)
+                Exit Do
+            Catch ex As FormatException
+                Console.WriteLine("Please enter a number for inventory")
+            End Try
+        Loop
+
+        Try
+            productbook.Add(New Product(desc, price, inv))
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        End Try
         Console.WriteLine("Implement product add functionality!")
     End Sub
 

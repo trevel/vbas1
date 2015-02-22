@@ -10,6 +10,8 @@ Imports System.IO
     Protected _Price As Double
     Protected _Inventory As Integer
 
+    Protected Shared next_id As Int16 = 1
+
     ' Public Sub New(Description As String, Price As Double, Inventory As Integer)
 
     ' End Sub
@@ -19,6 +21,13 @@ Imports System.IO
         Me.Description = Description
         Me.Price = Price
         Me.Inventory = Inventory
+        If ID >= next_id Then
+            next_id = ID + 1
+        End If
+    End Sub
+
+    Public Sub New(Description As String, Price As Double, Inventory As Integer)
+        Me.New(next_id, Description, Price, Inventory)
     End Sub
 
     Public Sub New(line As String)
@@ -49,7 +58,7 @@ Imports System.IO
         End Get
         Set(value As Double)
             If value >= 0 Then
-                Me._Price = Price
+                Me._Price = value
             Else
                 Throw New ArgumentException("Invalid Price. Be more positive")
             End If
@@ -85,7 +94,7 @@ Imports System.IO
     End Sub
 
     Public Overrides Function GetCSV() As String
-        Return Me.ID & "," & Me.Description & "," & Me.Price & "," & Me.Inventory
+        Return Me.ID & "," & Me.Description & "," & Me.Price.ToString("f2") & "," & Me.Inventory
     End Function
 
     Public Overrides Sub InterpretCSV(csv As String)
@@ -95,6 +104,9 @@ Imports System.IO
             Me.Description = fields(1)
             Me.Price = Convert.ToDouble(fields(2))
             Me.Inventory = Convert.ToInt16(fields(3))
+            If Me.ID >= next_id Then
+                next_id = Me.ID + 1
+            End If
         Else
             Throw New InvalidDataException("File does not contain valid data")
         End If
