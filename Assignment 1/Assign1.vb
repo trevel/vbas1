@@ -12,9 +12,14 @@ Public Module Assign1
     Const CUSTOMER_CSV_PATH = "..\..\..\customers.csv"
     Const PRODUCTS_CSV_PATH = "..\..\..\products.csv"
     Const ORDERS_CSV_PATH = "..\..\..\orders.csv"
+    Const ADDRESS_CSV_PATH = "..\..\..\address.csv"
+    Const ORDERLINE_CSV_PATH = "..\..\..\orderline.csv"
     Const CUSTOMER_XML_PATH = "..\..\..\customers.xml"
     Const PRODUCTS_XML_PATH = "..\..\..\products.xml"
     Const ORDERS_XML_PATH = "..\..\..\orders.xml"
+    Const ADDRESS_XML_PATH = "..\..\..\address.xml"
+    Const ORDERLINE_XML_PATH = "..\..\..\orderline.xml"
+
 
     ' Allocate the books
     Dim orderbook As New OrderBook()
@@ -331,13 +336,13 @@ Public Module Assign1
                 Case -1
                     Return -1
                 Case 1
-                    customerbook.Load(CUSTOMER_CSV_PATH)
-                    productbook.Load(PRODUCTS_CSV_PATH)
-                    orderbook.Load(ORDERS_CSV_PATH)
+                    customerbook = customerbook.Load(CUSTOMER_CSV_PATH)
+                    productbook = productbook.Load(PRODUCTS_CSV_PATH)
+                    orderbook = orderbook.Load(ORDERS_CSV_PATH)
                 Case 2
-                    customerbook.Load(CUSTOMER_XML_PATH)
-                    productbook.Load(PRODUCTS_XML_PATH)
-                    orderbook.Load(ORDERS_XML_PATH)
+                    customerbook = customerbook.Load(CUSTOMER_XML_PATH)
+                    productbook = productbook.Load(PRODUCTS_XML_PATH)
+                    orderbook = orderbook.Load(ORDERS_XML_PATH)
             End Select
         Catch e As InvalidDataException
             Console.WriteLine("Invalid data file format") ' LAURIE - TODO - add name of file here!!!
@@ -354,6 +359,14 @@ Public Module Assign1
     Private Sub SaveData()
         ' write out the various books to csv and soap
         Console.WriteLine("Serialize all the books and save to csv files")
+        'If Not AddressBook Is Nothing Then
+        '    AddressBook.SaveCSV(ADDRESS_CSV_PATH)
+        '    AddressBook.SaveXML(ADDRESS_XML_PATH)
+        'End If
+        'If Not OrderLineBook Is Nothing Then
+        '    OrderLineBook.SaveCSV(ORDERLINE_CSV_PATH)
+        '    OrderLineBook.SaveXML(ORDERLINE_XML_PATH)
+        'End If
         If Not customerbook Is Nothing Then
             customerbook.SaveCSV(CUSTOMER_CSV_PATH)
             customerbook.SaveXML(CUSTOMER_XML_PATH)

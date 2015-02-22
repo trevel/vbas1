@@ -129,7 +129,7 @@ Imports CSLib
     End Function
 
     Public Overrides Function GetCSV() As String
-        Return Me.ID & "," & Me.name & "," & Me.email & "," & Me.phone_number & "," & Me.credit_limit.ToString(".2f") & "," & Me.mailing_address & "," & Me.shipping_address
+        Return Me.ID & "," & Me.name & "," & Me.email & "," & Me.phone_number & "," & Me.credit_limit.ToString("0.00") & "," & Me.mailing_address & "," & Me.shipping_address
     End Function
 
     Public Overrides Sub InterpretCSV(csv As String)
