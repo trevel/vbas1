@@ -12,6 +12,7 @@ Imports System.Text.RegularExpressions
 
         Dim entry As New Product(line)
         Book.Add(entry)
+        next_id = entry.GetID
         ' RaiseEvent NewFriend(entry)
     End Sub
 

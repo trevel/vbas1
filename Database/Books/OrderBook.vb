@@ -9,6 +9,7 @@
 
         Dim entry As New Order(line)
         Book.Add(entry)
+        next_id = entry.GetID
         ' RaiseEvent NewFriend(entry)
     End Sub
 End Class

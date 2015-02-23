@@ -104,7 +104,7 @@ Public Module Assign1
 
         ' LAURIE :: TODO - fix the addresses
         Try
-            customerbook.Add(New Customer(name, email, 1, 1, phone_number, credit_limit))
+            customerbook.Add(New Customer(customerbook.next_id, name, email, 1, 1, phone_number, credit_limit))
         Catch ex As Exception
             Console.WriteLine(ex.Message)
         End Try
@@ -235,7 +235,7 @@ Public Module Assign1
         Loop
 
         Try
-            productbook.Add(New Product(desc, price, inv))
+            productbook.Add(New Product(productbook.next_id, desc, price, inv))
         Catch ex As Exception
             Console.WriteLine(ex.Message)
         End Try

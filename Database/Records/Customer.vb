@@ -17,7 +17,7 @@ Imports CSLib
     Protected _mailing_address_id As Integer
     Protected _shipping_address_id As Integer
 
-    Protected Shared next_id As Int16 = 1
+
     Public Sub New(id As Int16, name As String, email As String, mailing_address As Integer, shipping_address As Integer, phone_number As String, credit_limit As Double)
         Me.ID = id
         Me.name = name
@@ -26,13 +26,6 @@ Imports CSLib
         Me.shipping_address = shipping_address
         Me.phone_number = phone_number
         Me.credit_limit = credit_limit
-        If id >= next_id Then
-            next_id = id + 1
-        End If
-    End Sub
-
-    Public Sub New(name As String, email As String, mailing_address As Integer, shipping_address As Integer, phone_number As String, credit_limit As Double)
-        Me.New(next_id, name, email, mailing_address, shipping_address, phone_number, credit_limit)
     End Sub
 
     Public Sub New(csv As String)
@@ -143,9 +136,6 @@ Imports CSLib
             Me.credit_limit = Double.Parse(fields(4))
             Me.mailing_address = Integer.Parse(fields(5))
             Me.shipping_address = Integer.Parse(fields(6))
-            If Me.ID >= next_id Then
-                next_id = Me.ID + 1
-            End If
         Else
             Throw New InvalidDataException("File does not contain valid data")
         End If
