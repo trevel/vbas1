@@ -403,7 +403,7 @@ Public Module Assign1
                 Console.WriteLine("How many would you like at $" & prod_record.Price.ToString("0.00") & " each?")
                 qty = GetInteger("Quantity")
                 Try
-                    Dim newItem As New OrderItem(orderitembook.next_id, prod_record.GetID, qty)
+                    Dim newItem As New OrderItem(orderitembook.next_id, 0, prod_record.GetID, qty)
                     items.Add(newItem)
                     If qty <= prod_record.Inventory Then
                         can_ship = True
@@ -435,7 +435,93 @@ Public Module Assign1
     End Sub
 
     Private Sub OrderEdit()
-        Console.WriteLine("Implement order edit functionality!")
+        Dim tempStr As String = orderbook.tostring()
+        If tempStr = "- Empty -" Then
+            Console.WriteLine("No records found")
+            Exit Sub
+        End If
+        Dim lines() As String = tempStr.Split(Environment.NewLine)
+        If lines.Count = 0 Then
+            Console.WriteLine("No records found")
+            Exit Sub
+        End If
+        Dim recordtoedit As Short = GetChoiceID("Select an order to modify:", lines)
+        If recordtoedit = -1 Then
+            Exit Sub
+        End If
+        Dim record As Order = orderbook.GetByID(recordtoedit)
+        If record Is Nothing Then
+            Console.WriteLine("Order not found -- something went wrong")
+        Else
+            Do
+                Console.WriteLine(record.ToString)
+                Try
+                    Select Case GetChoice("Modify Order", {"Change Discount", "Add items", "Remove Items"})
+                        Case -1, 4
+                            Exit Sub
+                        Case 1
+                            Console.WriteLine("Current discount: " + record.discount.ToString("0.00") + " %")
+                            record.discount = GetDouble("Order Discount")
+                        Case 2
+                            OrderAddItems(record)
+                        Case 3
+                            OrderRemoveItems(record)
+                    End Select
+                Catch ex As ArgumentException
+                    Console.WriteLine(ex.Message)
+                End Try
+            Loop
+
+        End If
+    End Sub
+
+    Private Sub OrderAddItems(record As Order)
+        ' get a list of products and make sure there are some
+        Dim products() As String = productbook.tostring().Split(Environment.NewLine)
+        If products.Count = 0 Then
+            Console.WriteLine("No products found. You need to add some products before creating orders.")
+            Exit Sub
+        End If
+        Do While record.item_count <= 10
+            Dim product_choice As Short = GetChoiceID("Choose a Product", products)
+            If product_choice = -1 Then
+                Exit Do
+            End If
+            Dim prod_record As Product = productbook.GetByID(product_choice)
+            If prod_record Is Nothing Then
+                Console.WriteLine("Product record not found -- something went wrong")
+            Else
+                Console.WriteLine("How many would you like at $" & prod_record.Price.ToString("0.00") & " each?")
+                Dim qty As Integer = GetInteger("Quantity")
+                Try
+                    orderitembook.Add(New OrderItem(orderitembook.next_id, record.ID, prod_record.GetID, qty))
+                Catch ex As Exception
+                    Console.WriteLine(ex.Message)
+                End Try
+            End If
+        Loop
+    End Sub
+
+    Private Sub OrderRemoveItems(record As Order)
+        Dim orderlines() As String = orderitembook.GetByOrderID(record.ID)
+        If orderlines.Count = 0 Then
+            Console.WriteLine("Order currently has no items")
+            Exit Sub
+        End If
+        Dim recordtoedit As Short = GetChoiceID("Select an item to remove:", orderlines)
+        If recordtoedit = -1 Then
+            Exit Sub
+        End If
+        Dim item As OrderItem = orderitembook.GetByID(recordtoedit)
+        If item Is Nothing Then
+            Console.WriteLine("Order item not found -- something went wrong")
+        Else
+            If item.has_shipped Then
+                Console.WriteLine("That item has already shipped and cannot be removed")
+            Else
+                orderitembook.Remove(item)
+            End If
+        End If
     End Sub
 
     Private Sub OrderRemove()

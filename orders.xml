@@ -21,7 +21,7 @@
 <a3:ArrayList id="ref-5" xmlns:a3="http://schemas.microsoft.com/clr/ns/System.Collections">
 <_items href="#ref-11"/>
 <_size>1</_size>
-<_version>3</_version>
+<_version>1</_version>
 </a3:ArrayList>
 <a2:DelegateSerializationHolder_x002B_DelegateEntry id="ref-7" xmlns:a2="http://schemas.microsoft.com/clr/ns/System">
 <type id="ref-12">Database.OrderBook+NewOrderEventHandler</type>
@@ -65,7 +65,8 @@
 <a1:Order id="ref-23" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <_customer_id>1</_customer_id>
 <_order_date>2015-02-24T00:00:00.0000000-05:00</_order_date>
-<_discount>0</_discount>
+<_discount>15</_discount>
+<_item_count>0</_item_count>
 <_customer href="#ref-24"/>
 <m_ID>2</m_ID>
 <Record_x002B_m_ID>2</Record_x002B_m_ID>
@@ -86,8 +87,7 @@
 </a1:Customer>
 </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
-elds</_name>
-<_email id="ref-25">laurie_shields@hotmail.com</_email>
+5">laurie_shields@hotmail.com</_email>
 <_phone_number id="ref-26">905-111-2222</_phone_number>
 <_credit_limit>9999</_credit_limit>
 <_mailing_address_id>1</_mailing_address_id>

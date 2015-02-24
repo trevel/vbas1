@@ -71,9 +71,9 @@ Imports System.IO
         End Set
     End Property
 
-    Public Sub New(id As Integer, product As Integer, quantity As UInteger)
+    Public Sub New(id As Integer, order_id As Integer, product As Integer, quantity As UInteger)
         Me.ID = id
-        Me.order_id = 0
+        Me.order_id = order_id
         Me.product_id = product
         Me.quantity = quantity
         Me.ship_date = Nothing
@@ -125,6 +125,6 @@ Imports System.IO
         Else
             dateStr = "Not Shipped"
         End If
-        Return product.Description & "," & Me.quantity & "," & dateStr
+        Return Me.ID & "::" & product.Description & "," & Me.quantity & "," & dateStr
     End Function
 End Class

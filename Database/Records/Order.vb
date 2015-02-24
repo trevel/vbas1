@@ -11,6 +11,8 @@ Imports System.IO
     Protected _customer_id As Integer
     Protected _order_date As Date
     Protected _discount As Double
+    Protected _item_count As Integer = 0
+
     Public Property customer As Customer
 
     Public Sub New(id As Integer, cust As Integer, odate As Date, disc As Double, Items As ArrayList)
@@ -20,6 +22,7 @@ Imports System.IO
         Me.discount = disc
         For Each item As OrderItem In Items
             item.order_id = id
+            item_count = item_count + 1
         Next
     End Sub
 
@@ -60,6 +63,17 @@ Imports System.IO
                 Me._discount = value
             Else
                 Throw New ArgumentException("Invalid discount")
+            End If
+        End Set
+    End Property
+
+    Public Property item_count As Integer
+        Get
+            Return _item_count
+        End Get
+        Set(value As Integer)
+            If (value >= 0) Then
+                Me._item_count = value
             End If
         End Set
     End Property
