@@ -8,14 +8,15 @@
 Imports System.IO
 
 <Serializable()> Public Class Order : Inherits Record
-    Protected _customer As Integer
+    Protected _customer_id As Integer
     Protected _order_date As Date
     Protected _items As ArrayList ' List(Of OrderItem)
     Protected _discount As Double
+    Public Property customer As Customer
 
     Public Sub New(id As Integer, cust As Integer, odate As Date, disc As Double, Items As ArrayList)
         Me.ID = id
-        Me.customer = cust
+        Me.customer_id = cust
         Me.order_date = odate
         Me.discount = disc
         ' Me.Items = Nothing  ' LAURIE :: TODO
@@ -25,13 +26,13 @@ Imports System.IO
         InterpretCSV(csv)
     End Sub
 
-    Public Property customer As Integer
+    Public Property customer_id As Integer
         Get
-            Return _customer
+            Return _customer_id
         End Get
         Set(value As Integer)
             If (value > 0) Then
-                Me._customer = value
+                Me._customer_id = value
             End If
         End Set
     End Property
@@ -73,7 +74,7 @@ Imports System.IO
     End Function
 
     Public Overrides Function GetCSV() As String
-        Return Me.ID & "," & Format(Me.order_date, "yyyy-MM-dd") & "," & Me.discount.ToString("0.00") & "," & Me.customer
+        Return Me.ID & "," & Format(Me.order_date, "yyyy-MM-dd") & "," & Me.discount.ToString("0.00") & "," & Me.customer_id
     End Function
 
     Public Overrides Sub InterpretCSV(csv As String)
@@ -82,7 +83,7 @@ Imports System.IO
             Me.ID = Integer.Parse(fields(0))
             Me.order_date = Date.ParseExact(fields(1), "yyyy-MM-dd", Nothing)
             Me.discount = Double.Parse(fields(2))
-            Me.customer = Integer.Parse(fields(3))
+            Me.customer_id = Integer.Parse(fields(3))
         Else
             Throw New InvalidDataException("File does not contain valid data")
         End If

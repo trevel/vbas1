@@ -29,6 +29,8 @@ Imports CSLib
         End Set
     End Property
 
+    Public Property active As Boolean = False
+
     Protected Function IsValid(testData As String, searchstring As String) As Boolean Implements IValidator.IsValid
         Return Regex.IsMatch(testData, searchstring)
     End Function

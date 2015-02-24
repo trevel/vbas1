@@ -1,20 +1,42 @@
 <SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
 <SOAP-ENV:Body>
 <a1:OrderBook id="ref-1" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<Book href="#ref-3"/>
-<header id="ref-4">put something in here!!!</header>
+<NewOrderEvent href="#ref-3"/>
+<Book href="#ref-4"/>
+<header id="ref-5">put something in here!!!</header>
 <_next_id>1</_next_id>
-<Book_x0060_1_x002B_Book href="#ref-3"/>
-<Book_x0060_1_x002B_header href="#ref-4"/>
+<Book_x0060_1_x002B_Book href="#ref-4"/>
+<Book_x0060_1_x002B_header href="#ref-5"/>
 <Book_x0060_1_x002B__next_id>1</Book_x0060_1_x002B__next_id>
-<Book_x0060_1_x002B_NewEntryEvent xsi:null="1"/>
 </a1:OrderBook>
-<a2:ArrayList id="ref-3" xmlns:a2="http://schemas.microsoft.com/clr/ns/System.Collections">
-<_items href="#ref-5"/>
+<a2:DelegateSerializationHolder id="ref-3" xmlns:a2="http://schemas.microsoft.com/clr/ns/System">
+<Delegate href="#ref-6"/>
+<method0 href="#ref-7"/>
+</a2:DelegateSerializationHolder>
+<a3:ArrayList id="ref-4" xmlns:a3="http://schemas.microsoft.com/clr/ns/System.Collections">
+<_items href="#ref-8"/>
 <_size>0</_size>
 <_version>0</_version>
-</a2:ArrayList>
-<SOAP-ENC:Array id="ref-5" SOAP-ENC:arrayType="xsd:anyType[0]">
+</a3:ArrayList>
+<a2:DelegateSerializationHolder_x002B_DelegateEntry id="ref-6" xmlns:a2="http://schemas.microsoft.com/clr/ns/System">
+<type id="ref-9">Database.OrderBook+NewOrderEventHandler</type>
+<assembly id="ref-10">Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+<target xsi:type="xsd:anyType" xsi:null="1"/>
+<targetTypeAssembly id="ref-11">Assignment 1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</targetTypeAssembly>
+<targetTypeName id="ref-12">Assignment_1.Assign1</targetTypeName>
+<methodName id="ref-13">NewOrder</methodName>
+<delegateEntry xsi:null="1"/>
+</a2:DelegateSerializationHolder_x002B_DelegateEntry>
+<a4:MemberInfoSerializationHolder id="ref-7" xmlns:a4="http://schemas.microsoft.com/clr/ns/System.Reflection">
+<Name href="#ref-13"/>
+<AssemblyName href="#ref-11"/>
+<ClassName href="#ref-12"/>
+<Signature id="ref-14">Void NewOrder(Database.Order)</Signature>
+<Signature2 id="ref-15">System.Void NewOrder(Database.Order)</Signature2>
+<MemberType>8</MemberType>
+<GenericArguments xsi:null="1"/>
+</a4:MemberInfoSerializationHolder>
+<SOAP-ENC:Array id="ref-8" SOAP-ENC:arrayType="xsd:anyType[0]">
 </SOAP-ENC:Array>
 </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>

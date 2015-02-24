@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Books\AddressBook.vb" />
     <Compile Include="Books\CustomerBook.vb" />
+    <Compile Include="Books\OrderItemBook.vb" />
     <Compile Include="Books\ProductBook.vb" />
     <Compile Include="Records\Address.vb" />
     <Compile Include="Books\OrderBook.vb" />

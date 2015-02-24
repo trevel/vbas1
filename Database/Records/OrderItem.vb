@@ -9,17 +9,34 @@ Imports CSLib
 Imports System.IO
 
 Public Class OrderItem : Inherits Record : Implements IRecord
-    Protected _product As Integer
+    Protected _product_id As Integer
     Protected _quantity As UInteger
     Protected _ship_date As Date
 
-    Public Property product As Integer
+    Public Property order As Order
+    Public Property product As Product
+
+    Protected _order_id As Integer
+
+    Public Property product_id As Integer
         Get
-            Return _product
+            Return _product_id
         End Get
         Set(value As Integer)
             If value > 0 Then
-                _product = value
+                _product_id = value
+            End If
+        End Set
+    End Property
+
+
+    Public Property order_id As Integer
+        Get
+            Return _order_id
+        End Get
+        Set(value As Integer)
+            If value > 0 Then
+                _order_id = value
             End If
         End Set
     End Property
@@ -44,7 +61,7 @@ Public Class OrderItem : Inherits Record : Implements IRecord
     End Property
 
     Public Sub New(product As Integer, quantity As UInteger)
-        Me.product = product
+        Me.product_id = product
         Me.quantity = quantity
         Me.ship_date = Nothing
     End Sub
@@ -60,14 +77,14 @@ Public Class OrderItem : Inherits Record : Implements IRecord
     End Property
 
     Public Overrides Function GetCSV() As String
-        Return Me.ID & "," & Me.product & "," & Me.quantity & "," & Format(Me.ship_date, "yyyy-MM-dd")
+        Return Me.ID & "," & Me.order_id & "," & Me.product_id & "," & Me.quantity & "," & Format(Me.ship_date, "yyyy-MM-dd")
     End Function
 
     Public Overrides Sub InterpretCSV(csv As String)
         Dim fields() As String = csv.Split(",")
         If fields.Length = fieldcount Then
             Me.ID = fields(0)
-            Me.product = Integer.Parse(fields(1))
+            Me.product_id = Integer.Parse(fields(1))
             Me.quantity = Integer.Parse(fields(2))
             Me.ship_date = Date.ParseExact(fields(3), "yyyy-MM-dd", Nothing)
         Else

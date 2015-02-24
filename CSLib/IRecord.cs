@@ -10,6 +10,6 @@ namespace CSLib
     {
         int GetID();
 
-        String GetCSV();
+     String GetCSV();
     }
 }

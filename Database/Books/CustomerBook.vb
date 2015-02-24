@@ -8,7 +8,7 @@ Imports System.Text.RegularExpressions
 
 <Serializable()> Public Class CustomerBook : Inherits Book(Of Customer)
 
-    ' Public Property addressbook As AddressBook = Nothing
+    Public addressbook As New AddressBook
 
     Public Sub New() ' addressbook As AddressBook)
         ' Me.addressbook = addressbook

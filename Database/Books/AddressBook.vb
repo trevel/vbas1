@@ -5,12 +5,15 @@
 ' Last Updated On: Feb 21, 2015
 '*******************************************************************************************
 <Serializable()> Public Class AddressBook : Inherits Book(Of Address)
-    Public Property customerbook As CustomerBook = Nothing
+    ' Public Property customerbook As CustomerBook = Nothing
+
+
+    Public Event NewAddress(item As Address)
 
     Protected Overrides Sub Interpret(line As String)
         Dim entry As New Address(line)
+        RaiseEvent NewAddress(entry)
         Book.Add(entry)
-        ' RaiseEvent NewFriend(entry)
     End Sub
 
     Public Function GetByCustID(cust_id As Integer) As String()

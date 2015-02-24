@@ -31,10 +31,7 @@ Imports System.Text
         End Set
     End Property
 
-    Public Event NewEntry(item As T)
-
     Public Sub Add(item As T)
-        RaiseEvent NewEntry(item)
         Book.Add(item)
         next_id = item.GetID
     End Sub

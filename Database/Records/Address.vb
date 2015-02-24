@@ -20,6 +20,7 @@ Imports CSLib
     Protected _province As String
     Protected _postal_code As String
     Public Property type As AddressType
+    Public Property customer As Customer
     Public Sub New(csv As String)
         InterpretCSV(csv)
     End Sub

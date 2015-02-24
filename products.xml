@@ -7,7 +7,6 @@
 <Book_x0060_1_x002B_Book href="#ref-3"/>
 <Book_x0060_1_x002B_header href="#ref-4"/>
 <Book_x0060_1_x002B__next_id>4</Book_x0060_1_x002B__next_id>
-<Book_x0060_1_x002B_NewEntryEvent xsi:null="1"/>
 </a1:ProductBook>
 <a2:ArrayList id="ref-3" xmlns:a2="http://schemas.microsoft.com/clr/ns/System.Collections">
 <_items href="#ref-5"/>
@@ -25,6 +24,7 @@
 <_Inventory>100</_Inventory>
 <m_ID>1</m_ID>
 <Record_x002B_m_ID>1</Record_x002B_m_ID>
+<Record_x002B__active>false</Record_x002B__active>
 </a1:Product>
 <a1:Product id="ref-7" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <_Description id="ref-10">sunfish</_Description>
@@ -32,6 +32,7 @@
 <_Inventory>20</_Inventory>
 <m_ID>2</m_ID>
 <Record_x002B_m_ID>2</Record_x002B_m_ID>
+<Record_x002B__active>false</Record_x002B__active>
 </a1:Product>
 <a1:Product id="ref-8" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <_Description id="ref-11">salmon</_Description>
@@ -39,6 +40,7 @@
 <_Inventory>22</_Inventory>
 <m_ID>3</m_ID>
 <Record_x002B_m_ID>3</Record_x002B_m_ID>
+<Record_x002B__active>false</Record_x002B__active>
 </a1:Product>
 </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>

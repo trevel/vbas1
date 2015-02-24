@@ -22,13 +22,13 @@ Public Module Assign1
 
 
     ' Allocate the books
-    Dim addressbook As New AddressBook()
 
-    ' Dim orderlistbook As New orderlistbook()
-
-    Dim orderbook As New OrderBook()
-    Dim productbook As New ProductBook()
     Dim customerbook As New CustomerBook()
+    Dim productbook As New ProductBook()
+    Dim WithEvents orderbook As New OrderBook()
+    '    Dim WithEvents orderitembook As New OrderItemBook()
+    Dim WithEvents addressbook As New AddressBook()
+
 
     Sub Main()
         If LoadData() <> -1 Then
@@ -516,12 +516,39 @@ Public Module Assign1
         End If
     End Sub
 
-    'Private Sub NewCustomer(item As Customer) Handles customerbook.NewEntry
-    '    Console.WriteLine("New Customer!")
+    Private Sub NewAddress(item As Address) Handles addressbook.NewAddress
+        If item IsNot Nothing Then
+            Dim cust As Customer = customerbook.GetByID(item.cust_id)
+            If cust IsNot Nothing Then
+                item.customer = cust
+                If item.type = Address.AddressType.mailing_address Then
+                    cust.mailing_address_id = item.ID
+                Else
+                    cust.shipping_address_id = item.ID
+                End If
+            End If
+        End If
+    End Sub
+
+    'Private Sub NewOrderItem(item As OrderItem) Handles orderitembook.NewItem
+    '    If item IsNot Nothing Then
+    '        Dim o As Order = orderbook.GetByID(item.order_id)
+    '        If o IsNot Nothing Then
+    '            item.order = o
+    '        End If
+    '        Dim p As Product = productbook.GetByID(item.product_id)
+    '        If p IsNot Nothing Then
+    '            item.product = p
+    '        End If
+    '    End If
     'End Sub
 
-    'Private Sub NewOrder(item As Order) Handles orderbook.NewEntry
-
-    'End Sub
-
+    Private Sub NewOrder(item As Order) Handles orderbook.NewOrder
+        If item IsNot Nothing Then
+            Dim c As Customer = customerbook.GetByID(item.customer_id)
+            If c IsNot Nothing Then
+                item.customer = c
+            End If
+        End If
+    End Sub
 End Module
