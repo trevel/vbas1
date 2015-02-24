@@ -12,6 +12,7 @@ Public Class OrderItem : Inherits Record : Implements IRecord
     Protected _product_id As Integer
     Protected _quantity As UInteger
     Protected _ship_date As Date
+    Protected _has_shipped As Boolean
 
     Public Property order As Order
     Public Property product As Product
@@ -51,12 +52,23 @@ Public Class OrderItem : Inherits Record : Implements IRecord
         End Set
     End Property
 
-    Public Property ship_date As Date
+    Public Property ship_date As Date?
         Get
-            Return _ship_date
+            If _has_shipped Then
+                Return _ship_date
+            Else
+                Return Nothing
+            End If
+
         End Get
-        Set(value As Date)
-            _ship_date = value
+        Set(value As Date?)
+            If value Is Nothing Then
+                _ship_date = Date.MinValue
+                _has_shipped = False
+            Else
+                _has_shipped = True
+                _ship_date = _ship_date
+            End If
         End Set
     End Property
 
@@ -70,15 +82,17 @@ Public Class OrderItem : Inherits Record : Implements IRecord
         InterpretCSV(csv)
     End Sub
 
+    Public ReadOnly Property has_shipped As Boolean
+        Get
+            Return _has_shipped
+        End Get
+    End Property
+
     Protected Overrides ReadOnly Property fieldcount As UShort
         Get
             Return 4
         End Get
     End Property
-
-    Public Overrides Function GetCSV() As String
-        Return Me.ID & "," & Me.order_id & "," & Me.product_id & "," & Me.quantity & "," & Format(Me.ship_date, "yyyy-MM-dd")
-    End Function
 
     Public Overrides Sub InterpretCSV(csv As String)
         Dim fields() As String = csv.Split(",")
@@ -91,4 +105,12 @@ Public Class OrderItem : Inherits Record : Implements IRecord
             Throw New InvalidDataException("File does not contain valid data")
         End If
     End Sub
+
+    Public Overrides Function GetCSV() As String
+        Return Me.ID & "," & Me.order_id & "," & Me.product_id & "," & Me.quantity & "," & Format(Me.ship_date, "yyyy-MM-dd")
+    End Function
+
+    Public Overrides Function ToString() As String
+        Return product.Description & "," & Me.quantity & "," & Format(Me.ship_date, "yyyy-MM-dd")
+    End Function
 End Class

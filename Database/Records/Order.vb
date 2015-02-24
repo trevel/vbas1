@@ -73,9 +73,6 @@ Imports System.IO
         Return False
     End Function
 
-    Public Overrides Function GetCSV() As String
-        Return Me.ID & "," & Format(Me.order_date, "yyyy-MM-dd") & "," & Me.discount.ToString("0.00") & "," & Me.customer_id
-    End Function
 
     Public Overrides Sub InterpretCSV(csv As String)
         Dim fields() As String = csv.Split(",")
@@ -88,4 +85,12 @@ Imports System.IO
             Throw New InvalidDataException("File does not contain valid data")
         End If
     End Sub
+
+    Public Overrides Function GetCSV() As String
+        Return Me.ID & "," & Format(Me.order_date, "yyyy-MM-dd") & "," & Me.discount.ToString("0.00") & "," & Me.customer_id
+    End Function
+
+    Public Overrides Function ToString() As String
+        Return Me.ID & "::" & Format(Me.order_date, "yyyy-MM-dd") & "," & Me.discount.ToString("0.00") & "," & customer.name
+    End Function
 End Class

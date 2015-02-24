@@ -95,6 +95,8 @@ Public Module Assign1
         credit_limit = GetDouble("Credit Limit")
 
         ' LAURIE :: TODO need to construct the address objects...all we have is a string from the console
+        ' "Add a mailing address? (Y/N)" 
+        ' "Add a shipping address? (Y/N)" 
         Dim mailing_address As Address = Nothing
         Dim shipping_address As Address = Nothing
 
@@ -112,11 +114,11 @@ Public Module Assign1
             Console.WriteLine("No records found")
             Exit Sub
         End If
-        Dim recordtoedit As Short = GetChoice("Customer to Edit", lines)
+        Dim recordtoedit As Short = GetChoiceID("Customer to Edit", lines)
         If recordtoedit = -1 Then
             Exit Sub
         End If
-        Dim record As Customer = customerbook.GetByID(lines(recordtoedit - 1).Split(",")(0))
+        Dim record As Customer = customerbook.GetByID(recordtoedit)
         If record Is Nothing Then
             Console.WriteLine("Customer record not found -- something went wrong")
         Else
@@ -216,13 +218,13 @@ Public Module Assign1
             Console.WriteLine("No records found")
             Exit Sub
         End If
-        Dim recordtoedit As Short = GetChoice("Product to Edit", lines)
+        Dim recordtoedit As Short = GetChoiceID("Product to Edit", lines)
         If recordtoedit = -1 Then
             Exit Sub
         End If
         Dim record As Product = Nothing
         Try
-            record = productbook.GetByID(lines(recordtoedit - 1).Split(",")(0))
+            record = productbook.GetByID(recordtoedit)
         Catch e As InvalidCastException
         End Try
         If Record Is Nothing Then
@@ -257,11 +259,11 @@ Public Module Assign1
             Console.WriteLine("No records found")
             Exit Sub
         End If
-        Dim recordtoedit As Short = GetChoice("Product to Remove", lines)
+        Dim recordtoedit As Short = GetChoiceID("Product to Remove", lines)
         If recordtoedit = -1 Then
             Exit Sub
         End If
-        Dim record As Product = productbook.GetByID(lines(recordtoedit - 1).Split(",")(0))
+        Dim record As Product = productbook.GetByID(recordtoedit)
         If record Is Nothing Then
             Console.WriteLine("Product record not found -- something went wrong")
         Else
@@ -316,11 +318,11 @@ Public Module Assign1
         End If
 
         ' Let them pick a customer for the order
-        Dim cust_choice As Short = GetChoice("Choose a Customer", customers)
+        Dim cust_choice As Short = GetChoiceID("Choose a Customer", customers)
         If cust_choice = -1 Then
             Exit Sub
         End If
-        Dim cust_record As Customer = customerbook.GetByID(customers(cust_choice - 1).Split(",")(0))
+        Dim cust_record As Customer = customerbook.GetByID(cust_choice)
         If cust_record Is Nothing Then
             Console.WriteLine("Customer record not found -- something went wrong")
             Exit Sub
@@ -334,11 +336,11 @@ Public Module Assign1
 
         Do While items.Count <= 10
             ' now they need to pick some items1
-            Dim product_choice As Short = GetChoice("Choose a Product", products)
+            Dim product_choice As Short = GetChoiceID("Choose a Product", products)
             If product_choice = -1 Then
                 Exit Do
             End If
-            Dim prod_record As Product = productbook.GetByID(products(product_choice - 1).Split(",")(0))
+            Dim prod_record As Product = productbook.GetByID(product_choice)
             If prod_record Is Nothing Then
                 Console.WriteLine("Product record not found -- something went wrong")
             Else
@@ -357,7 +359,7 @@ Public Module Assign1
         Console.WriteLine("Enter discount %: ")
         disc = GetDouble("Discount")
 
-        Try
+        Try ' TO-DO :: Move Shipping to an event? Or otherwise eventify it...
             order = New Order(orderbook.next_id, cust_record.GetID(), odate, disc, items)
             orderbook.Add(order)
             If can_ship = True Then
@@ -404,6 +406,31 @@ Public Module Assign1
                 Dim choice = Convert.ToInt16(inputline)
                 If choice <= choices.Length And choice > 0 Then
                     Return choice
+                End If
+            Catch ex As FormatException
+                Console.WriteLine("Invalid Choice")
+            End Try
+        Loop
+    End Function
+
+    Private Function GetChoiceID(title As String, choices As String()) As Int16
+        Dim inputline As String
+        Dim i As Integer = 0
+        Console.WriteLine(title)
+        Console.WriteLine("----------------")
+        For i = 1 To choices.Length
+            Console.WriteLine(i & " - " & choices(i - 1).Split("::")(2))
+        Next
+        Console.WriteLine("----------------")
+
+        Do
+            Console.WriteLine("Enter your choice (or Q to quit)")
+            inputline = Console.ReadLine().ToUpper()
+            If inputline = "Q" Then Return -1
+            Try
+                Dim choice = Convert.ToInt16(inputline)
+                If choice <= choices.Length And choice > 0 Then
+                    Return choices(choice - 1).Split("::")(0)
                 End If
             Catch ex As FormatException
                 Console.WriteLine("Invalid Choice")
@@ -534,18 +561,18 @@ Public Module Assign1
         End If
     End Sub
 
-    'Private Sub NewOrderItem(item As OrderItem) Handles orderitembook.NewItem
-    '    If item IsNot Nothing Then
-    '        Dim o As Order = orderbook.GetByID(item.order_id)
-    '        If o IsNot Nothing Then
-    '            item.order = o
-    '        End If
-    '        Dim p As Product = productbook.GetByID(item.product_id)
-    '        If p IsNot Nothing Then
-    '            item.product = p
-    '        End If
-    '    End If
-    'End Sub
+    Private Sub NewOrderItem(item As OrderItem) Handles orderitembook.NewItem
+        If item IsNot Nothing Then
+            Dim o As Order = orderbook.GetByID(item.order_id)
+            If o IsNot Nothing Then
+                item.order = o
+            End If
+            Dim p As Product = productbook.GetByID(item.product_id)
+            If p IsNot Nothing Then
+                item.product = p
+            End If
+        End If
+    End Sub
 
     Private Sub NewOrder(item As Order) Handles orderbook.NewOrder
         If item IsNot Nothing Then

@@ -15,6 +15,7 @@
         Book.Add(entry)
         next_id = entry.GetID
     End Sub
+
 End Class
 
 

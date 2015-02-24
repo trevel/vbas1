@@ -126,10 +126,13 @@ Imports System.Text
     ' Used for display purposes only
     Public Overrides Function tostring() As String
         If Book.Count = 0 Then Return "- Empty -"
+        Dim Buffer As String = ""
         Dim s As New StringBuilder
-        s.Append(header)
+        '    s.Append(header)
         For Each item In Book
-            s.AppendLine.Append(item.ToString())
+            s.Append(Buffer)
+            Buffer = vbNewLine
+            s.Append(item.ToString())
         Next
         Return s.ToString()
     End Function

@@ -15,6 +15,17 @@
         Book.Add(entry)
         next_id = entry.GetID
     End Sub
+
+    Public Function GetByOrderID(order_id As Integer) As String()
+        Dim result As New List(Of String)
+        For Each item As OrderItem In Book
+            If item.order_id = order_id Then
+                result.Add(item.ToString)
+            End If
+        Next
+        Return result.ToArray
+    End Function
+
 End Class
 
 

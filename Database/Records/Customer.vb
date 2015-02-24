@@ -124,10 +124,6 @@ Imports CSLib
         End Try
     End Function
 
-    Public Overrides Function GetCSV() As String
-        Return Me.ID & "," & Me.name & "," & Me.email & "," & Me.phone_number & "," & Me.credit_limit.ToString("0.00") & "," & Me.mailing_address_id & "," & Me.shipping_address_id
-    End Function
-
     Public Overrides Sub InterpretCSV(csv As String)
         Dim fields() As String = csv.Split(",")
         If fields.Length = fieldcount Then
@@ -144,5 +140,13 @@ Imports CSLib
         End If
 
     End Sub
+
+    Public Overrides Function GetCSV() As String
+        Return Me.ID & "," & Me.name & "," & Me.email & "," & Me.phone_number & "," & Me.credit_limit.ToString("0.00") & "," & Me.mailing_address_id & "," & Me.shipping_address_id
+    End Function
+
+    Public Overrides Function ToString() As String
+        Return Me.ID & "::" & Me.name & "," & Me.email & "," & Me.phone_number & "," & Me.credit_limit.ToString("0.00")
+    End Function
 
 End Class

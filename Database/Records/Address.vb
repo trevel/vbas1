@@ -107,9 +107,7 @@ Imports CSLib
 
 
 
-    Public Overrides Function GetCSV() As String
-        Return Me.ID & "," & Me.cust_id & "," & Me.street & "," & Me.city & "," & Me.province & "," & Me.postal_code & "," & Me.type
-    End Function
+
 
     Public Overrides Sub InterpretCSV(csv As String)
         Dim fields() As String = csv.Split(",")
@@ -126,4 +124,15 @@ Imports CSLib
         End If
     End Sub
 
+    Public Overrides Function GetCSV() As String
+        Return Me.ID & "," & Me.cust_id & "," & Me.street & "," & Me.city & "," & Me.province & "," & Me.postal_code & "," & Me.type
+    End Function
+
+    Public Overrides Function ToString() As String
+        If customer IsNot Nothing Then
+            Return Me.ID & "::" & Me.customer.name & "," & Me.street & "," & Me.city & "," & Me.province & "," & Me.postal_code & "," & Me.type
+        Else
+            Return Me.ID & "::" & Me.cust_id & "," & Me.street & "," & Me.city & "," & Me.province & "," & Me.postal_code & "," & Me.type
+        End If
+    End Function
 End Class

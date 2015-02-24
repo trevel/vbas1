@@ -36,6 +36,6 @@ Imports CSLib
     End Function
 
     Public Overrides Function ToString() As String
-        Return GetCSV()
+        Return Me.ID & "::" & GetCSV()
     End Function
 End Class

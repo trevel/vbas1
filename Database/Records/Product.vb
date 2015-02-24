@@ -10,6 +10,7 @@ Imports System.IO
     Protected _Price As Double
     Protected _Inventory As Integer
 
+    Public Shared Event MoreInventory(prod As Product)
 
     ' Public Sub New(Description As String, Price As Double, Inventory As Integer)
 
@@ -63,6 +64,11 @@ Imports System.IO
         End Get
         Set(value As Integer)
             If value >= 0 Then
+                If value > Me._Inventory Then
+                    addInventory(value - Me._Inventory)
+                ElseIf value <= Me._Inventory Then
+                    removeInventory(Me._Inventory - value)
+                End If
                 Me._Inventory = value
             Else
                 Throw New ArgumentException("Invalid Inventory.")
@@ -73,6 +79,7 @@ Imports System.IO
     Public Sub addInventory(amount As Integer)
         If amount >= 0 Then
             _Inventory += amount
+            RaiseEvent MoreInventory(Me)
         Else
             Throw New ArgumentException("Can't add less than nothing")
         End If
@@ -86,9 +93,6 @@ Imports System.IO
         End If
     End Sub
 
-    Public Overrides Function GetCSV() As String
-        Return Me.ID & "," & Me.Description & "," & Me.Price.ToString("f2") & "," & Me.Inventory
-    End Function
 
     Public Overrides Sub InterpretCSV(csv As String)
         Dim fields() As String = csv.Split(",")
@@ -102,4 +106,11 @@ Imports System.IO
         End If
     End Sub
 
+    Public Overrides Function GetCSV() As String
+        Return Me.ID & "," & Me.Description & "," & Me.Price.ToString("f2") & "," & Me.Inventory
+    End Function
+
+    Public Overrides Function ToString() As String
+        Return Me.ID & "::" & Me.Description & "," & Me.Price.ToString("f2") & "," & Me.Inventory
+    End Function
 End Class
