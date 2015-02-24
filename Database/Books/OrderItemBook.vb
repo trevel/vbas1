@@ -26,6 +26,14 @@
         Return result.ToArray
     End Function
 
+    Public Function IsOrderItemForProduct(prod_id As Integer) As Boolean
+        For Each item As OrderItem In Book
+            If item.product_id = prod_id Then
+                Return True
+            End If
+        Next
+        Return False
+    End Function
 End Class
 
 

@@ -52,7 +52,7 @@ Imports System.Text
         Dim result As New List(Of String)
         For Each item As T In Book
             Dim record As String = item.GetCSV()
-            If Regex.IsMatch(pattern, record) Then
+            If Regex.IsMatch(record, pattern) Then
                 result.Add(record)
             End If
         Next

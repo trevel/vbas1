@@ -10,7 +10,6 @@ Imports System.IO
 <Serializable()> Public Class Order : Inherits Record
     Protected _customer_id As Integer
     Protected _order_date As Date
-    Protected _items As ArrayList ' List(Of OrderItem)
     Protected _discount As Double
     Public Property customer As Customer
 
@@ -19,7 +18,9 @@ Imports System.IO
         Me.customer_id = cust
         Me.order_date = odate
         Me.discount = disc
-        ' Me.Items = Nothing  ' LAURIE :: TODO
+        For Each item As OrderItem In Items
+            item.order_id = id
+        Next
     End Sub
 
     Public Sub New(csv As String)

@@ -109,7 +109,12 @@ Public Module Assign1
     End Sub
 
     Private Sub CustomerEdit()
-        Dim lines() As String = customerbook.tostring().Split(Environment.NewLine)
+        Dim tempStr As String = customerbook.tostring()
+        If tempStr = "- Empty -" Then
+            Console.WriteLine("No records found")
+            Exit Sub
+        End If
+        Dim lines() As String = tempStr.Split(Environment.NewLine)
         If lines.Count = 0 Then
             Console.WriteLine("No records found")
             Exit Sub
@@ -157,21 +162,29 @@ Public Module Assign1
     End Sub
 
     Private Sub CustomerRemove()
-        Dim lines() As String = customerbook.tostring().Split(Environment.NewLine)
+        Dim tempStr As String = customerbook.tostring()
+        If tempStr = "- Empty -" Then
+            Console.WriteLine("No records found")
+            Exit Sub
+        End If
+        Dim lines() As String = tempStr.Split(Environment.NewLine)
         If lines.Count = 0 Then
             Console.WriteLine("No records found")
             Exit Sub
         End If
-        Dim recordtoedit As Short = GetChoice("Customer to Remove", lines)
+        Dim recordtoedit As Short = GetChoiceID("Customer to Remove", lines)
         If recordtoedit = -1 Then
             Exit Sub
         End If
-        Dim record As Customer = customerbook.GetByID(lines(recordtoedit - 1).Split(",")(0))
+        Dim record As Customer = customerbook.GetByID(recordtoedit)
         If record Is Nothing Then
             Console.WriteLine("Customer record not found -- something went wrong")
         Else
-            customerbook.Remove(record)
-            Console.WriteLine("Implement customer delete functionality!")
+            If orderbook.IsOrderForCust(record.ID) = False Then
+                customerbook.Remove(record)
+            Else
+                Console.WriteLine("Customer cannot be removed due to Existing Orders")
+            End If
         End If
     End Sub
 
@@ -213,7 +226,12 @@ Public Module Assign1
     End Sub
 
     Private Sub ProductEdit()
-        Dim lines() As String = productbook.tostring().Split(Environment.NewLine)
+        Dim tempStr As String = productbook.tostring()
+        If tempStr = "- Empty -" Then
+            Console.WriteLine("No records found")
+            Exit Sub
+        End If
+        Dim lines() As String = tempStr.Split(Environment.NewLine)
         If lines.Count = 0 Then
             Console.WriteLine("No records found")
             Exit Sub
@@ -227,24 +245,24 @@ Public Module Assign1
             record = productbook.GetByID(recordtoedit)
         Catch e As InvalidCastException
         End Try
-        If Record Is Nothing Then
+        If record Is Nothing Then
             Console.WriteLine("Product record not found -- something went wrong")
         Else
             Do
-                Console.WriteLine(Record.ToString)
+                Console.WriteLine(record.ToString)
                 Try
                     Select Case GetChoice("Edit Product", {"Edit Description", "Edit Price", "Edit Inventory", "Exit"})
                         Case -1, 4
                             Exit Sub
                         Case 1
-                            Console.WriteLine("Current Description: " + Record.Description.ToString)
-                            Record.Description = Console.ReadLine().Trim()
+                            Console.WriteLine("Current Description: " + record.Description.ToString)
+                            record.Description = Console.ReadLine().Trim()
                         Case 2
-                            Console.WriteLine("Current price: " + Record.Price.ToString("$0.00"))
-                            Record.Price = GetDouble("Product Price")
+                            Console.WriteLine("Current price: " + record.Price.ToString("$0.00"))
+                            record.Price = GetDouble("Product Price")
                         Case 3
-                            Console.WriteLine("Current Inventory: " + Record.Inventory.ToString)
-                            Record.Inventory = GetInteger("Product Inventory")
+                            Console.WriteLine("Current Inventory: " + record.Inventory.ToString)
+                            record.Inventory = GetInteger("Product Inventory")
                     End Select
                 Catch ex As ArgumentException
                     Console.WriteLine(ex.Message)
@@ -254,7 +272,12 @@ Public Module Assign1
     End Sub
 
     Private Sub ProductRemove()
-        Dim lines() As String = productbook.tostring().Split(Environment.NewLine)
+        Dim tempStr As String = productbook.tostring()
+        If tempStr = "- Empty -" Then
+            Console.WriteLine("No records found")
+            Exit Sub
+        End If
+        Dim lines() As String = tempStr.Split(Environment.NewLine)
         If lines.Count = 0 Then
             Console.WriteLine("No records found")
             Exit Sub
@@ -267,7 +290,11 @@ Public Module Assign1
         If record Is Nothing Then
             Console.WriteLine("Product record not found -- something went wrong")
         Else
-            productbook.Remove(record)
+            If orderitembook.IsOrderItemForProduct(record.ID) = False Then
+                productbook.Remove(record)
+            Else
+                Console.WriteLine("Product cannot be removed due to Existing Orders")
+            End If
         End If
     End Sub
 
@@ -347,10 +374,12 @@ Public Module Assign1
                 Console.WriteLine("How many would you like at $" & prod_record.Price.ToString("0.00") & " each?")
                 qty = GetInteger("Quantity")
                 Try
-                    items.Add(New OrderItem(prod_record.GetID, qty))
+                    Dim newItem As New OrderItem(prod_record.GetID, qty)
+                    items.Add(newItem)
                     If qty <= prod_record.Inventory Then
                         can_ship = True
                     End If
+                    orderitembook.Add(newItem)
                 Catch ex As Exception
                     Console.WriteLine(ex.Message)
                 End Try
@@ -503,11 +532,13 @@ Public Module Assign1
                     addressbook = addressbook.Load(ADDRESS_CSV_PATH)
                     customerbook = customerbook.Load(CUSTOMER_CSV_PATH)
                     productbook = productbook.Load(PRODUCTS_CSV_PATH)
+                    orderitembook = orderitembook.Load(ORDERLINE_CSV_PATH)
                     orderbook = orderbook.Load(ORDERS_CSV_PATH)
                 Case 2
                     addressbook = addressbook.Load(ADDRESS_XML_PATH)
                     customerbook = customerbook.Load(CUSTOMER_XML_PATH)
                     productbook = productbook.Load(PRODUCTS_XML_PATH)
+                    orderitembook = orderitembook.Load(ORDERLINE_XML_PATH)
                     orderbook = orderbook.Load(ORDERS_XML_PATH)
             End Select
         Catch e As InvalidDataException

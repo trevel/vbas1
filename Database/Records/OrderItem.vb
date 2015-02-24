@@ -8,7 +8,9 @@
 Imports CSLib
 Imports System.IO
 
-Public Class OrderItem : Inherits Record : Implements IRecord
+<Serializable()> Public Class OrderItem : Inherits Record : Implements IRecord
+
+    Protected _order_id As Integer = 0
     Protected _product_id As Integer
     Protected _quantity As UInteger
     Protected _ship_date As Date
@@ -16,8 +18,6 @@ Public Class OrderItem : Inherits Record : Implements IRecord
 
     Public Property order As Order
     Public Property product As Product
-
-    Protected _order_id As Integer
 
     Public Property product_id As Integer
         Get
@@ -29,7 +29,6 @@ Public Class OrderItem : Inherits Record : Implements IRecord
             End If
         End Set
     End Property
-
 
     Public Property order_id As Integer
         Get
@@ -73,6 +72,7 @@ Public Class OrderItem : Inherits Record : Implements IRecord
     End Property
 
     Public Sub New(product As Integer, quantity As UInteger)
+        Me.order_id = 0
         Me.product_id = product
         Me.quantity = quantity
         Me.ship_date = Nothing
@@ -90,7 +90,7 @@ Public Class OrderItem : Inherits Record : Implements IRecord
 
     Protected Overrides ReadOnly Property fieldcount As UShort
         Get
-            Return 4
+            Return 5
         End Get
     End Property
 
@@ -98,16 +98,19 @@ Public Class OrderItem : Inherits Record : Implements IRecord
         Dim fields() As String = csv.Split(",")
         If fields.Length = fieldcount Then
             Me.ID = fields(0)
-            Me.product_id = Integer.Parse(fields(1))
-            Me.quantity = Integer.Parse(fields(2))
-            Me.ship_date = Date.ParseExact(fields(3), "yyyy-MM-dd", Nothing)
+            Me.order_id = Integer.Parse(fields(1))
+            Me.product_id = Integer.Parse(fields(2))
+            Me.quantity = Integer.Parse(fields(3))
+            Me.ship_date = Date.ParseExact(fields(4), "yyyy-MM-dd", Nothing)
         Else
             Throw New InvalidDataException("File does not contain valid data")
         End If
     End Sub
 
     Public Overrides Function GetCSV() As String
-        Return Me.ID & "," & Me.order_id & "," & Me.product_id & "," & Me.quantity & "," & Format(Me.ship_date, "yyyy-MM-dd")
+        If Me.order_id > 0 Then ' this allows us to eliminate orphaned order items that may not be attached to an order
+            Return Me.ID & "," & Me.order_id & "," & Me.product_id & "," & Me.quantity & "," & Format(Me.ship_date, "yyyy-MM-dd")
+        End If
     End Function
 
     Public Overrides Function ToString() As String

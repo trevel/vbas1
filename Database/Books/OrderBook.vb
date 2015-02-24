@@ -6,6 +6,7 @@
 '*******************************************************************************************
 <Serializable()> Public Class OrderBook : Inherits Book(Of Order)
 
+    Public orderitembook As New OrderItemBook
     Public Event NewOrder(item As Order)
 
     Protected Overrides Sub Interpret(line As String)
@@ -15,6 +16,15 @@
         Book.Add(entry)
         next_id = entry.GetID
     End Sub
+
+    Public Function IsOrderForCust(cust As Integer) As Boolean
+        For Each item As Order In Book
+            If item.customer_id = cust Then
+                Return True
+            End If
+        Next
+        Return False
+    End Function
 
 End Class
 
