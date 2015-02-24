@@ -16,6 +16,11 @@
         next_id = entry.GetID
     End Sub
 
+    Public Overrides Sub Add(item As OrderItem)
+        MyBase.Add(item)
+        RaiseEvent NewItem(item)
+    End Sub
+
     Public Function GetByOrderID(order_id As Integer) As String()
         Dim result As New List(Of String)
         For Each item As OrderItem In Book

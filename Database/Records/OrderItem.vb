@@ -71,7 +71,8 @@ Imports System.IO
         End Set
     End Property
 
-    Public Sub New(product As Integer, quantity As UInteger)
+    Public Sub New(id As Integer, product As Integer, quantity As UInteger)
+        Me.ID = id
         Me.order_id = 0
         Me.product_id = product
         Me.quantity = quantity
@@ -101,7 +102,11 @@ Imports System.IO
             Me.order_id = Integer.Parse(fields(1))
             Me.product_id = Integer.Parse(fields(2))
             Me.quantity = Integer.Parse(fields(3))
-            Me.ship_date = Date.ParseExact(fields(4), "yyyy-MM-dd", Nothing)
+            If fields(4) = "" Then
+                Me.ship_date = Nothing
+            Else
+                Me.ship_date = Date.ParseExact(fields(4), "yyyy-MM-dd", Nothing)
+            End If
         Else
             Throw New InvalidDataException("File does not contain valid data")
         End If
@@ -114,6 +119,12 @@ Imports System.IO
     End Function
 
     Public Overrides Function ToString() As String
-        Return product.Description & "," & Me.quantity & "," & Format(Me.ship_date, "yyyy-MM-dd")
+        Dim dateStr As String
+        If Me.has_shipped = True Then
+            dateStr = Format(Me.ship_date, "yyyy-MM-dd")
+        Else
+            dateStr = "Not Shipped"
+        End If
+        Return product.Description & "," & Me.quantity & "," & dateStr
     End Function
 End Class

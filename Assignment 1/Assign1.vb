@@ -300,8 +300,8 @@ Public Module Assign1
 
     Private Sub OrderMenu()
         Do
-            Select Case GetChoice("Order Menu", {"Display all Orders", "Add", "Edit", "Delete", "Ship", "Return to Main Menu"})
-                Case -1, 6
+            Select Case GetChoice("Order Menu", {"Display all Orders", "Add", "Edit", "Delete", "Ship", "View Order Detail", "Return to Main Menu"})
+                Case -1, 7
                     Exit Sub
                 Case 1
                     OrderDisplay()
@@ -313,12 +313,41 @@ Public Module Assign1
                     OrderRemove()
                 Case 5
                     OrderShip()
+                Case 6
+                    OrderViewDetail()
             End Select
         Loop
     End Sub
 
     Private Sub OrderDisplay()
         Console.WriteLine(orderbook.tostring())
+    End Sub
+
+    Private Sub OrderViewDetail()
+        Dim tempStr As String = orderbook.tostring()
+        If tempStr = "- Empty -" Then
+            Console.WriteLine("No records found")
+            Exit Sub
+        End If
+        Dim lines() As String = tempStr.Split(Environment.NewLine)
+        If lines.Count = 0 Then
+            Console.WriteLine("No records found")
+            Exit Sub
+        End If
+        Dim recordtoedit As Short = GetChoiceID("Select an order to view:", lines)
+        If recordtoedit = -1 Then
+            Exit Sub
+        End If
+        Dim record As Order = orderbook.GetByID(recordtoedit)
+        If record Is Nothing Then
+            Console.WriteLine("Order not found -- something went wrong")
+        Else
+            Console.WriteLine(record.ToString())
+            Dim orderlines() As String = orderitembook.GetByOrderID(record.ID)
+            For Each item As String In orderlines
+                Console.WriteLine(item)
+            Next
+        End If
     End Sub
 
     Private Sub OrderAdd()
@@ -374,7 +403,7 @@ Public Module Assign1
                 Console.WriteLine("How many would you like at $" & prod_record.Price.ToString("0.00") & " each?")
                 qty = GetInteger("Quantity")
                 Try
-                    Dim newItem As New OrderItem(prod_record.GetID, qty)
+                    Dim newItem As New OrderItem(orderitembook.next_id, prod_record.GetID, qty)
                     items.Add(newItem)
                     If qty <= prod_record.Inventory Then
                         can_ship = True

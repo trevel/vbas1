@@ -17,6 +17,11 @@
         next_id = entry.GetID
     End Sub
 
+    Public Overrides Sub Add(item As Order)
+        MyBase.Add(item)
+        RaiseEvent NewOrder(item)
+    End Sub
+
     Public Function IsOrderForCust(cust As Integer) As Boolean
         For Each item As Order In Book
             If item.customer_id = cust Then

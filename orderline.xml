@@ -3,40 +3,134 @@
 <a1:OrderItemBook id="ref-1" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <NewItemEvent href="#ref-3"/>
 <Book href="#ref-4"/>
-<header xsi:null="1"/>
-<_next_id>1</_next_id>
+<header id="ref-5">ID,ORDER_ID,PROD_ID,QTY,DATE</header>
+<_next_id>5</_next_id>
 <Book_x0060_1_x002B_Book href="#ref-4"/>
-<Book_x0060_1_x002B_header xsi:null="1"/>
-<Book_x0060_1_x002B__next_id>1</Book_x0060_1_x002B__next_id>
+<Book_x0060_1_x002B_header href="#ref-5"/>
+<Book_x0060_1_x002B__next_id>5</Book_x0060_1_x002B__next_id>
 </a1:OrderItemBook>
 <a2:DelegateSerializationHolder id="ref-3" xmlns:a2="http://schemas.microsoft.com/clr/ns/System">
-<Delegate href="#ref-5"/>
-<method0 href="#ref-6"/>
+<Delegate href="#ref-6"/>
+<method0 href="#ref-7"/>
 </a2:DelegateSerializationHolder>
 <a3:ArrayList id="ref-4" xmlns:a3="http://schemas.microsoft.com/clr/ns/System.Collections">
-<_items href="#ref-7"/>
-<_size>0</_size>
-<_version>0</_version>
+<_items href="#ref-8"/>
+<_size>4</_size>
+<_version>4</_version>
 </a3:ArrayList>
-<a2:DelegateSerializationHolder_x002B_DelegateEntry id="ref-5" xmlns:a2="http://schemas.microsoft.com/clr/ns/System">
-<type id="ref-8">Database.OrderItemBook+NewItemEventHandler</type>
-<assembly id="ref-9">Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+<a2:DelegateSerializationHolder_x002B_DelegateEntry id="ref-6" xmlns:a2="http://schemas.microsoft.com/clr/ns/System">
+<type id="ref-9">Database.OrderItemBook+NewItemEventHandler</type>
+<assembly id="ref-10">Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
 <target xsi:type="xsd:anyType" xsi:null="1"/>
-<targetTypeAssembly id="ref-10">Assignment 1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</targetTypeAssembly>
-<targetTypeName id="ref-11">Assignment_1.Assign1</targetTypeName>
-<methodName id="ref-12">NewOrderItem</methodName>
+<targetTypeAssembly id="ref-11">Assignment 1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</targetTypeAssembly>
+<targetTypeName id="ref-12">Assignment_1.Assign1</targetTypeName>
+<methodName id="ref-13">NewOrderItem</methodName>
 <delegateEntry xsi:null="1"/>
 </a2:DelegateSerializationHolder_x002B_DelegateEntry>
-<a4:MemberInfoSerializationHolder id="ref-6" xmlns:a4="http://schemas.microsoft.com/clr/ns/System.Reflection">
-<Name href="#ref-12"/>
-<AssemblyName href="#ref-10"/>
-<ClassName href="#ref-11"/>
-<Signature id="ref-13">Void NewOrderItem(Database.OrderItem)</Signature>
-<Signature2 id="ref-14">System.Void NewOrderItem(Database.OrderItem)</Signature2>
+<a4:MemberInfoSerializationHolder id="ref-7" xmlns:a4="http://schemas.microsoft.com/clr/ns/System.Reflection">
+<Name href="#ref-13"/>
+<AssemblyName href="#ref-11"/>
+<ClassName href="#ref-12"/>
+<Signature id="ref-14">Void NewOrderItem(Database.OrderItem)</Signature>
+<Signature2 id="ref-15">System.Void NewOrderItem(Database.OrderItem)</Signature2>
 <MemberType>8</MemberType>
 <GenericArguments xsi:null="1"/>
 </a4:MemberInfoSerializationHolder>
-<SOAP-ENC:Array id="ref-7" SOAP-ENC:arrayType="xsd:anyType[0]">
+<SOAP-ENC:Array id="ref-8" SOAP-ENC:arrayType="xsd:anyType[4]">
+<item href="#ref-16"/>
+<item href="#ref-17"/>
+<item href="#ref-18"/>
+<item href="#ref-19"/>
 </SOAP-ENC:Array>
+<a1:OrderItem id="ref-16" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_order_id>1</_order_id>
+<_product_id>1</_product_id>
+<_quantity>1</_quantity>
+<_ship_date>0001-01-01T00:00:00.0000000-05:00</_ship_date>
+<_has_shipped>false</_has_shipped>
+<_order xsi:null="1"/>
+<_product href="#ref-20"/>
+<m_ID>1</m_ID>
+<Record_x002B_m_ID>1</Record_x002B_m_ID>
+<Record_x002B__active>false</Record_x002B__active>
+</a1:OrderItem>
+<a1:OrderItem id="ref-17" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_order_id>1</_order_id>
+<_product_id>2</_product_id>
+<_quantity>2</_quantity>
+<_ship_date>0001-01-01T00:00:00.0000000-05:00</_ship_date>
+<_has_shipped>false</_has_shipped>
+<_order xsi:null="1"/>
+<_product href="#ref-21"/>
+<m_ID>2</m_ID>
+<Record_x002B_m_ID>2</Record_x002B_m_ID>
+<Record_x002B__active>false</Record_x002B__active>
+</a1:OrderItem>
+<a1:OrderItem id="ref-18" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_order_id>1</_order_id>
+<_product_id>3</_product_id>
+<_quantity>3</_quantity>
+<_ship_date>0001-01-01T00:00:00.0000000-05:00</_ship_date>
+<_has_shipped>false</_has_shipped>
+<_order xsi:null="1"/>
+<_product href="#ref-22"/>
+<m_ID>3</m_ID>
+<Record_x002B_m_ID>3</Record_x002B_m_ID>
+<Record_x002B__active>false</Record_x002B__active>
+</a1:OrderItem>
+<a1:OrderItem id="ref-19" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_order_id>1</_order_id>
+<_product_id>4</_product_id>
+<_quantity>4</_quantity>
+<_ship_date>0001-01-01T00:00:00.0000000-05:00</_ship_date>
+<_has_shipped>false</_has_shipped>
+<_order xsi:null="1"/>
+<_product href="#ref-23"/>
+<m_ID>4</m_ID>
+<Record_x002B_m_ID>4</Record_x002B_m_ID>
+<Record_x002B__active>false</Record_x002B__active>
+</a1:OrderItem>
+<a1:Product id="ref-20" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_Description id="ref-24">goldfish</_Description>
+<_Price>82</_Price>
+<_Inventory>100</_Inventory>
+<m_ID>1</m_ID>
+<Record_x002B_m_ID>1</Record_x002B_m_ID>
+<Record_x002B__active>false</Record_x002B__active>
+</a1:Product>
+<a1:Product id="ref-21" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_Description id="ref-25">sunfish</_Description>
+<_Price>0</_Price>
+<_Inventory>20</_Inventory>
+<m_ID>2</m_ID>
+<Record_x002B_m_ID>2</Record_x002B_m_ID>
+<Record_x002B__active>false</Record_x002B__active>
+</a1:Product>
+<a1:Product id="ref-22" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_Description id="ref-26">Salmon</_Description>
+<_Price>99.3</_Price>
+<_Inventory>22</_Inventory>
+<m_ID>3</m_ID>
+<Record_x002B_m_ID>3</Record_x002B_m_ID>
+<Record_x002B__active>false</Record_x002B__active>
+</a1:Product>
+<a1:Product id="ref-23" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_Description id="ref-27">Spacefish</_Description>
+<_Price>9</_Price>
+<_Inventory>220</_Inventory>
+<m_ID>4</m_ID>
+<Record_x002B_m_ID>4</Record_x002B_m_ID>
+<Record_x002B__active>false</Record_x002B__active>
+</a1:Product>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_Description id="ref-28">Spacefish</_Description>
+<_Price>9</_Price>
+<_Inventory>220</_Inventory>
+<m_ID>4</m_ID>
+<Record_x002B_m_ID>4</Record_x002B_m_ID>
+<Record_x002B__active>false</Record_x002B__active>
+</a1:Product>
 </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>

@@ -31,7 +31,7 @@ Imports System.Text
         End Set
     End Property
 
-    Public Sub Add(item As T)
+    Public Overridable Sub Add(item As T)
         Book.Add(item)
         next_id = item.GetID
     End Sub
