@@ -6,6 +6,8 @@
 '*******************************************************************************************
 Imports System.IO
 Imports CSLib
+Imports System.Text.RegularExpressions
+Imports System.Text
 
 <Serializable()> Public MustInherit Class Book(Of T As IRecord)
 
@@ -28,9 +30,11 @@ Imports CSLib
             End If
         End Set
     End Property
+
     Public Event NewEntry(item As T)
 
     Public Sub Add(item As T)
+        RaiseEvent NewEntry(item)
         Book.Add(item)
         next_id = item.GetID
     End Sub
@@ -39,11 +43,23 @@ Imports CSLib
         Book.Remove(item)
     End Sub
 
-    Public Function GetByID(id As Integer) As T
+    Public Function GetByID(id As Integer?) As T
+        If id Is Nothing Then Return Nothing
         For Each item As T In Book
             If item.GetID() = id Then Return item
         Next
         Return Nothing
+    End Function
+
+    Public Overridable Function GetCSVBySearch(pattern As String) As String()
+        Dim result As New List(Of String)
+        For Each item As T In Book
+            Dim record As String = item.GetCSV()
+            If Regex.IsMatch(pattern, record) Then
+                result.Add(record)
+            End If
+        Next
+        Return result.ToArray()
     End Function
 
     Public Function Load(path As String) As Book(Of T)
@@ -89,9 +105,8 @@ Imports CSLib
         Using sw As New StreamWriter(Path)
             ' first line is the header; good thing we saved it earlier, huh?
             sw.WriteLine(header)
-
             For Each item As T In Book
-                sw.WriteLine(item.ToString)
+                sw.WriteLine(item.GetCSV)
             Next
         End Using
     End Sub
@@ -111,12 +126,14 @@ Imports CSLib
         Return Nothing
     End Function
 
+    ' Used for display purposes only
     Public Overrides Function tostring() As String
         If Book.Count = 0 Then Return "- Empty -"
-        Dim s As String = header
+        Dim s As New StringBuilder
+        s.Append(header)
         For Each item In Book
-            s &= Environment.NewLine & item.ToString()
+            s.AppendLine.Append(item.ToString())
         Next
-        Return s
+        Return s.ToString()
     End Function
 End Class

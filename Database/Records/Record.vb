@@ -14,7 +14,7 @@ Imports CSLib
 
     Public MustOverride Sub InterpretCSV(csv As String)
 
-    Public MustOverride Function GetCSV() As String
+    Public MustOverride Function GetCSV() As String Implements IRecord.GetCSV
 
     Public Function GetID() As Integer Implements IRecord.GetID
         Return Me.ID

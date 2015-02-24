@@ -9,5 +9,7 @@ namespace CSLib
     public interface IRecord
     {
         int GetID();
+
+        String GetCSV();
     }
 }

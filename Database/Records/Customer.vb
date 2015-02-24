@@ -17,13 +17,15 @@ Imports CSLib
     Protected _mailing_address_id As Integer
     Protected _shipping_address_id As Integer
 
+    Protected Friend Property mailing_address As Address
+    Protected Friend Property shipping_address As Address
 
     Public Sub New(id As Int16, name As String, email As String, mailing_address As Integer, shipping_address As Integer, phone_number As String, credit_limit As Double)
         Me.ID = id
         Me.name = name
         Me.email = email
-        Me.mailing_address = mailing_address
-        Me.shipping_address = shipping_address
+        Me.mailing_address_id = mailing_address
+        Me.shipping_address_id = shipping_address
         Me.phone_number = phone_number
         Me.credit_limit = credit_limit
     End Sub
@@ -90,23 +92,24 @@ Imports CSLib
         End Set
     End Property
 
-    Public Property mailing_address As Integer
+    Public Property mailing_address_id As Integer
         Get
             Return _mailing_address_id
         End Get
         Set(value As Integer)
-            If value > 0 Then
+            If value >= 0 Then
                 _mailing_address_id = value
+
             End If
         End Set
     End Property
 
-    Public Property shipping_address As Integer
+    Public Property shipping_address_id As Integer
         Get
             Return _shipping_address_id
         End Get
         Set(value As Integer)
-            If value > 0 Then
+            If value >= 0 Then
                 _shipping_address_id = value
             End If
         End Set
@@ -122,7 +125,7 @@ Imports CSLib
     End Function
 
     Public Overrides Function GetCSV() As String
-        Return Me.ID & "," & Me.name & "," & Me.email & "," & Me.phone_number & "," & Me.credit_limit.ToString("0.00") & "," & Me.mailing_address & "," & Me.shipping_address
+        Return Me.ID & "," & Me.name & "," & Me.email & "," & Me.phone_number & "," & Me.credit_limit.ToString("0.00") & "," & Me.mailing_address_id & "," & Me.shipping_address_id
     End Function
 
     Public Overrides Sub InterpretCSV(csv As String)
@@ -134,8 +137,8 @@ Imports CSLib
             Me.email = fields(2)
             Me.phone_number = fields(3)
             Me.credit_limit = Double.Parse(fields(4))
-            Me.mailing_address = Integer.Parse(fields(5))
-            Me.shipping_address = Integer.Parse(fields(6))
+            Me.mailing_address_id = Integer.Parse(fields(5))
+            Me.shipping_address_id = Integer.Parse(fields(6))
         Else
             Throw New InvalidDataException("File does not contain valid data")
         End If

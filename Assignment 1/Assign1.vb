@@ -22,6 +22,10 @@ Public Module Assign1
 
 
     ' Allocate the books
+    Dim addressbook As New AddressBook()
+
+    ' Dim orderlistbook As New orderlistbook()
+
     Dim orderbook As New OrderBook()
     Dim productbook As New ProductBook()
     Dim customerbook As New CustomerBook()
@@ -132,13 +136,13 @@ Public Module Assign1
                             Console.WriteLine("Current phone number: " + record.phone_number.ToString)
                             record.phone_number = Console.ReadLine().Trim()
                         Case 4
-                            Console.WriteLine("Current mailing address :" + record.mailing_address.ToString)
+                            Console.WriteLine("Current mailing address :" + addressbook.GetByID(record.mailing_address_id).ToString)
                             ' LAURIE :: TODO
-                            record.mailing_address = Nothing ' New Address(Console.ReadLine().Trim())
+                            record.mailing_address_id = Nothing ' New Address(Console.ReadLine().Trim())
                         Case 5
-                            Console.WriteLine("Current shipping address: " + record.shipping_address.ToString)
+                            Console.WriteLine("Current shipping address: " + addressbook.GetByID(record.shipping_address_id).ToString)
                             ' LAURIE :: TODO
-                            record.shipping_address = Nothing ' New Address(Console.ReadLine().Trim())
+                            record.shipping_address_id = Nothing ' New Address(Console.ReadLine().Trim())
                         Case 6
                             Console.WriteLine("Current credit limit: " + record.credit_limit.ToString)
                             record.credit_limit = GetDouble("Credit Limit")
@@ -465,10 +469,12 @@ Public Module Assign1
                 Case -1
                     Return -1
                 Case 1
+                    addressbook = addressbook.Load(ADDRESS_CSV_PATH)
                     customerbook = customerbook.Load(CUSTOMER_CSV_PATH)
                     productbook = productbook.Load(PRODUCTS_CSV_PATH)
                     orderbook = orderbook.Load(ORDERS_CSV_PATH)
                 Case 2
+                    addressbook = addressbook.Load(ADDRESS_XML_PATH)
                     customerbook = customerbook.Load(CUSTOMER_XML_PATH)
                     productbook = productbook.Load(PRODUCTS_XML_PATH)
                     orderbook = orderbook.Load(ORDERS_XML_PATH)
@@ -488,10 +494,10 @@ Public Module Assign1
     Private Sub SaveData()
         ' write out the various books to csv and soap
         Console.WriteLine("Serialize all the books and save to csv files")
-        'If Not AddressBook Is Nothing Then
-        '    AddressBook.SaveCSV(ADDRESS_CSV_PATH)
-        '    AddressBook.SaveXML(ADDRESS_XML_PATH)
-        'End If
+        If Not addressbook Is Nothing Then
+            addressbook.SaveCSV(ADDRESS_CSV_PATH)
+            addressbook.SaveXML(ADDRESS_XML_PATH)
+        End If
         'If Not OrderLineBook Is Nothing Then
         '    OrderLineBook.SaveCSV(ORDERLINE_CSV_PATH)
         '    OrderLineBook.SaveXML(ORDERLINE_XML_PATH)
@@ -509,4 +515,13 @@ Public Module Assign1
             orderbook.SaveXML(ORDERS_XML_PATH)
         End If
     End Sub
+
+    'Private Sub NewCustomer(item As Customer) Handles customerbook.NewEntry
+    '    Console.WriteLine("New Customer!")
+    'End Sub
+
+    'Private Sub NewOrder(item As Order) Handles orderbook.NewEntry
+
+    'End Sub
+
 End Module

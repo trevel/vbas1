@@ -27,6 +27,8 @@
 <_credit_limit>9999</_credit_limit>
 <_mailing_address_id>1</_mailing_address_id>
 <_shipping_address_id>1</_shipping_address_id>
+<_mailing_address xsi:null="1"/>
+<_shipping_address xsi:null="1"/>
 <m_ID>1</m_ID>
 <Record_x002B_m_ID>1</Record_x002B_m_ID>
 </a1:Customer>
@@ -37,6 +39,8 @@
 <_credit_limit>3</_credit_limit>
 <_mailing_address_id>1</_mailing_address_id>
 <_shipping_address_id>1</_shipping_address_id>
+<_mailing_address xsi:null="1"/>
+<_shipping_address xsi:null="1"/>
 <m_ID>2</m_ID>
 <Record_x002B_m_ID>2</Record_x002B_m_ID>
 </a1:Customer>
@@ -47,6 +51,8 @@
 <_credit_limit>999</_credit_limit>
 <_mailing_address_id>1</_mailing_address_id>
 <_shipping_address_id>1</_shipping_address_id>
+<_mailing_address xsi:null="1"/>
+<_shipping_address xsi:null="1"/>
 <m_ID>3</m_ID>
 <Record_x002B_m_ID>3</Record_x002B_m_ID>
 </a1:Customer>
@@ -57,6 +63,8 @@
 <_credit_limit>9999</_credit_limit>
 <_mailing_address_id>1</_mailing_address_id>
 <_shipping_address_id>1</_shipping_address_id>
+<_mailing_address xsi:null="1"/>
+<_shipping_address xsi:null="1"/>
 <m_ID>4</m_ID>
 <Record_x002B_m_ID>4</Record_x002B_m_ID>
 </a1:Customer>

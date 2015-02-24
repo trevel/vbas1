@@ -7,13 +7,14 @@ Imports CSLib
 ' CVB815 - Address.vb
 ' Last Updated On: Feb 21, 2015
 '*******************************************************************************************
-Public Class Address : Inherits Record : Implements IRecord
+<Serializable()> Public Class Address : Inherits Record : Implements IRecord
 
     Public Enum AddressType
         mailing_address
         shipping_address
     End Enum
 
+    Protected _cust_id As Integer
     Protected _street As String
     Protected _city As String
     Protected _province As String
@@ -23,12 +24,13 @@ Public Class Address : Inherits Record : Implements IRecord
         InterpretCSV(csv)
     End Sub
 
-    Public Sub New(id, street, city, province, postal_code)
-        Me.New(id, street, city, province, postal_code, AddressType.mailing_address)
+    Public Sub New(id, cust_id, street, city, province, postal_code)
+        Me.New(id, cust_id, street, city, province, postal_code, AddressType.mailing_address)
     End Sub
 
-    Public Sub New(id, street, city, province, postalcode, type)
+    Public Sub New(id, cust_id, street, city, province, postalcode, type)
         Me.ID = id
+        Me.cust_id = cust_id
         Me.street = street
         Me.city = city
         Me.province = province
@@ -38,8 +40,19 @@ Public Class Address : Inherits Record : Implements IRecord
 
     Protected Overrides ReadOnly Property fieldcount As UShort
         Get
-            Return 6
+            Return 7
         End Get
+    End Property
+
+    Public Property cust_id As Integer
+        Get
+            Return _cust_id
+        End Get
+        Set(value As Integer)
+            If value > 0 Then
+                _cust_id = value
+            End If
+        End Set
     End Property
 
     Public Property street As String
@@ -59,7 +72,7 @@ Public Class Address : Inherits Record : Implements IRecord
             Return _city
         End Get
         Set(value As String)
-            If IsValid(value, "^[A-Za-z ]$") Then
+            If IsValid(value, "^[A-Za-z ]+$") Then
                 Me._city = value
             Else
                 Throw New ArgumentException("Invalid City")
@@ -91,19 +104,22 @@ Public Class Address : Inherits Record : Implements IRecord
         End Set
     End Property
 
+
+
     Public Overrides Function GetCSV() As String
-        Return Me.ID & "," & Me.street & "," & Me.city & "," & Me.province & "," & Me.postal_code & "," & Me.type
+        Return Me.ID & "," & Me.cust_id & "," & Me.street & "," & Me.city & "," & Me.province & "," & Me.postal_code & "," & Me.type
     End Function
 
     Public Overrides Sub InterpretCSV(csv As String)
         Dim fields() As String = csv.Split(",")
         If fields.Length = fieldcount Then
             Me.ID = fields(0)
-            Me.street = fields(1)
-            Me.city = fields(2)
-            Me.province = fields(3)
-            Me.postal_code = fields(4)
-            Me.type = fields(5)
+            Me.cust_id = fields(1)
+            Me.street = fields(2)
+            Me.city = fields(3)
+            Me.province = fields(4)
+            Me.postal_code = fields(5)
+            Me.type = fields(6)
         Else
             Throw New InvalidDataException("File does not contain valid data")
         End If
