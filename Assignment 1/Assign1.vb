@@ -732,6 +732,20 @@ Public Module Assign1
         End If
     End Sub
 
+    Private Sub DeleteOrderItem(item As OrderItem) Handles orderitembook.DeleteItem
+        If item IsNot Nothing Then
+            Dim o As Order = orderbook.GetByID(item.order_id)
+            If o IsNot Nothing Then
+                item.order = o
+                o.item_count = o.item_count - 1
+            End If
+            Dim p As Product = productbook.GetByID(item.product_id)
+            If p IsNot Nothing Then
+                item.product = p
+            End If
+        End If
+    End Sub
+
     Private Sub NewOrder(item As Order) Handles orderbook.NewOrder
         If item IsNot Nothing Then
             Dim c As Customer = customerbook.GetByID(item.customer_id)
@@ -742,7 +756,9 @@ Public Module Assign1
     End Sub
 
     Private Sub DeleteOrder(item As Order) Handles orderbook.DeleteOrder
-        orderitembook.RemoveByOrderID(item.ID)
+        If item IsNot Nothing Then
+            orderitembook.RemoveByOrderID(item.ID)
+        End If
     End Sub
 
 End Module

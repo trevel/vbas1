@@ -8,6 +8,7 @@
 <Serializable()> Public Class OrderItemBook : Inherits Book(Of OrderItem)
 
     Public Event NewItem(entry As OrderItem)
+    Public Event DeleteItem(item As OrderItem)
 
     Protected Overrides Sub Interpret(line As String)
         Dim entry As New OrderItem(line)
