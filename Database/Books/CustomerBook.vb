@@ -8,6 +8,12 @@ Imports System.Text.RegularExpressions
 
 <Serializable()> Public Class CustomerBook : Inherits Book(Of Customer)
 
+    Protected addressbook As AddressBook = Nothing
+
+    Public Sub New(addressbook As AddressBook)
+        Me.addressbook = addressbook
+    End Sub
+
     Protected Overrides Sub Interpret(line As String)
 
         Dim entry As New Customer(line)
