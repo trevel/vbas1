@@ -1,5 +1,4 @@
-﻿' Laurie is working on this!
-' '*****************************************************************************************
+﻿' '*****************************************************************************************
 ' Student Names: Laurie Shields (034448142)
 '                Mark Lindan (063336143)
 ' CVB815 - Assign1.vb
@@ -109,18 +108,9 @@ Public Module Assign1
     End Sub
 
     Private Sub CustomerEdit()
-        Dim tempStr As String = customerbook.tostring()
-        If tempStr = "- Empty -" Then
-            Console.WriteLine("No records found")
-            Exit Sub
-        End If
-        Dim lines() As String = tempStr.Split(Environment.NewLine)
-        If lines.Count = 0 Then
-            Console.WriteLine("No records found")
-            Exit Sub
-        End If
-        Dim recordtoedit As Short = GetChoiceID("Customer to Edit", lines)
+        Dim recordtoedit As Short = GetChoiceID("Customer to Edit", customerbook.tostring().Split(Environment.NewLine))
         If recordtoedit = -1 Then
+            Console.WriteLine("No records found")
             Exit Sub
         End If
         Dim record As Customer = customerbook.GetByID(recordtoedit)
@@ -162,18 +152,9 @@ Public Module Assign1
     End Sub
 
     Private Sub CustomerRemove()
-        Dim tempStr As String = customerbook.tostring()
-        If tempStr = "- Empty -" Then
-            Console.WriteLine("No records found")
-            Exit Sub
-        End If
-        Dim lines() As String = tempStr.Split(Environment.NewLine)
-        If lines.Count = 0 Then
-            Console.WriteLine("No records found")
-            Exit Sub
-        End If
-        Dim recordtoedit As Short = GetChoiceID("Customer to Remove", lines)
+        Dim recordtoedit As Short = GetChoiceID("Customer to Remove", customerbook.tostring().Split(Environment.NewLine))
         If recordtoedit = -1 Then
+            Console.WriteLine("No records found")
             Exit Sub
         End If
         Dim record As Customer = customerbook.GetByID(recordtoedit)
@@ -190,7 +171,7 @@ Public Module Assign1
 
     Private Sub ProductMenu()
         Do
-            Select Case GetChoice("Product Menu", {"Display All Products", "Add", "Edit", "Delete", "Return to Main Menu"})
+            Select Case GetChoice("Product Menu", {"Display All Products", "Add Product", "Edit Product", "Delete Product", "Return to Main Menu"})
                 Case -1, 5
                     Exit Sub
                 Case 1
@@ -226,18 +207,9 @@ Public Module Assign1
     End Sub
 
     Private Sub ProductEdit()
-        Dim tempStr As String = productbook.tostring()
-        If tempStr = "- Empty -" Then
-            Console.WriteLine("No records found")
-            Exit Sub
-        End If
-        Dim lines() As String = tempStr.Split(Environment.NewLine)
-        If lines.Count = 0 Then
-            Console.WriteLine("No records found")
-            Exit Sub
-        End If
-        Dim recordtoedit As Short = GetChoiceID("Product to Edit", lines)
+        Dim recordtoedit As Short = GetChoiceID("Product to Edit", productbook.tostring().Split(Environment.NewLine))
         If recordtoedit = -1 Then
+            Console.WriteLine("No records found")
             Exit Sub
         End If
         Dim record As Product = Nothing
@@ -272,18 +244,9 @@ Public Module Assign1
     End Sub
 
     Private Sub ProductRemove()
-        Dim tempStr As String = productbook.tostring()
-        If tempStr = "- Empty -" Then
-            Console.WriteLine("No records found")
-            Exit Sub
-        End If
-        Dim lines() As String = tempStr.Split(Environment.NewLine)
-        If lines.Count = 0 Then
-            Console.WriteLine("No records found")
-            Exit Sub
-        End If
-        Dim recordtoedit As Short = GetChoiceID("Product to Remove", lines)
+        Dim recordtoedit As Short = GetChoiceID("Product to Remove", productbook.tostring().Split(Environment.NewLine))
         If recordtoedit = -1 Then
+            Console.WriteLine("No records found")
             Exit Sub
         End If
         Dim record As Product = productbook.GetByID(recordtoedit)
@@ -300,7 +263,7 @@ Public Module Assign1
 
     Private Sub OrderMenu()
         Do
-            Select Case GetChoice("Order Menu", {"Display all Orders", "Add", "Edit", "Delete", "Ship", "View Order Detail", "Return to Main Menu"})
+            Select Case GetChoice("Order Menu", {"Display all Orders", "Add Order", "Edit Order", "Delete Order", "Ship Order", "View Order Detail", "Return to Main Menu"})
                 Case -1, 7
                     Exit Sub
                 Case 1
@@ -324,18 +287,9 @@ Public Module Assign1
     End Sub
 
     Private Sub OrderViewDetail()
-        Dim tempStr As String = orderbook.tostring()
-        If tempStr = "- Empty -" Then
-            Console.WriteLine("No records found")
-            Exit Sub
-        End If
-        Dim lines() As String = tempStr.Split(Environment.NewLine)
-        If lines.Count = 0 Then
-            Console.WriteLine("No records found")
-            Exit Sub
-        End If
-        Dim recordtoedit As Short = GetChoiceID("Select an order to view:", lines)
+        Dim recordtoedit As Short = GetChoiceID("Select an order to view:", orderbook.tostring().Split(Environment.NewLine))
         If recordtoedit = -1 Then
+            Console.WriteLine("No records found")
             Exit Sub
         End If
         Dim record As Order = orderbook.GetByID(recordtoedit)
@@ -357,23 +311,17 @@ Public Module Assign1
         Dim order As Order = Nothing
         Dim items As New ArrayList
 
-        ' get a list of customers - and make sure there are some
-        Dim customers() As String = customerbook.tostring().Split(Environment.NewLine)
-        If customers.Count = 0 Then
-            Console.WriteLine("No customers found. You need to add some customers before creating orders.")
-            Exit Sub
-        End If
-
         ' get a list of products and make sure there are some
         Dim products() As String = productbook.tostring().Split(Environment.NewLine)
-        If products.Count = 0 Then
+        If products Is Nothing OrElse products(0) = "- Empty -" Then
             Console.WriteLine("No products found. You need to add some products before creating orders.")
             Exit Sub
         End If
 
         ' Let them pick a customer for the order
-        Dim cust_choice As Short = GetChoiceID("Choose a Customer", customers)
+        Dim cust_choice As Short = GetChoiceID("Choose a Customer", customerbook.tostring().Split(Environment.NewLine))
         If cust_choice = -1 Then
+            Console.WriteLine("No customers found. You need to add some customers before creating orders.")
             Exit Sub
         End If
         Dim cust_record As Customer = customerbook.GetByID(cust_choice)
@@ -403,6 +351,7 @@ Public Module Assign1
         Do While items.Count <= 10
             Dim product_choice As Short = GetChoiceID("Choose a Product", products)
             If product_choice = -1 Then
+                Console.WriteLine("No products found")
                 Exit Do
             End If
             Dim prod_record As Product = productbook.GetByID(product_choice)
@@ -423,18 +372,9 @@ Public Module Assign1
     End Sub
 
     Private Sub OrderEdit()
-        Dim tempStr As String = orderbook.tostring()
-        If tempStr = "- Empty -" Then
-            Console.WriteLine("No records found")
-            Exit Sub
-        End If
-        Dim lines() As String = tempStr.Split(Environment.NewLine)
-        If lines.Count = 0 Then
-            Console.WriteLine("No records found")
-            Exit Sub
-        End If
-        Dim recordtoedit As Short = GetChoiceID("Select an order to modify:", lines)
+        Dim recordtoedit As Short = GetChoiceID("Select an order to modify:", orderbook.tostring().Split(Environment.NewLine))
         If recordtoedit = -1 Then
+            Console.WriteLine("No records found")
             Exit Sub
         End If
         Dim record As Order = orderbook.GetByID(recordtoedit)
@@ -464,15 +404,10 @@ Public Module Assign1
     End Sub
 
     Private Sub OrderAddItems(record As Order)
-        ' get a list of products and make sure there are some
-        Dim products() As String = productbook.tostring().Split(Environment.NewLine)
-        If products.Count = 0 Then
-            Console.WriteLine("No products found. You need to add some products before creating orders.")
-            Exit Sub
-        End If
         Do While record.item_count <= 10
-            Dim product_choice As Short = GetChoiceID("Choose a Product", products)
+            Dim product_choice As Short = GetChoiceID("Choose a Product", productbook.tostring().Split(Environment.NewLine))
             If product_choice = -1 Then
+                Console.WriteLine("No products found. You need to add some products before creating orders.")
                 Exit Do
             End If
             Dim prod_record As Product = productbook.GetByID(product_choice)
@@ -513,18 +448,9 @@ Public Module Assign1
     End Sub
 
     Private Sub OrderRemove()
-        Dim tempStr As String = orderbook.tostring()
-        If tempStr = "- Empty -" Then
-            Console.WriteLine("No records found")
-            Exit Sub
-        End If
-        Dim lines() As String = tempStr.Split(Environment.NewLine)
-        If lines.Count = 0 Then
-            Console.WriteLine("No records found")
-            Exit Sub
-        End If
-        Dim recordtoedit As Short = GetChoiceID("Select an order to delete:", lines)
+        Dim recordtoedit As Short = GetChoiceID("Select an order to delete:", orderbook.tostring().Split(Environment.NewLine))
         If recordtoedit = -1 Then
+            Console.WriteLine("No records found")
             Exit Sub
         End If
         Dim record As Order = orderbook.GetByID(recordtoedit)
@@ -571,6 +497,11 @@ Public Module Assign1
     Private Function GetChoiceID(title As String, choices As String()) As Int16
         Dim inputline As String
         Dim i As Integer = 0
+
+        If choices Is Nothing OrElse choices(0) = "- Empty -" Then
+            Return -1
+        End If
+
         Console.WriteLine(title)
         Console.WriteLine("----------------")
         For i = 1 To choices.Length

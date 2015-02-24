@@ -10,20 +10,19 @@
 </a1:CustomerBook>
 <a2:ArrayList id="ref-3" xmlns:a2="http://schemas.microsoft.com/clr/ns/System.Collections">
 <_items href="#ref-5"/>
-<_size>4</_size>
-<_version>4</_version>
+<_size>3</_size>
+<_version>5</_version>
 </a2:ArrayList>
 <SOAP-ENC:Array id="ref-5" SOAP-ENC:arrayType="xsd:anyType[4]">
 <item href="#ref-6"/>
 <item href="#ref-7"/>
 <item href="#ref-8"/>
-<item href="#ref-9"/>
 </SOAP-ENC:Array>
 <a1:Customer id="ref-6" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<_name id="ref-10">Laurie Shields</_name>
-<_email id="ref-11">laurie_shields@hotmail.com</_email>
-<_phone_number id="ref-12">905-111-2222</_phone_number>
-<_credit_limit>9999</_credit_limit>
+<_name id="ref-9">Laurie Shields</_name>
+<_email id="ref-10">laurie_shields@hotmail.com</_email>
+<_phone_number id="ref-11">905-111-2222</_phone_number>
+<_credit_limit>111</_credit_limit>
 <_mailing_address_id>1</_mailing_address_id>
 <_shipping_address_id>1</_shipping_address_id>
 <_mailing_address xsi:null="1"/>
@@ -33,9 +32,9 @@
 <Record_x002B__active>false</Record_x002B__active>
 </a1:Customer>
 <a1:Customer id="ref-7" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<_name id="ref-13">Mark</_name>
-<_email id="ref-14">blah@blah.ca</_email>
-<_phone_number id="ref-15">905-111-2222</_phone_number>
+<_name id="ref-12">Mark</_name>
+<_email id="ref-13">blah@blah.ca</_email>
+<_phone_number id="ref-14">905-111-2222</_phone_number>
 <_credit_limit>3</_credit_limit>
 <_mailing_address_id>1</_mailing_address_id>
 <_shipping_address_id>1</_shipping_address_id>
@@ -46,9 +45,9 @@
 <Record_x002B__active>false</Record_x002B__active>
 </a1:Customer>
 <a1:Customer id="ref-8" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<_name id="ref-16">blaha</_name>
-<_email id="ref-17">lkj@asdf.com</_email>
-<_phone_number id="ref-18">111-222-3333</_phone_number>
+<_name id="ref-15">blaha</_name>
+<_email id="ref-16">lkj@asdf.com</_email>
+<_phone_number id="ref-17">111-222-3333</_phone_number>
 <_credit_limit>999</_credit_limit>
 <_mailing_address_id>1</_mailing_address_id>
 <_shipping_address_id>1</_shipping_address_id>
@@ -58,7 +57,9 @@
 <Record_x002B_m_ID>3</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
 </a1:Customer>
-<a1:Customer id="ref-9" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+="ref-9" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <_name id="ref-19">test</_name>
 <_email id="ref-20">test@test.ca</_email>
 <_phone_number id="ref-21">111-222-3333</_phone_number>
