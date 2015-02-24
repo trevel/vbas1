@@ -8,14 +8,14 @@
 Imports System.IO
 
 <Serializable()> Public Class Order : Inherits Record
-    Protected _customer As Customer
+    Protected _customer As Integer
     Protected _order_date As Date
     Protected _items As ArrayList ' List(Of OrderItem)
     Protected _discount As Double
 
-    Public Sub New(id As Int16, cust As Customer, odate As Date, disc As Double, Items As ArrayList)
+    Public Sub New(id As Integer, cust As Integer, odate As Date, disc As Double, Items As ArrayList)
         Me.ID = id
-        Me.customer = customer
+        Me.customer = cust
         Me.order_date = odate
         Me.discount = disc
         ' Me.Items = Nothing  ' LAURIE :: TODO
@@ -25,12 +25,14 @@ Imports System.IO
         InterpretCSV(csv)
     End Sub
 
-    Public Property customer As Customer
+    Public Property customer As Integer
         Get
             Return _customer
         End Get
-        Set(value As Customer)
-            Me._customer = value
+        Set(value As Integer)
+            If (value > 0) Then
+                Me._customer = value
+            End If
         End Set
     End Property
 
@@ -66,12 +68,23 @@ Imports System.IO
         End Get
     End Property
 
+    Public Function Ship() As Boolean
+        Return False
+    End Function
+
     Public Overrides Function GetCSV() As String
-        Return Me.ID & "," & Format(Me.order_date, "yyyy-MM-dd") & "," & Me.discount.ToString("0.00") & "," & Me.customer.ID
+        Return Me.ID & "," & Format(Me.order_date, "yyyy-MM-dd") & "," & Me.discount.ToString("0.00") & "," & Me.customer
     End Function
 
     Public Overrides Sub InterpretCSV(csv As String)
-        Throw New NotImplementedException
+        Dim fields() As String = csv.Split(",")
+        If fields.Length = fieldcount Then
+            Me.ID = Integer.Parse(fields(0))
+            Me.order_date = Date.ParseExact(fields(1), "yyyy-MM-dd", Nothing)
+            Me.discount = Double.Parse(fields(2))
+            Me.customer = Integer.Parse(fields(3))
+        Else
+            Throw New InvalidDataException("File does not contain valid data")
+        End If
     End Sub
-
 End Class
