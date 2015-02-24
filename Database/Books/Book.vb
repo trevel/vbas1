@@ -11,16 +11,28 @@ Imports CSLib
 
     Protected Book As New ArrayList
     Protected header As String
-
+    Protected _next_id As Int16 = 1
 
     Public Sub New()
 
     End Sub
 
+    Public Property next_id As Int16
+        Get
+            Return _next_id
+        End Get
+        Set(value As Int16)
+            _next_id = value
+            If value >= _next_id Then
+                _next_id = value + 1
+            End If
+        End Set
+    End Property
     Public Event NewEntry(item As T)
 
     Public Sub Add(item As T)
         Book.Add(item)
+        next_id = item.GetID
     End Sub
 
     Public Sub Remove(item As T)

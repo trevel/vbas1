@@ -75,7 +75,7 @@ Public Module Assign1
     End Sub
 
     Private Sub CustomerAdd()
-        Dim input As String
+
         Dim credit_limit As Double = 0
         Console.WriteLine("Enter Customer Name")
         Dim name As String = Console.ReadLine().Trim()
@@ -88,15 +88,7 @@ Public Module Assign1
         Console.WriteLine("Enter Customer Shipping Address")
         Dim ship_address As String = Console.ReadLine().Trim()
         Console.WriteLine("Enter Customer Credit Limit")
-        Do
-            input = Console.ReadLine().Trim()
-            Try
-                credit_limit = Convert.ToDouble(input)
-                Exit Do
-            Catch ex As FormatException
-                Console.WriteLine("Please enter a number for credit limit")
-            End Try
-        Loop
+        credit_limit = GetDouble("Credit Limit")
 
         ' LAURIE :: TODO need to construct the address objects...all we have is a string from the console
         Dim mailing_address As Address = Nothing
@@ -104,81 +96,71 @@ Public Module Assign1
 
         ' LAURIE :: TODO - fix the addresses
         Try
-            customerbook.Add(New Customer(name, email, 1, 1, phone_number, credit_limit))
+            customerbook.Add(New Customer(customerbook.next_id, name, email, 1, 1, phone_number, credit_limit))
         Catch ex As Exception
             Console.WriteLine(ex.Message)
         End Try
     End Sub
 
     Private Sub CustomerEdit()
-        Dim results As List(Of String) = Nothing
-        Dim searchString As String = GetSearchString("Enter the customer name (Regular expressions are allowed)")
-        Console.WriteLine("Implement customer edit functionality!")
-        ' LAURIE - TODO - need to deal with searchfield here
-        ' results = customerbook.Search(searchString, searchField)
-        If results Is Nothing OrElse results.Count = 0 Then
+        Dim lines() As String = customerbook.tostring().Split(Environment.NewLine)
+        If lines.Count = 0 Then
             Console.WriteLine("No records found")
             Exit Sub
         End If
-        Dim recordtoedit As Short = GetChoice("Customer Search Results", results.ToArray)
+        Dim recordtoedit As Short = GetChoice("Customer to Edit", lines)
         If recordtoedit = -1 Then
             Exit Sub
         End If
-        Dim record As Customer = customerbook.GetByID(results(recordtoedit - 1).Split(",")(0))
+        Dim record As Customer = customerbook.GetByID(lines(recordtoedit - 1).Split(",")(0))
         If record Is Nothing Then
             Console.WriteLine("Customer record not found -- something went wrong")
         Else
-            Dim input As String
-            Console.WriteLine(results(recordtoedit - 1))
-            Select Case GetChoice("Edit Customer", {"Edit Name", "Edit Email Address", "Edit Phone Number", "Edit Mailing Address", "Edit Shipping Address", "Edit Credit Limit", "Exit"})
-                Case -1, 7
-                    Exit Sub
-                Case 1
-                    Console.WriteLine("Current name: " + record.name.ToString)
-                    record.name = Console.ReadLine().Trim()
-                Case 2
-                    Console.WriteLine("Current email address: " + record.email.ToString)
-                    record.email = Console.ReadLine().Trim()
-                Case 3
-                    Console.WriteLine("Current phone number: " + record.phone_number.ToString)
-                    record.phone_number = Console.ReadLine().Trim()
-                Case 4
-                    Console.WriteLine("Current mailing address :" + record.mailing_address.ToString)
-                    ' LAURIE :: TODO
-                    record.mailing_address = Nothing ' New Address(Console.ReadLine().Trim())
-                Case 5
-                    Console.WriteLine("Current shipping address: " + record.shipping_address.ToString)
-                    ' LAURIE :: TODO
-                    record.shipping_address = Nothing ' New Address(Console.ReadLine().Trim())
-                Case 6
-                    Console.WriteLine("Current credit limit: " + record.credit_limit.ToString)
-                    Do
-                        input = Console.ReadLine().Trim()
-                        Try
-                            record.credit_limit = Convert.ToDouble(input)
-                            Exit Do
-                        Catch ex As FormatException
-                            Console.WriteLine("Please enter a number for credit limit")
-                        End Try
-                    Loop
-            End Select
+            Do
+                Console.WriteLine(record.ToString)
+                Try
+                    Select Case GetChoice("Edit Customer", {"Edit Name", "Edit Email Address", "Edit Phone Number", "Edit Mailing Address", "Edit Shipping Address", "Edit Credit Limit", "Exit"})
+                        Case -1, 7
+                            Exit Sub
+                        Case 1
+                            Console.WriteLine("Current name: " + record.name.ToString)
+                            record.name = Console.ReadLine().Trim()
+                        Case 2
+                            Console.WriteLine("Current email address: " + record.email.ToString)
+                            record.email = Console.ReadLine().Trim()
+                        Case 3
+                            Console.WriteLine("Current phone number: " + record.phone_number.ToString)
+                            record.phone_number = Console.ReadLine().Trim()
+                        Case 4
+                            Console.WriteLine("Current mailing address :" + record.mailing_address.ToString)
+                            ' LAURIE :: TODO
+                            record.mailing_address = Nothing ' New Address(Console.ReadLine().Trim())
+                        Case 5
+                            Console.WriteLine("Current shipping address: " + record.shipping_address.ToString)
+                            ' LAURIE :: TODO
+                            record.shipping_address = Nothing ' New Address(Console.ReadLine().Trim())
+                        Case 6
+                            Console.WriteLine("Current credit limit: " + record.credit_limit.ToString)
+                            record.credit_limit = GetDouble("Credit Limit")
+                    End Select
+                Catch ex As ArgumentException
+                    Console.WriteLine(ex.Message)
+                End Try
+            Loop
         End If
     End Sub
 
     Private Sub CustomerRemove()
-        Dim results As List(Of String) = Nothing
-        Dim searchString As String = GetSearchString("Enter the customer name (Regular expressions are allowed)")
-        ' LAURIE :: TODO - need to deal with searchfield here
-        'results = customerbook.Search(searchString, searchField)
-        If results Is Nothing OrElse results.Count = 0 Then
+        Dim lines() As String = customerbook.tostring().Split(Environment.NewLine)
+        If lines.Count = 0 Then
             Console.WriteLine("No records found")
             Exit Sub
         End If
-        Dim recordtoedit As Short = GetChoice("Customer delete menu", results.ToArray)
+        Dim recordtoedit As Short = GetChoice("Customer to Remove", lines)
         If recordtoedit = -1 Then
             Exit Sub
         End If
-        Dim record As Customer = customerbook.GetByID(results(recordtoedit - 1).Split(",")(0))
+        Dim record As Customer = customerbook.GetByID(lines(recordtoedit - 1).Split(",")(0))
         If record Is Nothing Then
             Console.WriteLine("Customer record not found -- something went wrong")
         Else
@@ -209,46 +191,74 @@ Public Module Assign1
     End Sub
 
     Private Sub ProductAdd()
-        Dim input As String
         Dim price As Double = 0
         Dim inv As Integer = 0
         Console.WriteLine("Enter Product Description")
         Dim desc As String = Console.ReadLine().Trim()
         Console.WriteLine("Enter Product Price")
-        Do
-            input = Console.ReadLine().Trim()
-            Try
-                price = Convert.ToDouble(input)
-                Exit Do
-            Catch ex As FormatException
-                Console.WriteLine("Please enter a number for price")
-            End Try
-        Loop
+        price = GetDouble("Product Price")
         Console.WriteLine("Enter Product Inventory")
-        Do
-            input = Console.ReadLine().Trim()
-            Try
-                inv = Integer.Parse(input)
-                Exit Do
-            Catch ex As FormatException
-                Console.WriteLine("Please enter a number for inventory")
-            End Try
-        Loop
-
+        inv = GetInteger("Product Inventory")
         Try
-            productbook.Add(New Product(desc, price, inv))
+            productbook.Add(New Product(productbook.next_id, desc, price, inv))
         Catch ex As Exception
             Console.WriteLine(ex.Message)
         End Try
-        Console.WriteLine("Implement product add functionality!")
     End Sub
 
     Private Sub ProductEdit()
-        Console.WriteLine("Implement product edit functionality!")
+        Dim lines() As String = productbook.tostring().Split(Environment.NewLine)
+        If lines.Count = 0 Then
+            Console.WriteLine("No records found")
+            Exit Sub
+        End If
+        Dim recordtoedit As Short = GetChoice("Product to Edit", lines)
+        If recordtoedit = -1 Then
+            Exit Sub
+        End If
+        Dim record As Product = productbook.GetByID(lines(recordtoedit - 1).Split(",")(0))
+        If record Is Nothing Then
+            Console.WriteLine("Product record not found -- something went wrong")
+        Else
+            Do
+                Console.WriteLine(record.ToString)
+                Try
+                    Select Case GetChoice("Edit Product", {"Edit Description", "Edit Price", "Edit Inventory", "Exit"})
+                        Case -1, 4
+                            Exit Sub
+                        Case 1
+                            Console.WriteLine("Current Description: " + record.Description.ToString)
+                            record.Description = Console.ReadLine().Trim()
+                        Case 2
+                            Console.WriteLine("Current price: " + record.Price.ToString("$0.00"))
+                            record.Price = GetDouble("Product Price")
+                        Case 3
+                            Console.WriteLine("Current Inventory: " + record.Inventory.ToString)
+                            record.Inventory = GetInteger("Product Inventory")
+                    End Select
+                Catch ex As ArgumentException
+                    Console.WriteLine(ex.Message)
+                End Try
+            Loop
+        End If
     End Sub
 
     Private Sub ProductRemove()
-        Console.WriteLine("Implement product delete functionality!")
+        Dim lines() As String = productbook.tostring().Split(Environment.NewLine)
+        If lines.Count = 0 Then
+            Console.WriteLine("No records found")
+            Exit Sub
+        End If
+        Dim recordtoedit As Short = GetChoice("Product to Remove", lines)
+        If recordtoedit = -1 Then
+            Exit Sub
+        End If
+        Dim record As Product = productbook.GetByID(lines(recordtoedit - 1).Split(",")(0))
+        If record Is Nothing Then
+            Console.WriteLine("Product record not found -- something went wrong")
+        Else
+            productbook.Remove(record)
+        End If
     End Sub
 
     Private Sub OrderMenu()
@@ -275,7 +285,85 @@ Public Module Assign1
     End Sub
 
     Private Sub OrderAdd()
-        Console.WriteLine("Implement order add functionality!")
+        Dim input As String
+        Dim odate As Date = Today
+        Dim qty As UInteger
+        Dim disc As Double = 0
+        Dim can_ship As Boolean = False
+        Dim order As Order = Nothing
+        Dim items As New ArrayList
+
+        ' get a list of customers - and make sure there are some
+        Dim customers() As String = customerbook.tostring().Split(Environment.NewLine)
+        If customers.Count = 0 Then
+            Console.WriteLine("No customers found. You need to add some customers before creating orders.")
+            Exit Sub
+        End If
+
+        ' get a list of products and make sure there are some
+        Dim products() As String = productbook.tostring().Split(Environment.NewLine)
+        If products.Count = 0 Then
+            Console.WriteLine("No products found. You need to add some products before creating orders.")
+            Exit Sub
+        End If
+
+        ' Let them pick a customer for the order
+        Dim cust_choice As Short = GetChoice("Choose a Customer", customers)
+        If cust_choice = -1 Then
+            Exit Sub
+        End If
+        Dim cust_record As Customer = customerbook.GetByID(customers(cust_choice - 1).Split(",")(0))
+        If cust_record Is Nothing Then
+            Console.WriteLine("Customer record not found -- something went wrong")
+            Exit Sub
+        End If
+
+        ' set the order date
+        Console.WriteLine("Order Date 'yyyy-MM-dd': ")
+        If odate = GetDate("Order Date") Is Nothing Then
+            odate = Today
+        End If
+
+        Do While items.Count <= 10
+            ' now they need to pick some items1
+            Dim product_choice As Short = GetChoice("Choose a Product", products)
+            If product_choice = -1 Then
+                Exit Do
+            End If
+            Dim prod_record As Product = productbook.GetByID(products(product_choice - 1).Split(",")(0))
+            If prod_record Is Nothing Then
+                Console.WriteLine("Product record not found -- something went wrong")
+            Else
+                Console.WriteLine("How many would you like at $" & prod_record.Price.ToString("0.00") & " each?")
+                qty = GetInteger("Quantity")
+                Try
+                    items.Add(New OrderItem(prod_record.GetID, qty))
+                    If qty <= prod_record.Inventory Then
+                        can_ship = True
+                    End If
+                Catch ex As Exception
+                    Console.WriteLine(ex.Message)
+                End Try
+            End If
+        Loop
+        Console.WriteLine("Enter discount %: ")
+        disc = GetDouble("Discount")
+
+        Try
+            order = New Order(orderbook.next_id, cust_record.GetID(), odate, disc, items)
+            orderbook.Add(order)
+            If can_ship = True Then
+                Console.WriteLine("Some items are available to ship. Do you want to go ahead with shipping all available items? (Y/N)")
+                input = Console.ReadLine().Trim().ToUpper()
+                If input = "Y" AndAlso Not order Is Nothing Then
+                    order.Ship()
+                End If
+            End If
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        End Try
+
+
     End Sub
 
     Private Sub OrderEdit()
@@ -311,6 +399,47 @@ Public Module Assign1
                 End If
             Catch ex As FormatException
                 Console.WriteLine("Invalid Choice")
+            End Try
+        Loop
+    End Function
+
+    Function GetDate(message As String) As Date?
+        Console.WriteLine("Please enter " + message + " date or N to not enter a date.")
+        Dim line As String = ""
+        Dim result As Date
+        Do While line = ""
+            line = Console.ReadLine()
+            If line.Substring(0, 1).ToUpper() = "N" Then Return Nothing
+            Try
+                result = Date.ParseExact(line, "yyyy-MM-dd", Nothing)
+                Return result
+            Catch ex As FormatException
+                Console.WriteLine("I didn't understand that date; enter N to not enter a date, or the " + message + " date in yyyy-mm-dd format.")
+                line = ""
+            End Try
+        Loop
+    End Function
+
+    Private Function GetInteger(msg As String) As Integer
+        Dim input As String
+        Do
+            Input = Console.ReadLine().Trim()
+            Try
+                Return Integer.Parse(input)
+            Catch ex As FormatException
+                Console.WriteLine("Please enter a number for " & msg)
+            End Try
+        Loop
+    End Function
+
+    Private Function GetDouble(msg As String) As Double
+        Dim input As String
+        Do
+            input = Console.ReadLine().Trim()
+            Try
+                Return Convert.ToDouble(input)
+            Catch ex As FormatException
+                Console.WriteLine("Please enter a number for " & msg)
             End Try
         Loop
     End Function

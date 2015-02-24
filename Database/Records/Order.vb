@@ -8,31 +8,83 @@
 Imports System.IO
 
 <Serializable()> Public Class Order : Inherits Record
-    Public Property Customer As Customer
-    Public Property Items As ArrayList ' List(Of OrderItem)
+    Protected _customer As Integer
+    Protected _order_date As Date
+    Protected _items As ArrayList ' List(Of OrderItem)
+    Protected _discount As Double
 
-    Public Sub New(customer As Customer, Items As ArrayList, Quantity As Integer)
-        Me.Customer = customer
-        Me.Items = Items
+    Public Sub New(id As Integer, cust As Integer, odate As Date, disc As Double, Items As ArrayList)
+        Me.ID = id
+        Me.customer = cust
+        Me.order_date = odate
+        Me.discount = disc
+        ' Me.Items = Nothing  ' LAURIE :: TODO
     End Sub
 
     Public Sub New(csv As String)
         InterpretCSV(csv)
     End Sub
 
+    Public Property customer As Integer
+        Get
+            Return _customer
+        End Get
+        Set(value As Integer)
+            If (value > 0) Then
+                Me._customer = value
+            End If
+        End Set
+    End Property
+
+    Public Property order_date As Date
+        Get
+            Return _order_date
+        End Get
+        Set(value As Date)
+            If value <= Today Then
+                Me._order_date = value
+            Else
+                Throw New ArgumentException("Order Date cannot be in the future")
+            End If
+        End Set
+    End Property
+
+    Public Property discount As Double
+        Get
+            Return _discount
+        End Get
+        Set(value As Double)
+            If value >= 0 Then
+                Me._discount = value
+            Else
+                Throw New ArgumentException("Invalid discount")
+            End If
+        End Set
+    End Property
+
     Protected Overrides ReadOnly Property fieldcount As UShort
         Get
-            Return 7  ' TODO - figure out what this should be
+            Return 4
         End Get
     End Property
 
+    Public Function Ship() As Boolean
+        Return False
+    End Function
+
     Public Overrides Function GetCSV() As String
-        Throw New NotImplementedException
-        Return Nothing
+        Return Me.ID & "," & Format(Me.order_date, "yyyy-MM-dd") & "," & Me.discount.ToString("0.00") & "," & Me.customer
     End Function
 
     Public Overrides Sub InterpretCSV(csv As String)
-        Throw New NotImplementedException
+        Dim fields() As String = csv.Split(",")
+        If fields.Length = fieldcount Then
+            Me.ID = Integer.Parse(fields(0))
+            Me.order_date = Date.ParseExact(fields(1), "yyyy-MM-dd", Nothing)
+            Me.discount = Double.Parse(fields(2))
+            Me.customer = Integer.Parse(fields(3))
+        Else
+            Throw New InvalidDataException("File does not contain valid data")
+        End If
     End Sub
-
 End Class

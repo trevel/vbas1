@@ -3,8 +3,10 @@
 <a1:OrderBook id="ref-1" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <Book href="#ref-3"/>
 <header id="ref-4">put something in here!!!</header>
+<_next_id>1</_next_id>
 <Book_x0060_1_x002B_Book href="#ref-3"/>
 <Book_x0060_1_x002B_header href="#ref-4"/>
+<Book_x0060_1_x002B__next_id>1</Book_x0060_1_x002B__next_id>
 <Book_x0060_1_x002B_NewEntryEvent xsi:null="1"/>
 </a1:OrderBook>
 <a2:ArrayList id="ref-3" xmlns:a2="http://schemas.microsoft.com/clr/ns/System.Collections">

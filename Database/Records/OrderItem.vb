@@ -9,15 +9,46 @@ Imports CSLib
 Imports System.IO
 
 Public Class OrderItem : Inherits Record : Implements IRecord
-    Public Property Product As Integer
-    Public Property quantity As Integer
-    Public Property shipped As Boolean
+    Protected _product As Integer
+    Protected _quantity As UInteger
+    Protected _ship_date As Date
 
-    Public Sub New(product As Integer, quantity As Integer)
-        Me.Product = product
+    Public Property product As Integer
+        Get
+            Return _product
+        End Get
+        Set(value As Integer)
+            If value > 0 Then
+                _product = value
+            End If
+        End Set
+    End Property
+    Public Property quantity As UInteger
+        Get
+            Return _quantity
+        End Get
+        Set(value As UInteger)
+            If value > 0 Then
+                _quantity = value
+            End If
+        End Set
+    End Property
+
+    Public Property ship_date As Date
+        Get
+            Return _ship_date
+        End Get
+        Set(value As Date)
+            _ship_date = value
+        End Set
+    End Property
+
+    Public Sub New(product As Integer, quantity As UInteger)
+        Me.product = product
         Me.quantity = quantity
-        Me.shipped = False
+        Me.ship_date = Nothing
     End Sub
+
     Public Sub New(csv As String)
         InterpretCSV(csv)
     End Sub
@@ -29,19 +60,18 @@ Public Class OrderItem : Inherits Record : Implements IRecord
     End Property
 
     Public Overrides Function GetCSV() As String
-        Return Me.ID & "," & Me.Product & "," & Me.quantity & "," & Me.shipped
+        Return Me.ID & "," & Me.product & "," & Me.quantity & "," & Format(Me.ship_date, "yyyy-MM-dd")
     End Function
 
     Public Overrides Sub InterpretCSV(csv As String)
         Dim fields() As String = csv.Split(",")
         If fields.Length = fieldcount Then
             Me.ID = fields(0)
-            Me.Product = Integer.Parse(fields(1))
+            Me.product = Integer.Parse(fields(1))
             Me.quantity = Integer.Parse(fields(2))
-            Me.shipped = Boolean.Parse(fields(3))
+            Me.ship_date = Date.ParseExact(fields(3), "yyyy-MM-dd", Nothing)
         Else
             Throw New InvalidDataException("File does not contain valid data")
         End If
     End Sub
-
 End Class
