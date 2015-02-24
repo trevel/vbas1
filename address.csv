@@ -1,0 +1,5 @@
+id,cust_id,street,city,province,postal_code,type
+1,1,23 o'er there,villetown,ON,M1B9B3,0
+2,1,29 o'er here,townville,ON,M5B9A3,1
+3,2,9 five street,yonderland,ON,A1A1A1,0
+4,3,5 nine street,landyonder,ON,A2A2A2,1

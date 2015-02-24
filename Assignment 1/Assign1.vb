@@ -26,7 +26,7 @@ Public Module Assign1
     Dim customerbook As New CustomerBook()
     Dim productbook As New ProductBook()
     Dim WithEvents orderbook As New OrderBook()
-    '    Dim WithEvents orderitembook As New OrderItemBook()
+    Dim WithEvents orderitembook As New OrderItemBook()
     Dim WithEvents addressbook As New AddressBook()
 
 
@@ -220,25 +220,29 @@ Public Module Assign1
         If recordtoedit = -1 Then
             Exit Sub
         End If
-        Dim record As Product = productbook.GetByID(lines(recordtoedit - 1).Split(",")(0))
-        If record Is Nothing Then
+        Dim record As Product = Nothing
+        Try
+            record = productbook.GetByID(lines(recordtoedit - 1).Split(",")(0))
+        Catch e As InvalidCastException
+        End Try
+        If Record Is Nothing Then
             Console.WriteLine("Product record not found -- something went wrong")
         Else
             Do
-                Console.WriteLine(record.ToString)
+                Console.WriteLine(Record.ToString)
                 Try
                     Select Case GetChoice("Edit Product", {"Edit Description", "Edit Price", "Edit Inventory", "Exit"})
                         Case -1, 4
                             Exit Sub
                         Case 1
-                            Console.WriteLine("Current Description: " + record.Description.ToString)
-                            record.Description = Console.ReadLine().Trim()
+                            Console.WriteLine("Current Description: " + Record.Description.ToString)
+                            Record.Description = Console.ReadLine().Trim()
                         Case 2
-                            Console.WriteLine("Current price: " + record.Price.ToString("$0.00"))
-                            record.Price = GetDouble("Product Price")
+                            Console.WriteLine("Current price: " + Record.Price.ToString("$0.00"))
+                            Record.Price = GetDouble("Product Price")
                         Case 3
-                            Console.WriteLine("Current Inventory: " + record.Inventory.ToString)
-                            record.Inventory = GetInteger("Product Inventory")
+                            Console.WriteLine("Current Inventory: " + Record.Inventory.ToString)
+                            Record.Inventory = GetInteger("Product Inventory")
                     End Select
                 Catch ex As ArgumentException
                     Console.WriteLine(ex.Message)
@@ -498,10 +502,10 @@ Public Module Assign1
             addressbook.SaveCSV(ADDRESS_CSV_PATH)
             addressbook.SaveXML(ADDRESS_XML_PATH)
         End If
-        'If Not OrderLineBook Is Nothing Then
-        '    OrderLineBook.SaveCSV(ORDERLINE_CSV_PATH)
-        '    OrderLineBook.SaveXML(ORDERLINE_XML_PATH)
-        'End If
+        If Not orderitembook Is Nothing Then
+            orderitembook.SaveCSV(ORDERLINE_CSV_PATH)
+            orderitembook.SaveXML(ORDERLINE_XML_PATH)
+        End If
         If Not customerbook Is Nothing Then
             customerbook.SaveCSV(CUSTOMER_CSV_PATH)
             customerbook.SaveXML(CUSTOMER_XML_PATH)
