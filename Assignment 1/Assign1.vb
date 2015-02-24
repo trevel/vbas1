@@ -351,11 +351,9 @@ Public Module Assign1
     End Sub
 
     Private Sub OrderAdd()
-        Dim input As String
         Dim odate As Date = Today
         Dim qty As UInteger
         Dim disc As Double = 0
-        Dim can_ship As Boolean = False
         Dim order As Order = Nothing
         Dim items As New ArrayList
 
@@ -390,8 +388,19 @@ Public Module Assign1
             odate = Today
         End If
 
+        Console.WriteLine("Enter discount %: ")
+        disc = GetDouble("Discount")
+
+        Try
+            order = New Order(orderbook.next_id, cust_record.GetID(), odate, disc)
+            orderbook.Add(order)
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+            Exit Sub
+        End Try
+
+        ' now they need to pick some items1
         Do While items.Count <= 10
-            ' now they need to pick some items1
             Dim product_choice As Short = GetChoiceID("Choose a Product", products)
             If product_choice = -1 Then
                 Exit Do
@@ -403,35 +412,14 @@ Public Module Assign1
                 Console.WriteLine("How many would you like at $" & prod_record.Price.ToString("0.00") & " each?")
                 qty = GetInteger("Quantity")
                 Try
-                    Dim newItem As New OrderItem(orderitembook.next_id, 0, prod_record.GetID, qty)
+                    Dim newItem As New OrderItem(orderitembook.next_id, order.ID, prod_record.GetID, qty)
                     items.Add(newItem)
-                    If qty <= prod_record.Inventory Then
-                        can_ship = True
-                    End If
                     orderitembook.Add(newItem)
                 Catch ex As Exception
                     Console.WriteLine(ex.Message)
                 End Try
             End If
         Loop
-        Console.WriteLine("Enter discount %: ")
-        disc = GetDouble("Discount")
-
-        Try ' TO-DO :: Move Shipping to an event? Or otherwise eventify it...
-            order = New Order(orderbook.next_id, cust_record.GetID(), odate, disc, items)
-            orderbook.Add(order)
-            If can_ship = True Then
-                Console.WriteLine("Some items are available to ship. Do you want to go ahead with shipping all available items? (Y/N)")
-                input = Console.ReadLine().Trim().ToUpper()
-                If input = "Y" AndAlso Not order Is Nothing Then
-                    order.Ship()
-                End If
-            End If
-        Catch ex As Exception
-            Console.WriteLine(ex.Message)
-        End Try
-
-
     End Sub
 
     Private Sub OrderEdit()
@@ -670,14 +658,14 @@ Public Module Assign1
                     addressbook = addressbook.Load(ADDRESS_CSV_PATH)
                     customerbook = customerbook.Load(CUSTOMER_CSV_PATH)
                     productbook = productbook.Load(PRODUCTS_CSV_PATH)
-                    orderitembook = orderitembook.Load(ORDERLINE_CSV_PATH)
                     orderbook = orderbook.Load(ORDERS_CSV_PATH)
+                    orderitembook = orderitembook.Load(ORDERLINE_CSV_PATH)
                 Case 2
                     addressbook = addressbook.Load(ADDRESS_XML_PATH)
                     customerbook = customerbook.Load(CUSTOMER_XML_PATH)
                     productbook = productbook.Load(PRODUCTS_XML_PATH)
-                    orderitembook = orderitembook.Load(ORDERLINE_XML_PATH)
                     orderbook = orderbook.Load(ORDERS_XML_PATH)
+                    orderitembook = orderitembook.Load(ORDERLINE_XML_PATH)
             End Select
         Catch e As InvalidDataException
             Console.WriteLine("Invalid data file format") ' LAURIE - TODO - add name of file here!!!
@@ -735,6 +723,7 @@ Public Module Assign1
             Dim o As Order = orderbook.GetByID(item.order_id)
             If o IsNot Nothing Then
                 item.order = o
+                o.item_count = o.item_count + 1
             End If
             Dim p As Product = productbook.GetByID(item.product_id)
             If p IsNot Nothing Then

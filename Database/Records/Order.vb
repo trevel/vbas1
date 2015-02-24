@@ -11,19 +11,16 @@ Imports System.IO
     Protected _customer_id As Integer
     Protected _order_date As Date
     Protected _discount As Double
-    Protected _item_count As Integer = 0
+    Protected _item_count As Integer
 
     Public Property customer As Customer
 
-    Public Sub New(id As Integer, cust As Integer, odate As Date, disc As Double, Items As ArrayList)
+    Public Sub New(id As Integer, cust As Integer, odate As Date, disc As Double)
         Me.ID = id
         Me.customer_id = cust
         Me.order_date = odate
         Me.discount = disc
-        For Each item As OrderItem In Items
-            item.order_id = id
-            item_count = item_count + 1
-        Next
+        Me.item_count = 0
     End Sub
 
     Public Sub New(csv As String)
