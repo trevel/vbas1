@@ -1,0 +1,34 @@
+<SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<SOAP-ENV:Body>
+<a1:ProductBook id="ref-1" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<Book href="#ref-3"/>
+<header id="ref-4">ID,description,price,inventory</header>
+<Book_x0060_1_x002B_Book href="#ref-3"/>
+<Book_x0060_1_x002B_header href="#ref-4"/>
+<Book_x0060_1_x002B_NewEntryEvent xsi:null="1"/>
+</a1:ProductBook>
+<a2:ArrayList id="ref-3" xmlns:a2="http://schemas.microsoft.com/clr/ns/System.Collections">
+<_items href="#ref-5"/>
+<_size>2</_size>
+<_version>2</_version>
+</a2:ArrayList>
+<SOAP-ENC:Array id="ref-5" SOAP-ENC:arrayType="xsd:anyType[4]">
+<item href="#ref-6"/>
+<item href="#ref-7"/>
+</SOAP-ENC:Array>
+<a1:Product id="ref-6" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_Description id="ref-8">goldfish</_Description>
+<_Price>0</_Price>
+<_Inventory>100</_Inventory>
+<m_ID>1</m_ID>
+<Record_x002B_m_ID>1</Record_x002B_m_ID>
+</a1:Product>
+<a1:Product id="ref-7" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_Description id="ref-9">sunfish</_Description>
+<_Price>0</_Price>
+<_Inventory>20</_Inventory>
+<m_ID>2</m_ID>
+<Record_x002B_m_ID>2</Record_x002B_m_ID>
+</a1:Product>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
