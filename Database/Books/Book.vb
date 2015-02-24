@@ -36,7 +36,7 @@ Imports System.Text
         next_id = item.GetID
     End Sub
 
-    Public Sub Remove(item As T)
+    Public Overridable Sub Remove(item As T)
         Book.Remove(item)
     End Sub
 

@@ -439,7 +439,30 @@ Public Module Assign1
     End Sub
 
     Private Sub OrderRemove()
-        Console.WriteLine("Implement order delete functionality!")
+        Dim tempStr As String = orderbook.tostring()
+        If tempStr = "- Empty -" Then
+            Console.WriteLine("No records found")
+            Exit Sub
+        End If
+        Dim lines() As String = tempStr.Split(Environment.NewLine)
+        If lines.Count = 0 Then
+            Console.WriteLine("No records found")
+            Exit Sub
+        End If
+        Dim recordtoedit As Short = GetChoiceID("Select an order to delete:", lines)
+        If recordtoedit = -1 Then
+            Exit Sub
+        End If
+        Dim record As Order = orderbook.GetByID(recordtoedit)
+        If record Is Nothing Then
+            Console.WriteLine("Order not found -- something went wrong")
+        Else
+            If orderitembook.OrderHasShippedItems(record.ID) = True Then
+                Console.WriteLine("This order has items that have already been shipped, therefore it cannot be deleted")
+            Else
+                orderbook.Remove(record)
+            End If
+        End If
     End Sub
 
     Private Sub OrderShip()
@@ -642,4 +665,9 @@ Public Module Assign1
             End If
         End If
     End Sub
+
+    Private Sub DeleteOrder(item As Order) Handles orderbook.DeleteOrder
+        orderitembook.RemoveByOrderID(item.ID)
+    End Sub
+
 End Module

@@ -6,8 +6,8 @@
 '*******************************************************************************************
 <Serializable()> Public Class OrderBook : Inherits Book(Of Order)
 
-    Public orderitembook As New OrderItemBook
     Public Event NewOrder(item As Order)
+    Public Event DeleteOrder(item As Order)
 
     Protected Overrides Sub Interpret(line As String)
 
@@ -20,6 +20,10 @@
     Public Overrides Sub Add(item As Order)
         MyBase.Add(item)
         RaiseEvent NewOrder(item)
+    End Sub
+    Public Overrides Sub Remove(item As Order)
+        MyBase.Remove(item)
+        RaiseEvent DeleteOrder(item)
     End Sub
 
     Public Function IsOrderForCust(cust As Integer) As Boolean

@@ -1,39 +1,29 @@
 <SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
 <SOAP-ENV:Body>
 <a1:OrderBook id="ref-1" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<orderitembook href="#ref-3"/>
-<NewOrderEvent href="#ref-4"/>
+<NewOrderEvent href="#ref-3"/>
+<DeleteOrderEvent href="#ref-4"/>
 <Book href="#ref-5"/>
 <header id="ref-6">ID,ORDER_DATE,DISCOUNT,CUST_ID</header>
-<_next_id>2</_next_id>
+<_next_id>3</_next_id>
 <Book_x0060_1_x002B_Book href="#ref-5"/>
 <Book_x0060_1_x002B_header href="#ref-6"/>
-<Book_x0060_1_x002B__next_id>2</Book_x0060_1_x002B__next_id>
+<Book_x0060_1_x002B__next_id>3</Book_x0060_1_x002B__next_id>
 </a1:OrderBook>
-<a1:OrderItemBook id="ref-3" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<NewItemEvent xsi:null="1"/>
-<Book href="#ref-7"/>
-<header xsi:null="1"/>
-<_next_id>1</_next_id>
-<Book_x0060_1_x002B_Book href="#ref-7"/>
-<Book_x0060_1_x002B_header xsi:null="1"/>
-<Book_x0060_1_x002B__next_id>1</Book_x0060_1_x002B__next_id>
-</a1:OrderItemBook>
+<a2:DelegateSerializationHolder id="ref-3" xmlns:a2="http://schemas.microsoft.com/clr/ns/System">
+<Delegate href="#ref-7"/>
+<method0 href="#ref-8"/>
+</a2:DelegateSerializationHolder>
 <a2:DelegateSerializationHolder id="ref-4" xmlns:a2="http://schemas.microsoft.com/clr/ns/System">
-<Delegate href="#ref-8"/>
-<method0 href="#ref-9"/>
+<Delegate href="#ref-9"/>
+<method0 href="#ref-10"/>
 </a2:DelegateSerializationHolder>
 <a3:ArrayList id="ref-5" xmlns:a3="http://schemas.microsoft.com/clr/ns/System.Collections">
-<_items href="#ref-10"/>
-<_size>1</_size>
-<_version>1</_version>
-</a3:ArrayList>
-<a3:ArrayList id="ref-7" xmlns:a3="http://schemas.microsoft.com/clr/ns/System.Collections">
 <_items href="#ref-11"/>
-<_size>0</_size>
-<_version>0</_version>
+<_size>1</_size>
+<_version>3</_version>
 </a3:ArrayList>
-<a2:DelegateSerializationHolder_x002B_DelegateEntry id="ref-8" xmlns:a2="http://schemas.microsoft.com/clr/ns/System">
+<a2:DelegateSerializationHolder_x002B_DelegateEntry id="ref-7" xmlns:a2="http://schemas.microsoft.com/clr/ns/System">
 <type id="ref-12">Database.OrderBook+NewOrderEventHandler</type>
 <assembly id="ref-13">Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
 <target xsi:type="xsd:anyType" xsi:null="1"/>
@@ -42,7 +32,7 @@
 <methodName id="ref-16">NewOrder</methodName>
 <delegateEntry xsi:null="1"/>
 </a2:DelegateSerializationHolder_x002B_DelegateEntry>
-<a4:MemberInfoSerializationHolder id="ref-9" xmlns:a4="http://schemas.microsoft.com/clr/ns/System.Reflection">
+<a4:MemberInfoSerializationHolder id="ref-8" xmlns:a4="http://schemas.microsoft.com/clr/ns/System.Reflection">
 <Name href="#ref-16"/>
 <AssemblyName href="#ref-14"/>
 <ClassName href="#ref-15"/>
@@ -51,44 +41,52 @@
 <MemberType>8</MemberType>
 <GenericArguments xsi:null="1"/>
 </a4:MemberInfoSerializationHolder>
-<SOAP-ENC:Array id="ref-10" SOAP-ENC:arrayType="xsd:anyType[4]">
-<item href="#ref-19"/>
+<a2:DelegateSerializationHolder_x002B_DelegateEntry id="ref-9" xmlns:a2="http://schemas.microsoft.com/clr/ns/System">
+<type id="ref-19">Database.OrderBook+DeleteOrderEventHandler</type>
+<assembly href="#ref-13"/>
+<target xsi:type="xsd:anyType" xsi:null="1"/>
+<targetTypeAssembly href="#ref-14"/>
+<targetTypeName href="#ref-15"/>
+<methodName id="ref-20">DeleteOrder</methodName>
+<delegateEntry xsi:null="1"/>
+</a2:DelegateSerializationHolder_x002B_DelegateEntry>
+<a4:MemberInfoSerializationHolder id="ref-10" xmlns:a4="http://schemas.microsoft.com/clr/ns/System.Reflection">
+<Name href="#ref-20"/>
+<AssemblyName href="#ref-14"/>
+<ClassName href="#ref-15"/>
+<Signature id="ref-21">Void DeleteOrder(Database.Order)</Signature>
+<Signature2 id="ref-22">System.Void DeleteOrder(Database.Order)</Signature2>
+<MemberType>8</MemberType>
+<GenericArguments xsi:null="1"/>
+</a4:MemberInfoSerializationHolder>
+<SOAP-ENC:Array id="ref-11" SOAP-ENC:arrayType="xsd:anyType[4]">
+<item href="#ref-23"/>
 </SOAP-ENC:Array>
-<SOAP-ENC:Array id="ref-11" SOAP-ENC:arrayType="xsd:anyType[0]">
-</SOAP-ENC:Array>
-<a1:Order id="ref-19" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<_customer_id>2</_customer_id>
+<a1:Order id="ref-23" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_customer_id>1</_customer_id>
 <_order_date>2015-02-24T00:00:00.0000000-05:00</_order_date>
-<_discount>9</_discount>
-<_customer href="#ref-20"/>
-<m_ID>1</m_ID>
-<Record_x002B_m_ID>1</Record_x002B_m_ID>
+<_discount>0</_discount>
+<_customer href="#ref-24"/>
+<m_ID>2</m_ID>
+<Record_x002B_m_ID>2</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
 </a1:Order>
-<a1:Customer id="ref-20" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<_name id="ref-21">Mark</_name>
-<_email id="ref-22">blah@blah.ca</_email>
-<_phone_number id="ref-23">905-111-2222</_phone_number>
-<_credit_limit>3</_credit_limit>
+<a1:Customer id="ref-24" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_name id="ref-25">Laurie Shields</_name>
+<_email id="ref-26">laurie_shields@hotmail.com</_email>
+<_phone_number id="ref-27">905-111-2222</_phone_number>
+<_credit_limit>9999</_credit_limit>
 <_mailing_address_id>1</_mailing_address_id>
 <_shipping_address_id>1</_shipping_address_id>
 <_mailing_address xsi:null="1"/>
 <_shipping_address xsi:null="1"/>
-<m_ID>2</m_ID>
-<Record_x002B_m_ID>2</Record_x002B_m_ID>
+<m_ID>1</m_ID>
+<Record_x002B_m_ID>1</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
 </a1:Customer>
 </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
-2015-02-24T00:00:00.0000000-05:00</_order_date>
-<_discount>99</_discount>
-<_customer href="#ref-23"/>
-<m_ID>2</m_ID>
-<Record_x002B_m_ID>2</Record_x002B_m_ID>
-<Record_x002B__active>false</Record_x002B__active>
-</a1:Order>
-<a1:Customer id="ref-22" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<_name id="ref-24">Laurie Shields</_name>
+elds</_name>
 <_email id="ref-25">laurie_shields@hotmail.com</_email>
 <_phone_number id="ref-26">905-111-2222</_phone_number>
 <_credit_limit>9999</_credit_limit>

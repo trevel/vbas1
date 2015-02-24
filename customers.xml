@@ -1,45 +1,28 @@
 <SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
 <SOAP-ENV:Body>
 <a1:CustomerBook id="ref-1" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<addressbook href="#ref-3"/>
-<Book href="#ref-4"/>
-<header id="ref-5">id,name,email,phone_number,credit_limit,mailing_address,shipping_address</header>
+<Book href="#ref-3"/>
+<header id="ref-4">id,name,email,phone_number,credit_limit,mailing_address,shipping_address</header>
 <_next_id>5</_next_id>
-<Book_x0060_1_x002B_Book href="#ref-4"/>
-<Book_x0060_1_x002B_header href="#ref-5"/>
+<Book_x0060_1_x002B_Book href="#ref-3"/>
+<Book_x0060_1_x002B_header href="#ref-4"/>
 <Book_x0060_1_x002B__next_id>5</Book_x0060_1_x002B__next_id>
 </a1:CustomerBook>
-<a1:AddressBook id="ref-3" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<NewAddressEvent xsi:null="1"/>
-<Book href="#ref-6"/>
-<header xsi:null="1"/>
-<_next_id>1</_next_id>
-<Book_x0060_1_x002B_Book href="#ref-6"/>
-<Book_x0060_1_x002B_header xsi:null="1"/>
-<Book_x0060_1_x002B__next_id>1</Book_x0060_1_x002B__next_id>
-</a1:AddressBook>
-<a2:ArrayList id="ref-4" xmlns:a2="http://schemas.microsoft.com/clr/ns/System.Collections">
-<_items href="#ref-7"/>
+<a2:ArrayList id="ref-3" xmlns:a2="http://schemas.microsoft.com/clr/ns/System.Collections">
+<_items href="#ref-5"/>
 <_size>4</_size>
 <_version>4</_version>
 </a2:ArrayList>
-<a2:ArrayList id="ref-6" xmlns:a2="http://schemas.microsoft.com/clr/ns/System.Collections">
-<_items href="#ref-8"/>
-<_size>0</_size>
-<_version>0</_version>
-</a2:ArrayList>
-<SOAP-ENC:Array id="ref-7" SOAP-ENC:arrayType="xsd:anyType[4]">
+<SOAP-ENC:Array id="ref-5" SOAP-ENC:arrayType="xsd:anyType[4]">
+<item href="#ref-6"/>
+<item href="#ref-7"/>
+<item href="#ref-8"/>
 <item href="#ref-9"/>
-<item href="#ref-10"/>
-<item href="#ref-11"/>
-<item href="#ref-12"/>
 </SOAP-ENC:Array>
-<SOAP-ENC:Array id="ref-8" SOAP-ENC:arrayType="xsd:anyType[0]">
-</SOAP-ENC:Array>
-<a1:Customer id="ref-9" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<_name id="ref-13">Laurie Shields</_name>
-<_email id="ref-14">laurie_shields@hotmail.com</_email>
-<_phone_number id="ref-15">905-111-2222</_phone_number>
+<a1:Customer id="ref-6" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_name id="ref-10">Laurie Shields</_name>
+<_email id="ref-11">laurie_shields@hotmail.com</_email>
+<_phone_number id="ref-12">905-111-2222</_phone_number>
 <_credit_limit>9999</_credit_limit>
 <_mailing_address_id>1</_mailing_address_id>
 <_shipping_address_id>1</_shipping_address_id>
@@ -49,10 +32,10 @@
 <Record_x002B_m_ID>1</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
 </a1:Customer>
-<a1:Customer id="ref-10" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<_name id="ref-16">Mark</_name>
-<_email id="ref-17">blah@blah.ca</_email>
-<_phone_number id="ref-18">905-111-2222</_phone_number>
+<a1:Customer id="ref-7" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_name id="ref-13">Mark</_name>
+<_email id="ref-14">blah@blah.ca</_email>
+<_phone_number id="ref-15">905-111-2222</_phone_number>
 <_credit_limit>3</_credit_limit>
 <_mailing_address_id>1</_mailing_address_id>
 <_shipping_address_id>1</_shipping_address_id>
@@ -62,10 +45,10 @@
 <Record_x002B_m_ID>2</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
 </a1:Customer>
-<a1:Customer id="ref-11" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<_name id="ref-19">blaha</_name>
-<_email id="ref-20">lkj@asdf.com</_email>
-<_phone_number id="ref-21">111-222-3333</_phone_number>
+<a1:Customer id="ref-8" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_name id="ref-16">blaha</_name>
+<_email id="ref-17">lkj@asdf.com</_email>
+<_phone_number id="ref-18">111-222-3333</_phone_number>
 <_credit_limit>999</_credit_limit>
 <_mailing_address_id>1</_mailing_address_id>
 <_shipping_address_id>1</_shipping_address_id>
@@ -73,6 +56,24 @@
 <_shipping_address xsi:null="1"/>
 <m_ID>3</m_ID>
 <Record_x002B_m_ID>3</Record_x002B_m_ID>
+<Record_x002B__active>false</Record_x002B__active>
+</a1:Customer>
+<a1:Customer id="ref-9" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_name id="ref-19">test</_name>
+<_email id="ref-20">test@test.ca</_email>
+<_phone_number id="ref-21">111-222-3333</_phone_number>
+<_credit_limit>9999</_credit_limit>
+<_mailing_address_id>1</_mailing_address_id>
+<_shipping_address_id>1</_shipping_address_id>
+<_mailing_address xsi:null="1"/>
+<_shipping_address xsi:null="1"/>
+<m_ID>4</m_ID>
+<Record_x002B_m_ID>4</Record_x002B_m_ID>
+<Record_x002B__active>false</Record_x002B__active>
+</a1:Customer>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
 <Record_x002B__active>false</Record_x002B__active>
 </a1:Customer>
 <a1:Customer id="ref-12" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">

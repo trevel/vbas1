@@ -5,7 +5,7 @@
 ' Last Updated On: Feb 21, 2015
 '*******************************************************************************************
 <Serializable()> Public Class AddressBook : Inherits Book(Of Address)
-    ' Public Property customerbook As CustomerBook = Nothing
+    Public Property customerbook As CustomerBook = Nothing
 
 
     Public Event NewAddress(item As Address)
