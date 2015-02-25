@@ -114,6 +114,8 @@ Imports System.IO
     Public Overrides Function GetCSV() As String
         If Me.order_id > 0 Then ' this allows us to eliminate orphaned order items that may not be attached to an order
             Return Me.ID & "," & Me.order_id & "," & Me.product_id & "," & Me.quantity & "," & Format(Me.ship_date, "yyyy-MM-dd")
+        Else
+            Return Nothing
         End If
     End Function
 

@@ -7,7 +7,6 @@
 <Serializable()> Public Class AddressBook : Inherits Book(Of Address)
     Public Property customerbook As CustomerBook = Nothing
 
-
     Public Event NewAddress(item As Address)
 
     Protected Overrides Sub Interpret(line As String)

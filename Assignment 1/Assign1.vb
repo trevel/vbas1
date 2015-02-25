@@ -544,7 +544,7 @@ Public Module Assign1
     Private Function GetInteger(msg As String) As Integer
         Dim input As String
         Do
-            Input = Console.ReadLine().Trim()
+            input = Console.ReadLine().Trim()
             Try
                 Return Integer.Parse(input)
             Catch ex As FormatException
@@ -635,7 +635,7 @@ Public Module Assign1
         End If
     End Sub
 
-    Private Sub NewAddress(item As Address) Handles addressbook.NewAddress
+    Private Sub NewAddress(item As Address) Handles AddressBook.NewAddress
         If item IsNot Nothing Then
             Dim cust As Customer = customerbook.GetByID(item.cust_id)
             If cust IsNot Nothing Then
@@ -649,7 +649,7 @@ Public Module Assign1
         End If
     End Sub
 
-    Private Sub NewOrderItem(item As OrderItem) Handles orderitembook.NewItem
+    Private Sub NewOrderItem(item As OrderItem) Handles OrderItemBook.NewItem
         If item IsNot Nothing Then
             Dim o As Order = orderbook.GetByID(item.order_id)
             If o IsNot Nothing Then
@@ -663,7 +663,7 @@ Public Module Assign1
         End If
     End Sub
 
-    Private Sub DeleteOrderItem(item As OrderItem) Handles orderitembook.DeleteItem
+    Private Sub DeleteOrderItem(item As OrderItem) Handles OrderItemBook.DeleteItem
         If item IsNot Nothing Then
             Dim o As Order = orderbook.GetByID(item.order_id)
             If o IsNot Nothing Then
@@ -677,7 +677,7 @@ Public Module Assign1
         End If
     End Sub
 
-    Private Sub NewOrder(item As Order) Handles orderbook.NewOrder
+    Private Sub NewOrder(item As Order) Handles OrderBook.NewOrder
         If item IsNot Nothing Then
             Dim c As Customer = customerbook.GetByID(item.customer_id)
             If c IsNot Nothing Then
@@ -686,7 +686,7 @@ Public Module Assign1
         End If
     End Sub
 
-    Private Sub DeleteOrder(item As Order) Handles orderbook.DeleteOrder
+    Private Sub DeleteOrder(item As Order) Handles OrderBook.DeleteOrder
         If item IsNot Nothing Then
             orderitembook.RemoveByOrderID(item.ID)
         End If

@@ -103,7 +103,10 @@ Imports System.Text
             ' first line is the header; good thing we saved it earlier, huh?
             sw.WriteLine(header)
             For Each item As T In Book
-                sw.WriteLine(item.GetCSV)
+                Dim csv As String = item.GetCSV
+                If csv IsNot Nothing Then
+                    sw.WriteLine(item.GetCSV)
+                End If
             Next
         End Using
     End Sub
