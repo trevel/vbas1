@@ -11,9 +11,7 @@ Imports System.Text.RegularExpressions
     Protected Overrides Sub Interpret(line As String)
 
         Dim entry As New Product(line)
-        Book.Add(entry)
-        next_id = entry.GetID
-        ' RaiseEvent NewFriend(entry)
+        Me.Add(entry)
     End Sub
 
 End Class

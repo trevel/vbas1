@@ -1,4 +1,5 @@
 id,name,email,phone_number,credit_limit,mailing_address,shipping_address
-1,Laurie Shields,laurie_shields@hotmail.com,905-111-2222,111.00,1,1
-2,Mark,blah@blah.ca,905-111-2222,3.00,1,1
-3,blaha,lkj@asdf.com,111-222-3333,999.00,1,1
+1,Laurie Shields,laurie_shields@hotmail.com,905-111-2222,111.00,1,2
+2,Mark,blah@blah.ca,905-111-2222,3.00,3,0
+3,blaha,lkj@asdf.com,111-222-3333,999.00,0,4
+4,Joe,joe@joe.joe,123-132-1234,213.00,1,0

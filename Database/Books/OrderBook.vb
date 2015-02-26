@@ -13,8 +13,7 @@
 
         Dim entry As New Order(line)
         RaiseEvent NewOrder(entry)
-        Book.Add(entry)
-        next_id = entry.GetID
+        Me.Add(entry)
     End Sub
 
     Public Overrides Sub Add(item As Order)

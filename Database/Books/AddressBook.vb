@@ -12,7 +12,7 @@
     Protected Overrides Sub Interpret(line As String)
         Dim entry As New Address(line)
         RaiseEvent NewAddress(entry)
-        Book.Add(entry)
+        Me.Add(entry)
     End Sub
 
     Public Function GetByCustID(cust_id As Integer) As String()

@@ -13,8 +13,7 @@
     Protected Overrides Sub Interpret(line As String)
         Dim entry As New OrderItem(line)
         RaiseEvent NewItem(entry)
-        Book.Add(entry)
-        next_id = entry.GetID
+        Me.Add(entry)
     End Sub
 
     Public Overrides Sub Add(item As OrderItem)

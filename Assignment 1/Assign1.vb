@@ -36,7 +36,6 @@ Public Module Assign1
         Console.WriteLine("Press almost any key to continue")
         Console.ReadKey()
         Console.Clear()
-
     End Sub
 
     Private Function MainMenu() As Int16
@@ -86,26 +85,58 @@ Public Module Assign1
         Dim email As String = Console.ReadLine().Trim()
         Console.WriteLine("Enter Customer Phone number")
         Dim phone_number As String = Console.ReadLine().Trim()
-        Console.WriteLine("Enter Customer Mailing Address")
-        Dim mail_address As String = Console.ReadLine().Trim()
-        Console.WriteLine("Enter Customer Shipping Address")
-        Dim ship_address As String = Console.ReadLine().Trim()
         Console.WriteLine("Enter Customer Credit Limit")
         credit_limit = GetDouble("Credit Limit")
 
-        ' LAURIE :: TODO need to construct the address objects...all we have is a string from the console
-        ' "Add a mailing address? (Y/N)" 
-        ' "Add a shipping address? (Y/N)" 
-        Dim mailing_address As Address = Nothing
-        Dim shipping_address As Address = Nothing
+        Console.WriteLine("Enter Customer Mailing Address")
+        Dim mail_address As Address = RequestAddress(Address.AddressType.mailing_address)
+        Console.WriteLine("Would you like a separate shipping address?")
+        Dim ship_address As Address
+        If Console.ReadKey().KeyChar.ToString.ToUpper = "Y" Then
+            ship_address = RequestAddress(Address.AddressType.shipping_address)
+        Else
+            ship_address = Nothing
+        End If
 
-        ' LAURIE :: TODO - fix the addresses
         Try
-            customerbook.Add(New Customer(customerbook.next_id, name, email, 1, 1, phone_number, credit_limit))
+            Dim cust As Customer
+
+            If ship_address IsNot Nothing Then
+                cust = New Customer(customerbook.next_id, name, email, mail_address.GetID, ship_address.GetID, phone_number, credit_limit)
+            Else
+                cust = New Customer(customerbook.next_id, name, email, mail_address.GetID, 0, phone_number, credit_limit)
+            End If
+            mail_address.cust_id = cust.GetID
+            mail_address.customer = cust
+            customerbook.Add(cust)
+            addressbook.Add(mail_address)
+            If ship_address IsNot Nothing Then
+                ship_address.cust_id = cust.GetID
+                ship_address.customer = cust
+                addressbook.Add(ship_address)
+            End If
         Catch ex As Exception
             Console.WriteLine(ex.Message)
         End Try
     End Sub
+
+    Private Function RequestAddress(type As Address.AddressType) As Address
+        Console.WriteLine("Enter street")
+        Dim street As String = Console.ReadLine().Trim()
+        Console.WriteLine("Enter city")
+        Dim city As String = Console.ReadLine().Trim()
+        Console.WriteLine("Enter province (2 letter code)")
+        Dim province As String = Console.ReadLine().Trim()
+        Console.WriteLine("Enter postal code (A1A 1A1)")
+        Dim postal_code As String = Console.ReadLine().Trim()
+
+        Try
+            Return New Address(addressbook.next_id, 0, street, city, province, postal_code, type)
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        End Try
+        Return Nothing
+    End Function
 
     Private Sub CustomerEdit()
         Dim recordtoedit As Short = GetChoiceID("Customer to Edit", customerbook.tostring().Split(Environment.NewLine))
@@ -133,13 +164,33 @@ Public Module Assign1
                             Console.WriteLine("Current phone number: " + record.phone_number.ToString)
                             record.phone_number = Console.ReadLine().Trim()
                         Case 4
-                            Console.WriteLine("Current mailing address :" + addressbook.GetByID(record.mailing_address_id).ToString)
-                            ' LAURIE :: TODO
-                            record.mailing_address_id = Nothing ' New Address(Console.ReadLine().Trim())
+                            Dim address As Address = addressbook.GetByID(record.mailing_address_id)
+                            If address Is Nothing Then
+                                Console.WriteLine("No mailing address exists; add one?")
+                                If Console.ReadKey(True).KeyChar.ToString.ToUpper = "Y" Then
+                                    address = RequestAddress(address.AddressType.mailing_address)
+                                    address.cust_id = record.GetID
+                                    address.customer = record
+                                    addressbook.Add(address)
+                                End If
+                            Else
+                                Console.WriteLine("Current mailing address :" + address.ToString)
+                                AddressEdit(record, address)
+                            End If
                         Case 5
-                            Console.WriteLine("Current shipping address: " + addressbook.GetByID(record.shipping_address_id).ToString)
-                            ' LAURIE :: TODO
-                            record.shipping_address_id = Nothing ' New Address(Console.ReadLine().Trim())
+                            Dim address As Address = addressbook.GetByID(record.shipping_address_id)
+                            If address Is Nothing Then
+                                Console.WriteLine("No shipping address exists; add one?")
+                                If Console.ReadKey(True).KeyChar.ToString.ToUpper = "Y" Then
+                                    address = RequestAddress(address.AddressType.shipping_address)
+                                    address.cust_id = record.GetID
+                                    address.customer = record
+                                    addressbook.Add(address)
+                                End If
+                            Else
+                                Console.WriteLine("Current shipping address :" + address.ToString)
+                                AddressEdit(record, address)
+                            End If
                         Case 6
                             Console.WriteLine("Current credit limit: " + record.credit_limit.ToString)
                             record.credit_limit = GetDouble("Credit Limit")
@@ -149,6 +200,43 @@ Public Module Assign1
                 End Try
             Loop
         End If
+    End Sub
+
+    Private Sub AddressEdit(cust As Customer, record As Address)
+        Dim choices As String()
+        If record.type = Address.AddressType.mailing_address Then
+            choices = {"Edit Street", "Edit City", "Edit Province", "Edit Postal Code", "Exit"}
+        Else
+            choices = {"Edit Street", "Edit City", "Edit Province", "Edit Postal Code", "Delete Address", "Exit"}
+        End If
+        Do
+            Try
+                Select Case GetChoice("Edit Address", choices)
+                    Case -1, 6
+                        Exit Sub
+                    Case 1
+                        Console.WriteLine("Current street: " + record.street.ToString)
+                        record.street = Console.ReadLine().Trim()
+                    Case 2
+                        Console.WriteLine("Current city: " + record.city.ToString)
+                        record.city = Console.ReadLine().Trim()
+                    Case 3
+                        Console.WriteLine("Current province: " + record.province.ToString)
+                        record.province = Console.ReadLine().Trim()
+                    Case 4
+                        Console.WriteLine("Current postal code: " + record.province.ToString)
+                        record.province = Console.ReadLine().Trim()
+                    Case 5
+                        If record.type = Address.AddressType.mailing_address Then Exit Sub
+                        Console.WriteLine("Deleting shipping address. Default address will be used instead.")
+                        record.customer.shipping_address_id = 0
+                        addressbook.Remove(record)
+                End Select
+            Catch ex As ArgumentException
+                Console.WriteLine(ex.Message)
+                Console.WriteLine(ex.StackTrace)
+            End Try
+        Loop
     End Sub
 
     Private Sub CustomerRemove()
@@ -163,6 +251,8 @@ Public Module Assign1
         Else
             If orderbook.IsOrderForCust(record.ID) = False Then
                 customerbook.Remove(record)
+                addressbook.Remove(addressbook.GetByID(record.shipping_address_id))
+                addressbook.Remove(addressbook.GetByID(record.mailing_address_id))
             Else
                 Console.WriteLine("Customer cannot be removed due to Existing Orders")
             End If
@@ -472,6 +562,7 @@ Public Module Assign1
     Private Function GetChoice(title As String, choices As String()) As Int16
         Dim inputline As String
         Dim i As Integer = 0
+        Console.WriteLine()
         Console.WriteLine(title)
         Console.WriteLine("----------------")
         For i = 1 To choices.Length
@@ -691,5 +782,7 @@ Public Module Assign1
             orderitembook.RemoveByOrderID(item.ID)
         End If
     End Sub
+
+
 
 End Module

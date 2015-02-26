@@ -17,9 +17,6 @@ Imports CSLib
     Protected _mailing_address_id As Integer
     Protected _shipping_address_id As Integer
 
-    Protected Friend Property mailing_address As Address
-    Protected Friend Property shipping_address As Address
-
     Public Sub New(id As Int16, name As String, email As String, mailing_address As Integer, shipping_address As Integer, phone_number As String, credit_limit As Double)
         Me.ID = id
         Me.name = name

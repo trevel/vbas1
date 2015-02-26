@@ -25,11 +25,11 @@ Imports CSLib
         InterpretCSV(csv)
     End Sub
 
-    Public Sub New(id, cust_id, street, city, province, postal_code)
+    Public Sub New(id As Integer, cust_id As Integer, street As String, city As String, province As String, postal_code As String)
         Me.New(id, cust_id, street, city, province, postal_code, AddressType.mailing_address)
     End Sub
 
-    Public Sub New(id, cust_id, street, city, province, postalcode, type)
+    Public Sub New(id As Integer, cust_id As Integer, street As String, city As String, province As String, postal_code As String, type As AddressType)
         Me.ID = id
         Me.cust_id = cust_id
         Me.street = street
@@ -50,7 +50,7 @@ Imports CSLib
             Return _cust_id
         End Get
         Set(value As Integer)
-            If value > 0 Then
+            If value >= 0 Then
                 _cust_id = value
             End If
         End Set
@@ -104,10 +104,6 @@ Imports CSLib
             End If
         End Set
     End Property
-
-
-
-
 
     Public Overrides Sub InterpretCSV(csv As String)
         Dim fields() As String = csv.Split(",")

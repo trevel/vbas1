@@ -24,7 +24,7 @@ Imports System.Text
             Return _next_id
         End Get
         Set(value As Int16)
-            _next_id = value
+            ' _next_id = value
             If value >= _next_id Then
                 _next_id = value + 1
             End If
@@ -37,11 +37,11 @@ Imports System.Text
     End Sub
 
     Public Overridable Sub Remove(item As T)
-        Book.Remove(item)
+        If item IsNot Nothing Then Book.Remove(item)
     End Sub
 
     Public Function GetByID(id As Integer?) As T
-        If id Is Nothing Then Return Nothing
+        If id Is Nothing Or id = 0 Then Return Nothing
         For Each item As T In Book
             If item.GetID() = id Then Return item
         Next
