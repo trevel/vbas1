@@ -130,12 +130,22 @@ Imports System.Text
         If Book.Count = 0 Then Return "- Empty -"
         Dim Buffer As String = ""
         Dim s As New StringBuilder
-        '    s.Append(header)
+        s.AppendLine(header)
         For Each item In Book
             s.Append(Buffer)
-            Buffer = vbNewLine
+            Buffer = Environment.NewLine
             s.Append(item.ToString())
         Next
         Return s.ToString()
+    End Function
+
+    Public Function GetChoiceStrings() As String()
+        If Book.Count = 0 Then Return Nothing
+        Dim Buffer As String = ""
+        Dim result As New List(Of String)
+        For Each item In Book
+            result.Add(item.ToChoiceString())
+        Next
+        Return result.ToArray
     End Function
 End Class

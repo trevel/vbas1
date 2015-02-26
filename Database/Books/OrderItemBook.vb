@@ -35,7 +35,7 @@
         Next
     End Sub
 
-    Public Function OrderHasShippedItems(order_id As Integer) As Boolean
+    Public Function DoesOrderHaveShippedItems(order_id As Integer) As Boolean
         For Each item As OrderItem In Book
             If item.order_id = order_id Then
                 If item.has_shipped = True Then

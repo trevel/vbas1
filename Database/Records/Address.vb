@@ -132,6 +132,10 @@ Imports System.Text
         End If
     End Function
 
+    Public Overrides Function ToChoiceString() As String
+        Return MyBase.ToChoiceString()
+    End Function
+
     Function ToFancyString() As Object
         Dim sb As New StringBuilder
         sb.AppendLine(Me.customer.name)

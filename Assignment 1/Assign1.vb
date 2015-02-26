@@ -138,7 +138,7 @@ Public Module Assign1
     End Function
 
     Private Sub CustomerEdit()
-        Dim recordtoedit As Short = GetChoiceID("Customer to Edit", customerbook.tostring().Split(Environment.NewLine))
+        Dim recordtoedit As Short = GetChoiceID("Customer to Edit", customerbook.GetChoiceStrings())
         If recordtoedit = -1 Then
             ' User hit Q
             Exit Sub
@@ -242,7 +242,7 @@ Public Module Assign1
     End Sub
 
     Private Sub CustomerRemove()
-        Dim recordtoedit As Short = GetChoiceID("Customer to Remove", customerbook.tostring().Split(Environment.NewLine))
+        Dim recordtoedit As Short = GetChoiceID("Customer to Remove", customerbook.GetChoiceStrings())
         If recordtoedit = -1 Then
             ' User hit q
             Exit Sub
@@ -254,7 +254,7 @@ Public Module Assign1
         If record Is Nothing Then
             Console.WriteLine("Customer record not found -- something went wrong")
         Else
-            If orderbook.IsOrderForCust(record.ID) = False Then
+            If orderbook.DoesCustHaveOrder(record.ID) = False Then
                 customerbook.Remove(record)
                 addressbook.Remove(addressbook.GetByID(record.shipping_address_id))
                 addressbook.Remove(addressbook.GetByID(record.mailing_address_id))
@@ -302,7 +302,7 @@ Public Module Assign1
     End Sub
 
     Private Sub ProductEdit()
-        Dim recordtoedit As Short = GetChoiceID("Product to Edit", productbook.tostring().Split(Environment.NewLine))
+        Dim recordtoedit As Short = GetChoiceID("Product to Edit", productbook.GetChoiceStrings())
         If recordtoedit = -1 Then
             ' user hit q
             Exit Sub
@@ -342,7 +342,7 @@ Public Module Assign1
     End Sub
 
     Private Sub ProductRemove()
-        Dim recordtoedit As Short = GetChoiceID("Product to Remove", productbook.tostring().Split(Environment.NewLine))
+        Dim recordtoedit As Short = GetChoiceID("Product to Remove", productbook.GetChoiceStrings())
         If recordtoedit = -1 Then
             ' user hit q
             Exit Sub
@@ -388,7 +388,7 @@ Public Module Assign1
     End Sub
 
     Private Sub OrderViewDetail()
-        Dim recordtoedit As Short = GetChoiceID("Select an order to view:", orderbook.tostring().Split(Environment.NewLine))
+        Dim recordtoedit As Short = GetChoiceID("Select an order to view:", orderbook.GetChoiceStrings())
         If recordtoedit = -1 Then
             'User hit q
             Exit Sub
@@ -429,14 +429,14 @@ Public Module Assign1
         Dim items As New ArrayList
 
         ' get a list of products and make sure there are some
-        Dim products() As String = productbook.tostring().Split(Environment.NewLine)
+        Dim products() As String = productbook.GetChoiceStrings()
         If products Is Nothing OrElse products(0) = "- Empty -" Then
             Console.WriteLine("No products found. You need to add some products before creating orders.")
             Exit Sub
         End If
 
         ' Let them pick a customer for the order
-        Dim cust_choice As Short = GetChoiceID("Choose a Customer", customerbook.tostring().Split(Environment.NewLine))
+        Dim cust_choice As Short = GetChoiceID("Choose a Customer", customerbook.GetChoiceStrings())
         If cust_choice = -1 Then
             ' user hit q
             Exit Sub
@@ -489,7 +489,7 @@ Public Module Assign1
     End Sub
 
     Private Sub OrderEdit()
-        Dim recordtoedit As Short = GetChoiceID("Select an order to modify:", orderbook.tostring().Split(Environment.NewLine))
+        Dim recordtoedit As Short = GetChoiceID("Select an order to modify:", orderbook.GetChoiceStrings())
         If recordtoedit = -1 Then
             ' user hit q
             Exit Sub
@@ -580,7 +580,7 @@ Public Module Assign1
     End Sub
 
     Private Sub OrderRemove()
-        Dim recordtoedit As Short = GetChoiceID("Select an order to delete:", orderbook.tostring().Split(Environment.NewLine))
+        Dim recordtoedit As Short = GetChoiceID("Select an order to delete:", orderbook.GetChoiceStrings())
         If recordtoedit = -1 Then
             ' user hit q
             Exit Sub
@@ -592,7 +592,7 @@ Public Module Assign1
         If record Is Nothing Then
             Console.WriteLine("Order not found -- something went wrong")
         Else
-            If orderitembook.OrderHasShippedItems(record.ID) = True Then
+            If orderitembook.DoesOrderHaveShippedItems(record.ID) = True Then
                 Console.WriteLine("This order has items that have already been shipped, therefore it cannot be deleted")
             Else
                 orderbook.Remove(record)

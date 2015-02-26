@@ -37,4 +37,8 @@ Imports CSLib
     Public Overrides Function ToString() As String
         Return Me.ID & "::" & GetCSV()
     End Function
+
+    Public Overridable Function ToChoiceString() As String
+        Return ToString()
+    End Function
 End Class

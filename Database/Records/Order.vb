@@ -54,7 +54,7 @@ Imports System.IO
             Return _discount
         End Get
         Set(value As Double)
-            If value >= 0 Then
+            If value >= 0 And value <= 100 Then
                 Me._discount = value
             Else
                 Throw New ArgumentException("Invalid discount")

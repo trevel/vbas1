@@ -22,7 +22,7 @@
         RaiseEvent DeleteOrder(item)
     End Sub
 
-    Public Function IsOrderForCust(cust As Integer) As Boolean
+    Public Function DoesCustHaveOrder(cust As Integer) As Boolean
         For Each item As Order In Book
             If item.customer_id = cust Then
                 Return True
