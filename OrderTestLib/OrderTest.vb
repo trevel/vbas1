@@ -36,7 +36,7 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
         Assert.AreEqual(o.ID, 1)
         Assert.AreEqual(o.customer_id, 1)
         Assert.AreEqual(o.order_date, Today)
-        Assert.AreEqual(o.discount, 10)
+        Assert.AreEqual(o.discount, 10.0)
 
     End Sub
 
