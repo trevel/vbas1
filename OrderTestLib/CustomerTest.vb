@@ -47,61 +47,61 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
     End Sub
 
     ' Try an invalid name
-    <TestMethod(), ExpectedException(GetType(ArgumentException))> Public Sub Test_Name_fail_1()
+    <TestMethod(), ExpectedException(GetType(ArgumentException))> Public Sub cust_Name_fail_1()
         cust1.name = "13"
         Assert.AreNotEqual(cust1.name, "13")
     End Sub
 
-    <TestMethod(), ExpectedException(GetType(ArgumentException))> Public Sub Test_Name_fail_2()
+    <TestMethod(), ExpectedException(GetType(ArgumentException))> Public Sub cust_Name_fail_2()
         cust1.name = ""
         Assert.AreNotEqual(cust1.name, "")
     End Sub
 
-    <TestMethod()> Public Sub Test_Name_pass_1()
+    <TestMethod()> Public Sub cust_Name_pass_1()
         Assert.AreNotEqual(cust1.name, "Bubba")
         cust1.name = "Bubba"
         Assert.AreEqual(cust1.name, "Bubba")
     End Sub
 
-    <TestMethod()> Public Sub Test_Name_pass_2()
+    <TestMethod()> Public Sub cust_Name_pass_2()
         Assert.AreNotEqual(cust1.name, "Billy Joe")
         cust1.name = "Billy Joe"
     End Sub
 
-    <TestMethod()> Public Sub Test_Phone_pass_1()
+    <TestMethod()> Public Sub cust_Phone_pass_1()
         cust1.phone_number = "(905) 123-3122"
         Assert.AreEqual(cust1.phone_number, "(905) 123-3122")
     End Sub
 
-    <TestMethod()> Public Sub Test_Phone_pass_2()
+    <TestMethod()> Public Sub cust_Phone_pass_2()
         Dim value As String = "123-312-8324"
         cust1.phone_number = value
         Assert.AreEqual(cust1.phone_number, value)
     End Sub
 
 
-    <TestMethod(), ExpectedException(GetType(ArgumentException))> Public Sub Test_Phone_fail_1()
+    <TestMethod(), ExpectedException(GetType(ArgumentException))> Public Sub cust_Phone_fail_1()
         cust1.phone_number = "231-1234-312"
         Assert.AreNotEqual(cust1.phone_number, "213-123-3122")
     End Sub
-    <TestMethod(), ExpectedException(GetType(ArgumentException))> Public Sub Test_Phone_fail_2()
+    <TestMethod(), ExpectedException(GetType(ArgumentException))> Public Sub cust_Phone_fail_2()
         Dim Value = "123-3122"
         cust1.phone_number = Value
         Assert.AreNotEqual(cust1.phone_number, Value)
     End Sub
 
-    <TestMethod()> Public Sub Test_email_pass_1()
+    <TestMethod()> Public Sub cust_email_pass_1()
         Dim value = "joe@email.com"
         cust1.email = value
         Assert.AreEqual(cust1.email, value)
     End Sub
-    <TestMethod()> Public Sub Test_email_pass_2()
+    <TestMethod()> Public Sub cust_email_pass_2()
         Dim value = "joe.32l.here@place.ca"
         cust1.email = value
         Assert.AreEqual(cust1.email, value)
     End Sub
 
-    <TestMethod(), ExpectedException(GetType(ArgumentException))> Public Sub Test_email_fail_1()
+    <TestMethod(), ExpectedException(GetType(ArgumentException))> Public Sub cust_email_fail_1()
         Dim Value = "joe.soil.place.ca"
         cust1.email = Value
         Assert.AreNotEqual(cust1.email, Value)
