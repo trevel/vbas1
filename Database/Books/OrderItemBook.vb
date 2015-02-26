@@ -94,6 +94,17 @@
             End If
         Next
     End Sub
+
+    Function GetListByOrderID(order_id As Integer) As List(Of OrderItem)
+        Dim result As New List(Of OrderItem)
+        For Each item As OrderItem In Book
+            If item.order_id = order_id Then
+                result.Add(item)
+            End If
+        Next
+        Return result
+    End Function
+
 End Class
 
 

@@ -386,11 +386,18 @@ Public Module Assign1
         If record Is Nothing Then
             Console.WriteLine("Order not found -- something went wrong")
         Else
-            Console.WriteLine(record.ToString())
-            Dim orderlines() As String = orderitembook.GetByOrderID(record.ID)
-            For Each item As String In orderlines
-                Console.WriteLine(item)
+            Console.WriteLine("Order #{0}   Date {1:yyyy-MM-dd}", record.ID, record.order_date)
+            Console.WriteLine("{0}", addressbook.GetShippingAddress(record.customer.ID).ToFancyString)
+            Dim orderlines As List(Of OrderItem) = orderitembook.GetListByOrderID(record.ID)
+            Dim total As Double = 0
+            For Each item As OrderItem In orderlines
+                Console.WriteLine("{0}, {1:0} at {2:$0.00}: {3:$0.00}; shipped on {4:yyyy-MM-dd}", item.product.Description, item.quantity, item.product.Price, item.quantity * item.product.Price, item.ship_date)
+                total += item.quantity * item.product.Price
             Next
+            Console.WriteLine()
+            Console.WriteLine("Subtotal: {0:$0.00}", total)
+            Console.WriteLine("with discount {0:0.0}%", record.discount)
+            Console.WriteLine("Total: {0:$0.00}", total * (1 - record.discount / 100))
         End If
     End Sub
 
@@ -804,7 +811,5 @@ Public Module Assign1
             orderitembook.RemoveByOrderID(item.ID)
         End If
     End Sub
-
-
 
 End Module

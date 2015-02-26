@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports CSLib
+Imports System.Text
 
 '*****************************************************************************************
 ' Student Names: Laurie Shields (034448142)
@@ -131,4 +132,13 @@ Imports CSLib
             Return Me.ID & "::" & Me.cust_id & "," & Me.street & "," & Me.city & "," & Me.province & "," & Me.postal_code
         End If
     End Function
+
+    Function ToFancyString() As Object
+        Dim sb As New StringBuilder
+        sb.AppendLine(Me.customer.name)
+        sb.AppendLine(Me.street)
+        sb.Append(Me.city).Append(", ").Append(Me.province).Append(", ").Append(Me.postal_code)
+        Return sb.ToString
+    End Function
+
 End Class
