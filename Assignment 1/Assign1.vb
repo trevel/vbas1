@@ -141,6 +141,9 @@ Public Module Assign1
     Private Sub CustomerEdit()
         Dim recordtoedit As Short = GetChoiceID("Customer to Edit", customerbook.tostring().Split(Environment.NewLine))
         If recordtoedit = -1 Then
+            ' User hit Q
+            Exit Sub
+        ElseIf recordtoedit = 0 Then
             Console.WriteLine("No records found")
             Exit Sub
         End If
@@ -242,6 +245,9 @@ Public Module Assign1
     Private Sub CustomerRemove()
         Dim recordtoedit As Short = GetChoiceID("Customer to Remove", customerbook.tostring().Split(Environment.NewLine))
         If recordtoedit = -1 Then
+            ' User hit q
+            Exit Sub
+        ElseIf recordtoedit = 0 Then
             Console.WriteLine("No records found")
             Exit Sub
         End If
@@ -299,6 +305,9 @@ Public Module Assign1
     Private Sub ProductEdit()
         Dim recordtoedit As Short = GetChoiceID("Product to Edit", productbook.tostring().Split(Environment.NewLine))
         If recordtoedit = -1 Then
+            ' user hit q
+            Exit Sub
+        ElseIf recordtoedit = 0 Then
             Console.WriteLine("No records found")
             Exit Sub
         End If
@@ -336,6 +345,9 @@ Public Module Assign1
     Private Sub ProductRemove()
         Dim recordtoedit As Short = GetChoiceID("Product to Remove", productbook.tostring().Split(Environment.NewLine))
         If recordtoedit = -1 Then
+            ' user hit q
+            Exit Sub
+        ElseIf recordtoedit = 0 Then
             Console.WriteLine("No records found")
             Exit Sub
         End If
@@ -379,6 +391,9 @@ Public Module Assign1
     Private Sub OrderViewDetail()
         Dim recordtoedit As Short = GetChoiceID("Select an order to view:", orderbook.tostring().Split(Environment.NewLine))
         If recordtoedit = -1 Then
+            'User hit q
+            Exit Sub
+        ElseIf recordtoedit = 0 Then
             Console.WriteLine("No records found")
             Exit Sub
         End If
@@ -418,6 +433,9 @@ Public Module Assign1
         ' Let them pick a customer for the order
         Dim cust_choice As Short = GetChoiceID("Choose a Customer", customerbook.tostring().Split(Environment.NewLine))
         If cust_choice = -1 Then
+            ' user hit q
+            Exit Sub
+        ElseIf cust_choice = 0 Then
             Console.WriteLine("No customers found. You need to add some customers before creating orders.")
             Exit Sub
         End If
@@ -448,6 +466,9 @@ Public Module Assign1
         Do While items.Count <= 10
             Dim product_choice As Short = GetChoiceID("Choose a Product", products)
             If product_choice = -1 Then
+                ' User hit q
+                Exit Do
+            ElseIf product_choice = 0 Then
                 Console.WriteLine("No products found")
                 Exit Do
             End If
@@ -471,6 +492,9 @@ Public Module Assign1
     Private Sub OrderEdit()
         Dim recordtoedit As Short = GetChoiceID("Select an order to modify:", orderbook.tostring().Split(Environment.NewLine))
         If recordtoedit = -1 Then
+            ' user hit q
+            Exit Sub
+        ElseIf recordtoedit = 0 Then
             Console.WriteLine("No records found")
             Exit Sub
         End If
@@ -508,7 +532,10 @@ Public Module Assign1
             End If
             Dim product_choice As Short = GetChoiceID("Choose a Product", productbook.tostring().Split(Environment.NewLine))
             If product_choice = -1 Then
-                Console.WriteLine("No products found. You need to add some products before creating orders.")
+                ' user hit q
+                Exit Do
+            ElseIf product_choice = 0 Then
+                Console.WriteLine("No products found, please add some products!")
                 Exit Do
             End If
             Dim prod_record As Product = productbook.GetByID(product_choice)
@@ -534,6 +561,10 @@ Public Module Assign1
         End If
         Dim recordtoedit As Short = GetChoiceID("Select an item to remove:", orderlines)
         If recordtoedit = -1 Then
+            ' user hit q
+            Exit Sub
+        ElseIf recordtoedit = 0 Then
+            Console.WriteLine("No order items found")
             Exit Sub
         End If
         Dim item As OrderItem = orderitembook.GetByID(recordtoedit)
@@ -551,6 +582,9 @@ Public Module Assign1
     Private Sub OrderRemove()
         Dim recordtoedit As Short = GetChoiceID("Select an order to delete:", orderbook.tostring().Split(Environment.NewLine))
         If recordtoedit = -1 Then
+            ' user hit q
+            Exit Sub
+        ElseIf recordtoedit = 0 Then
             Console.WriteLine("No records found")
             Exit Sub
         End If
@@ -569,6 +603,9 @@ Public Module Assign1
     Private Sub OrderShip()
         Dim recordtoedit As Short = GetChoiceID("Select an order to ship:", orderitembook.GetOrdersThatCanShip())
         If recordtoedit = -1 Then
+            ' user hit q
+            Exit Sub
+        ElseIf recordtoedit = 0 Then
             Console.WriteLine("No records found")
             Exit Sub
         End If
@@ -617,7 +654,7 @@ Public Module Assign1
         Dim i As Integer = 0
 
         If choices Is Nothing OrElse choices(0) = "- Empty -" Then
-            Return -1
+            Return 0
         End If
 
         Console.WriteLine(title)
