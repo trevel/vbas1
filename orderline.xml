@@ -128,8 +128,8 @@
 <_order_id>3</_order_id>
 <_product_id>1</_product_id>
 <_quantity>1</_quantity>
-<_ship_date>0001-01-01T00:00:00.0000000-05:00</_ship_date>
-<_has_shipped>false</_has_shipped>
+<_ship_date>2015-02-25T00:00:00.0000000-05:00</_ship_date>
+<_has_shipped>true</_has_shipped>
 <_order href="#ref-42"/>
 <_product href="#ref-41"/>
 <m_ID>12</m_ID>
@@ -140,8 +140,8 @@
 <_order_id>3</_order_id>
 <_product_id>2</_product_id>
 <_quantity>2</_quantity>
-<_ship_date>0001-01-01T00:00:00.0000000-05:00</_ship_date>
-<_has_shipped>false</_has_shipped>
+<_ship_date>2015-02-25T00:00:00.0000000-05:00</_ship_date>
+<_has_shipped>true</_has_shipped>
 <_order href="#ref-42"/>
 <_product href="#ref-40"/>
 <m_ID>13</m_ID>
@@ -152,8 +152,8 @@
 <_order_id>3</_order_id>
 <_product_id>3</_product_id>
 <_quantity>3</_quantity>
-<_ship_date>0001-01-01T00:00:00.0000000-05:00</_ship_date>
-<_has_shipped>false</_has_shipped>
+<_ship_date>2015-02-25T00:00:00.0000000-05:00</_ship_date>
+<_has_shipped>true</_has_shipped>
 <_order href="#ref-42"/>
 <_product href="#ref-43"/>
 <m_ID>14</m_ID>
@@ -164,8 +164,8 @@
 <_order_id>3</_order_id>
 <_product_id>4</_product_id>
 <_quantity>4</_quantity>
-<_ship_date>0001-01-01T00:00:00.0000000-05:00</_ship_date>
-<_has_shipped>false</_has_shipped>
+<_ship_date>2015-02-25T00:00:00.0000000-05:00</_ship_date>
+<_has_shipped>true</_has_shipped>
 <_order href="#ref-42"/>
 <_product href="#ref-39"/>
 <m_ID>15</m_ID>
@@ -176,8 +176,8 @@
 <_order_id>3</_order_id>
 <_product_id>1</_product_id>
 <_quantity>33</_quantity>
-<_ship_date>0001-01-01T00:00:00.0000000-05:00</_ship_date>
-<_has_shipped>false</_has_shipped>
+<_ship_date>2015-02-25T00:00:00.0000000-05:00</_ship_date>
+<_has_shipped>true</_has_shipped>
 <_order href="#ref-42"/>
 <_product href="#ref-41"/>
 <m_ID>16</m_ID>
@@ -212,8 +212,8 @@
 <_order_id>3</_order_id>
 <_product_id>4</_product_id>
 <_quantity>44</_quantity>
-<_ship_date>0001-01-01T00:00:00.0000000-05:00</_ship_date>
-<_has_shipped>false</_has_shipped>
+<_ship_date>2015-02-25T00:00:00.0000000-05:00</_ship_date>
+<_has_shipped>true</_has_shipped>
 <_order href="#ref-42"/>
 <_product href="#ref-39"/>
 <m_ID>19</m_ID>
@@ -269,7 +269,7 @@
 <a1:Product id="ref-39" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <_Description id="ref-46">Spacefish</_Description>
 <_Price>9</_Price>
-<_Inventory>220</_Inventory>
+<_Inventory>172</_Inventory>
 <m_ID>4</m_ID>
 <Record_x002B_m_ID>4</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
@@ -277,7 +277,7 @@
 <a1:Product id="ref-40" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <_Description id="ref-47">sunfish</_Description>
 <_Price>12</_Price>
-<_Inventory>20</_Inventory>
+<_Inventory>18</_Inventory>
 <m_ID>2</m_ID>
 <Record_x002B_m_ID>2</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
@@ -285,7 +285,7 @@
 <a1:Product id="ref-41" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <_Description id="ref-48">goldfish</_Description>
 <_Price>82</_Price>
-<_Inventory>100</_Inventory>
+<_Inventory>66</_Inventory>
 <m_ID>1</m_ID>
 <Record_x002B_m_ID>1</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
@@ -303,7 +303,7 @@
 <a1:Product id="ref-43" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <_Description id="ref-49">Salmon</_Description>
 <_Price>99.3</_Price>
-<_Inventory>22</_Inventory>
+<_Inventory>19</_Inventory>
 <m_ID>3</m_ID>
 <Record_x002B_m_ID>3</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
@@ -324,7 +324,9 @@
 <_phone_number id="ref-53">905-111-2222</_phone_number>
 <_credit_limit>111</_credit_limit>
 <_mailing_address_id>1</_mailing_address_id>
-<_shipping_address_id>2</_shipping_address_id>
+<_shipping_address_id>1</_shipping_address_id>
+<_mailing_address xsi:null="1"/>
+<_shipping_address xsi:null="1"/>
 <m_ID>1</m_ID>
 <Record_x002B_m_ID>1</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
@@ -334,18 +336,17 @@
 <_email id="ref-55">lkj@asdf.com</_email>
 <_phone_number id="ref-56">111-222-3333</_phone_number>
 <_credit_limit>999</_credit_limit>
-<_mailing_address_id>0</_mailing_address_id>
-<_shipping_address_id>4</_shipping_address_id>
+<_mailing_address_id>1</_mailing_address_id>
+<_shipping_address_id>1</_shipping_address_id>
+<_mailing_address xsi:null="1"/>
+<_shipping_address xsi:null="1"/>
 <m_ID>3</m_ID>
 <Record_x002B_m_ID>3</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
 </a1:Customer>
 </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
-phone_number>
-<_credit_limit>9999</_credit_limit>
-<_mailing_address_id>1</_mailing_address_id>
-<_shipping_address_id>1</_shipping_address_id>
+g_address_id>
 <_mailing_address xsi:null="1"/>
 <_shipping_address xsi:null="1"/>
 <m_ID>1</m_ID>

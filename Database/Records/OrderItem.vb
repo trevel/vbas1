@@ -65,7 +65,7 @@ Imports System.IO
                 _has_shipped = False
             Else
                 _has_shipped = True
-                _ship_date = _ship_date
+                _ship_date = value
             End If
         End Set
     End Property

@@ -23,7 +23,7 @@
 <a1:Product id="ref-6" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <_Description id="ref-11">goldfish</_Description>
 <_Price>82</_Price>
-<_Inventory>100</_Inventory>
+<_Inventory>66</_Inventory>
 <m_ID>1</m_ID>
 <Record_x002B_m_ID>1</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
@@ -31,7 +31,7 @@
 <a1:Product id="ref-7" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <_Description id="ref-12">sunfish</_Description>
 <_Price>12</_Price>
-<_Inventory>20</_Inventory>
+<_Inventory>18</_Inventory>
 <m_ID>2</m_ID>
 <Record_x002B_m_ID>2</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
@@ -39,7 +39,7 @@
 <a1:Product id="ref-8" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <_Description id="ref-13">Salmon</_Description>
 <_Price>99.3</_Price>
-<_Inventory>22</_Inventory>
+<_Inventory>19</_Inventory>
 <m_ID>3</m_ID>
 <Record_x002B_m_ID>3</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
@@ -47,7 +47,7 @@
 <a1:Product id="ref-9" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <_Description id="ref-14">Spacefish</_Description>
 <_Price>9</_Price>
-<_Inventory>220</_Inventory>
+<_Inventory>172</_Inventory>
 <m_ID>4</m_ID>
 <Record_x002B_m_ID>4</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
@@ -62,3 +62,4 @@
 </a1:Product>
 </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
+

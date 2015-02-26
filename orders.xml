@@ -100,7 +100,9 @@
 <_phone_number id="ref-30">905-111-2222</_phone_number>
 <_credit_limit>111</_credit_limit>
 <_mailing_address_id>1</_mailing_address_id>
-<_shipping_address_id>2</_shipping_address_id>
+<_shipping_address_id>1</_shipping_address_id>
+<_mailing_address xsi:null="1"/>
+<_shipping_address xsi:null="1"/>
 <m_ID>1</m_ID>
 <Record_x002B_m_ID>1</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
@@ -110,18 +112,17 @@
 <_email id="ref-32">lkj@asdf.com</_email>
 <_phone_number id="ref-33">111-222-3333</_phone_number>
 <_credit_limit>999</_credit_limit>
-<_mailing_address_id>0</_mailing_address_id>
-<_shipping_address_id>4</_shipping_address_id>
+<_mailing_address_id>1</_mailing_address_id>
+<_shipping_address_id>1</_shipping_address_id>
+<_mailing_address xsi:null="1"/>
+<_shipping_address xsi:null="1"/>
 <m_ID>3</m_ID>
 <Record_x002B_m_ID>3</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
 </a1:Customer>
 </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
-_phone_number>
-<_credit_limit>9999</_credit_limit>
-<_mailing_address_id>1</_mailing_address_id>
-<_shipping_address_id>1</_shipping_address_id>
+ess_id>
 <_mailing_address xsi:null="1"/>
 <_shipping_address xsi:null="1"/>
 <m_ID>1</m_ID>
