@@ -5,10 +5,10 @@
 <DeleteOrderEvent href="#ref-4"/>
 <Book href="#ref-5"/>
 <header id="ref-6">ID,ORDER_DATE,DISCOUNT,CUST_ID</header>
-<_next_id>5</_next_id>
+<_next_id>6</_next_id>
 <Book_x0060_1_x002B_Book href="#ref-5"/>
 <Book_x0060_1_x002B_header href="#ref-6"/>
-<Book_x0060_1_x002B__next_id>5</Book_x0060_1_x002B__next_id>
+<Book_x0060_1_x002B__next_id>6</Book_x0060_1_x002B__next_id>
 </a1:OrderBook>
 <a2:DelegateSerializationHolder id="ref-3" xmlns:a2="http://schemas.microsoft.com/clr/ns/System">
 <Delegate href="#ref-7"/>
@@ -20,8 +20,8 @@
 </a2:DelegateSerializationHolder>
 <a3:ArrayList id="ref-5" xmlns:a3="http://schemas.microsoft.com/clr/ns/System.Collections">
 <_items href="#ref-11"/>
-<_size>3</_size>
-<_version>3</_version>
+<_size>4</_size>
+<_version>4</_version>
 </a3:ArrayList>
 <a2:DelegateSerializationHolder_x002B_DelegateEntry id="ref-7" xmlns:a2="http://schemas.microsoft.com/clr/ns/System">
 <type id="ref-12">Database.OrderBook+NewOrderEventHandler</type>
@@ -63,13 +63,14 @@
 <item href="#ref-23"/>
 <item href="#ref-24"/>
 <item href="#ref-25"/>
+<item href="#ref-26"/>
 </SOAP-ENC:Array>
 <a1:Order id="ref-23" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <_customer_id>1</_customer_id>
 <_order_date>2015-02-24T00:00:00.0000000-05:00</_order_date>
 <_discount>15</_discount>
-<_item_count>4</_item_count>
-<_customer href="#ref-26"/>
+<_item_count>3</_item_count>
+<_customer href="#ref-27"/>
 <m_ID>2</m_ID>
 <Record_x002B_m_ID>2</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
@@ -78,8 +79,8 @@
 <_customer_id>1</_customer_id>
 <_order_date>2015-02-24T00:00:00.0000000-05:00</_order_date>
 <_discount>12</_discount>
-<_item_count>9</_item_count>
-<_customer href="#ref-26"/>
+<_item_count>4</_item_count>
+<_customer href="#ref-27"/>
 <m_ID>3</m_ID>
 <Record_x002B_m_ID>3</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
@@ -89,15 +90,25 @@
 <_order_date>2015-02-24T00:00:00.0000000-05:00</_order_date>
 <_discount>10</_discount>
 <_item_count>2</_item_count>
-<_customer href="#ref-27"/>
+<_customer href="#ref-28"/>
 <m_ID>4</m_ID>
 <Record_x002B_m_ID>4</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
 </a1:Order>
-<a1:Customer id="ref-26" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<_name id="ref-28">Laurie Shields</_name>
-<_email id="ref-29">laurie_shields@hotmail.com</_email>
-<_phone_number id="ref-30">905-111-2222</_phone_number>
+<a1:Order id="ref-26" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_customer_id>2</_customer_id>
+<_order_date>2015-02-26T00:00:00.0000000-05:00</_order_date>
+<_discount>95</_discount>
+<_item_count>2</_item_count>
+<_customer href="#ref-29"/>
+<m_ID>5</m_ID>
+<Record_x002B_m_ID>5</Record_x002B_m_ID>
+<Record_x002B__active>false</Record_x002B__active>
+</a1:Order>
+<a1:Customer id="ref-27" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_name id="ref-30">Laurie Shields</_name>
+<_email id="ref-31">laurie_shields@hotmail.com</_email>
+<_phone_number id="ref-32">905-111-2222</_phone_number>
 <_credit_limit>111</_credit_limit>
 <_mailing_address_id>1</_mailing_address_id>
 <_shipping_address_id>2</_shipping_address_id>
@@ -105,10 +116,10 @@
 <Record_x002B_m_ID>1</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
 </a1:Customer>
-<a1:Customer id="ref-27" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<_name id="ref-31">blaha</_name>
-<_email id="ref-32">lkj@asdf.com</_email>
-<_phone_number id="ref-33">111-222-3333</_phone_number>
+<a1:Customer id="ref-28" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_name id="ref-33">blaha</_name>
+<_email id="ref-34">lkj@asdf.com</_email>
+<_phone_number id="ref-35">111-222-3333</_phone_number>
 <_credit_limit>999</_credit_limit>
 <_mailing_address_id>1</_mailing_address_id>
 <_shipping_address_id>4</_shipping_address_id>
@@ -116,31 +127,15 @@
 <Record_x002B_m_ID>3</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
 </a1:Customer>
-</SOAP-ENV:Body>
-</SOAP-ENV:Envelope>
-B_m_ID>3</Record_x002B_m_ID>
-<Record_x002B__active>false</Record_x002B__active>
-</a1:Customer>
-</SOAP-ENV:Body>
-</SOAP-ENV:Envelope>
-ess_id>
-<_mailing_address xsi:null="1"/>
-<_shipping_address xsi:null="1"/>
-<m_ID>1</m_ID>
-<Record_x002B_m_ID>1</Record_x002B_m_ID>
-<Record_x002B__active>false</Record_x002B__active>
-</a1:Customer>
 <a1:Customer id="ref-29" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<_name id="ref-33">blaha</_name>
-<_email id="ref-34">lkj@asdf.com</_email>
-<_phone_number id="ref-35">111-222-3333</_phone_number>
-<_credit_limit>999</_credit_limit>
-<_mailing_address_id>1</_mailing_address_id>
-<_shipping_address_id>1</_shipping_address_id>
-<_mailing_address xsi:null="1"/>
-<_shipping_address xsi:null="1"/>
-<m_ID>3</m_ID>
-<Record_x002B_m_ID>3</Record_x002B_m_ID>
+<_name id="ref-36">Mark</_name>
+<_email id="ref-37">blah@blah.ca</_email>
+<_phone_number id="ref-38">905-111-2222</_phone_number>
+<_credit_limit>3</_credit_limit>
+<_mailing_address_id>3</_mailing_address_id>
+<_shipping_address_id>0</_shipping_address_id>
+<m_ID>2</m_ID>
+<Record_x002B_m_ID>2</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
 </a1:Customer>
 </SOAP-ENV:Body>
