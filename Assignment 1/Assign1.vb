@@ -693,14 +693,16 @@ Public Module Assign1
                 Case -1
                     Return -1
                 Case 1
-                    addressbook = addressbook.Load(ADDRESS_CSV_PATH)
+                    ' this order is important. Customer before Addressbook and Orderbook; Product and Order before OrderItem
                     customerbook = customerbook.Load(CUSTOMER_CSV_PATH)
+                    addressbook = addressbook.Load(ADDRESS_CSV_PATH)
                     productbook = productbook.Load(PRODUCTS_CSV_PATH)
                     orderbook = orderbook.Load(ORDERS_CSV_PATH)
                     orderitembook = orderitembook.Load(ORDERLINE_CSV_PATH)
                 Case 2
-                    addressbook = addressbook.Load(ADDRESS_XML_PATH)
+                    ' this order is less important, but might as well be the same
                     customerbook = customerbook.Load(CUSTOMER_XML_PATH)
+                    addressbook = addressbook.Load(ADDRESS_XML_PATH)
                     productbook = productbook.Load(PRODUCTS_XML_PATH)
                     orderbook = orderbook.Load(ORDERS_XML_PATH)
                     orderitembook = orderitembook.Load(ORDERLINE_XML_PATH)

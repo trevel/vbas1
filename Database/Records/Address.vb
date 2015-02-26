@@ -126,9 +126,9 @@ Imports CSLib
 
     Public Overrides Function ToString() As String
         If customer IsNot Nothing Then
-            Return Me.ID & "::" & Me.customer.name & "," & Me.street & "," & Me.city & "," & Me.province & "," & Me.postal_code & "," & Me.type
+            Return Me.ID & "::" & Me.customer.name & "," & Me.street & "," & Me.city & "," & Me.province & "," & Me.postal_code
         Else
-            Return Me.ID & "::" & Me.cust_id & "," & Me.street & "," & Me.city & "," & Me.province & "," & Me.postal_code & "," & Me.type
+            Return Me.ID & "::" & Me.cust_id & "," & Me.street & "," & Me.city & "," & Me.province & "," & Me.postal_code
         End If
     End Function
 End Class
