@@ -14,4 +14,18 @@ Imports System.Text.RegularExpressions
         Me.Add(entry)
     End Sub
 
+    Public Function GetProdListNotInOrder(orderlist As List(Of OrderItem)) As String()
+        Dim tempresult As New List(Of Product)
+        For Each item As Product In Book
+            tempresult.Add(item)
+        Next
+        For Each item As OrderItem In orderlist
+            tempresult.Remove(item.product)
+        Next
+        Dim result As New List(Of String)
+        For Each item In tempresult
+            result.Add(item.ToString)
+        Next
+        Return result.ToArray
+    End Function
 End Class

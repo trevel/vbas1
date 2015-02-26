@@ -386,12 +386,19 @@ Public Module Assign1
         If record Is Nothing Then
             Console.WriteLine("Order not found -- something went wrong")
         Else
+            Console.Clear()
             Console.WriteLine("Order #{0}   Date {1:yyyy-MM-dd}", record.ID, record.order_date)
             Console.WriteLine("{0}", addressbook.GetShippingAddress(record.customer.ID).ToFancyString)
             Dim orderlines As List(Of OrderItem) = orderitembook.GetListByOrderID(record.ID)
             Dim total As Double = 0
             For Each item As OrderItem In orderlines
-                Console.WriteLine("{0}, {1:0} at {2:$0.00}: {3:$0.00}; shipped on {4:yyyy-MM-dd}", item.product.Description, item.quantity, item.product.Price, item.quantity * item.product.Price, item.ship_date)
+                Console.Write("{0}, {1:0} at {2:$0.00}: {3:$0.00}; ", item.product.Description, item.quantity, item.product.Price, item.quantity * item.product.Price)
+                If item.ship_date Is Nothing Then
+                    Console.WriteLine("Not yet shipped")
+                Else
+                    Console.WriteLine("shipped on {0:yyyy-MM-dd}", item.ship_date)
+                End If
+
                 total += item.quantity * item.product.Price
             Next
             Console.WriteLine()
@@ -402,7 +409,6 @@ Public Module Assign1
     End Sub
 
     Private Sub OrderAdd()
-        Dim odate As Date = Today
         Dim qty As UInteger
         Dim disc As Double = 0
         Dim order As Order = Nothing
@@ -427,17 +433,11 @@ Public Module Assign1
             Exit Sub
         End If
 
-        ' set the order date
-        Console.WriteLine("Order Date 'yyyy-MM-dd': ")
-        If odate = GetDate("Order Date") Is Nothing Then
-            odate = Today
-        End If
-
         Console.WriteLine("Enter discount %: ")
         disc = GetDouble("Discount")
 
         Try
-            order = New Order(orderbook.next_id, cust_record.GetID(), odate, disc)
+            order = New Order(orderbook.next_id, cust_record.GetID(), Today, disc)
             orderbook.Add(order)
         Catch ex As Exception
             Console.WriteLine(ex.Message)
@@ -446,7 +446,7 @@ Public Module Assign1
 
         ' now they need to pick some items1
         Do While items.Count <= 10
-            Dim product_choice As Short = GetChoiceID("Choose a Product", products)
+            Dim product_choice As Short = GetChoiceID("Choose a Product", productbook.GetProdListNotInOrder(orderitembook.GetListByOrderID(order.ID)))
             If product_choice = -1 Then
                 Console.WriteLine("No products found")
                 Exit Do
@@ -506,7 +506,8 @@ Public Module Assign1
                 Console.WriteLine("Only 10 items are allowed per order")
                 Exit Do
             End If
-            Dim product_choice As Short = GetChoiceID("Choose a Product", productbook.tostring().Split(Environment.NewLine))
+
+            Dim product_choice As Short = GetChoiceID("Choose a Product", productbook.GetProdListNotInOrder(orderitembook.GetListByOrderID(record.ID)))
             If product_choice = -1 Then
                 Console.WriteLine("No products found. You need to add some products before creating orders.")
                 Exit Do
