@@ -3,15 +3,15 @@
 <a1:CustomerBook id="ref-1" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <Book href="#ref-3"/>
 <header id="ref-4">id,name,email,phone_number,credit_limit,mailing_address,shipping_address</header>
-<_next_id>5</_next_id>
+<_next_id>4</_next_id>
 <Book_x0060_1_x002B_Book href="#ref-3"/>
 <Book_x0060_1_x002B_header href="#ref-4"/>
-<Book_x0060_1_x002B__next_id>5</Book_x0060_1_x002B__next_id>
+<Book_x0060_1_x002B__next_id>4</Book_x0060_1_x002B__next_id>
 </a1:CustomerBook>
 <a2:ArrayList id="ref-3" xmlns:a2="http://schemas.microsoft.com/clr/ns/System.Collections">
 <_items href="#ref-5"/>
 <_size>3</_size>
-<_version>5</_version>
+<_version>3</_version>
 </a2:ArrayList>
 <SOAP-ENC:Array id="ref-5" SOAP-ENC:arrayType="xsd:anyType[4]">
 <item href="#ref-6"/>

@@ -51,7 +51,7 @@
                 result.Add(item.ToString)
             End If
         Next
-        Return result.ToArray
+        Return result.ToArray()
     End Function
 
     Public Function IsOrderItemForProduct(prod_id As Integer) As Boolean
@@ -62,6 +62,35 @@
         Next
         Return False
     End Function
+
+    Public Function GetOrdersThatCanShip() As String()
+        Dim orders As New List(Of Order)
+        Dim result As New List(Of String)
+        For Each item As OrderItem In Book
+            If item.quantity <= item.product.Inventory And item.has_shipped = False Then
+                ' item is shippable
+                If orders.Contains(item.order) = False Then
+                    orders.Add(item.order)
+                End If
+            End If
+        Next
+        For Each item As Order In orders
+            result.Add(item.ToString())
+        Next
+        If result.Count = 0 Then
+            Return Nothing
+        End If
+        Return result.ToArray()
+    End Function
+
+    Public Sub ShipAllItemsByOrderId(order_id)
+        For Each item As OrderItem In Book
+            If item.order_id = order_id And item.quantity <= item.product.Inventory Then
+                item.ship_date = Today
+                item.product.removeInventory(item.quantity)
+            End If
+        Next
+    End Sub
 End Class
 
 

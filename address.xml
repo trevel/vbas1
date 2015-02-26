@@ -13,7 +13,6 @@
 <a2:DelegateSerializationHolder id="ref-3" xmlns:a2="http://schemas.microsoft.com/clr/ns/System">
 <Delegate href="#ref-6"/>
 <method0 href="#ref-7"/>
-<method1 href="#ref-7"/>
 </a2:DelegateSerializationHolder>
 <a3:ArrayList id="ref-4" xmlns:a3="http://schemas.microsoft.com/clr/ns/System.Collections">
 <_items href="#ref-8"/>
@@ -27,69 +26,74 @@
 <targetTypeAssembly id="ref-11">Assignment 1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</targetTypeAssembly>
 <targetTypeName id="ref-12">Assignment_1.Assign1</targetTypeName>
 <methodName id="ref-13">NewAddress</methodName>
-<delegateEntry href="#ref-14"/>
+<delegateEntry xsi:null="1"/>
 </a2:DelegateSerializationHolder_x002B_DelegateEntry>
 <a4:MemberInfoSerializationHolder id="ref-7" xmlns:a4="http://schemas.microsoft.com/clr/ns/System.Reflection">
 <Name href="#ref-13"/>
 <AssemblyName href="#ref-11"/>
 <ClassName href="#ref-12"/>
-<Signature id="ref-15">Void NewAddress(Database.Address)</Signature>
-<Signature2 id="ref-16">System.Void NewAddress(Database.Address)</Signature2>
+<Signature id="ref-14">Void NewAddress(Database.Address)</Signature>
+<Signature2 id="ref-15">System.Void NewAddress(Database.Address)</Signature2>
 <MemberType>8</MemberType>
 <GenericArguments xsi:null="1"/>
 </a4:MemberInfoSerializationHolder>
 <SOAP-ENC:Array id="ref-8" SOAP-ENC:arrayType="xsd:anyType[4]">
+<item href="#ref-16"/>
 <item href="#ref-17"/>
 <item href="#ref-18"/>
 <item href="#ref-19"/>
-<item href="#ref-20"/>
 </SOAP-ENC:Array>
-<a2:DelegateSerializationHolder_x002B_DelegateEntry id="ref-14" xmlns:a2="http://schemas.microsoft.com/clr/ns/System">
-<type href="#ref-9"/>
-<assembly href="#ref-10"/>
-<target xsi:type="xsd:anyType" xsi:null="1"/>
-<targetTypeAssembly href="#ref-11"/>
-<targetTypeName href="#ref-12"/>
-<methodName href="#ref-13"/>
-<delegateEntry xsi:null="1"/>
-</a2:DelegateSerializationHolder_x002B_DelegateEntry>
-<a1:Address id="ref-17" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<a1:Address id="ref-16" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <_cust_id>1</_cust_id>
-<_street id="ref-21">23 o&#39;er there</_street>
-<_city id="ref-22">villetown</_city>
-<_province id="ref-23">ON</_province>
-<_postal_code id="ref-24">M1B9B3</_postal_code>
+<_street id="ref-20">23 o&#39;er there</_street>
+<_city id="ref-21">villetown</_city>
+<_province id="ref-22">ON</_province>
+<_postal_code id="ref-23">M1B9B3</_postal_code>
 <_type>mailing_address</_type>
 <_customer xsi:null="1"/>
 <m_ID>1</m_ID>
 <Record_x002B_m_ID>1</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
 </a1:Address>
-<a1:Address id="ref-18" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<a1:Address id="ref-17" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <_cust_id>1</_cust_id>
-<_street id="ref-25">29 o&#39;er here</_street>
-<_city id="ref-26">townville</_city>
-<_province id="ref-27">ON</_province>
-<_postal_code id="ref-28">M5B9A3</_postal_code>
+<_street id="ref-24">29 o&#39;er here</_street>
+<_city id="ref-25">townville</_city>
+<_province id="ref-26">ON</_province>
+<_postal_code id="ref-27">M5B9A3</_postal_code>
 <_type>shipping_address</_type>
 <_customer xsi:null="1"/>
 <m_ID>2</m_ID>
 <Record_x002B_m_ID>2</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
 </a1:Address>
-<a1:Address id="ref-19" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<a1:Address id="ref-18" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
 <_cust_id>2</_cust_id>
-<_street id="ref-29">9 five street</_street>
-<_city id="ref-30">yonderland</_city>
-<_province id="ref-31">ON</_province>
-<_postal_code id="ref-32">A1A1A1</_postal_code>
+<_street id="ref-28">9 five street</_street>
+<_city id="ref-29">yonderland</_city>
+<_province id="ref-30">ON</_province>
+<_postal_code id="ref-31">A1A1A1</_postal_code>
 <_type>mailing_address</_type>
 <_customer xsi:null="1"/>
 <m_ID>3</m_ID>
 <Record_x002B_m_ID>3</Record_x002B_m_ID>
 <Record_x002B__active>false</Record_x002B__active>
 </a1:Address>
-<a1:Address id="ref-20" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<a1:Address id="ref-19" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Database/Database%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<_cust_id>3</_cust_id>
+<_street id="ref-32">5 nine street</_street>
+<_city id="ref-33">landyonder</_city>
+<_province id="ref-34">ON</_province>
+<_postal_code id="ref-35">A2A2A2</_postal_code>
+<_type>shipping_address</_type>
+<_customer xsi:null="1"/>
+<m_ID>4</m_ID>
+<Record_x002B_m_ID>4</Record_x002B_m_ID>
+<Record_x002B__active>false</Record_x002B__active>
+</a1:Address>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+n%3Dnull">
 <_cust_id>3</_cust_id>
 <_street id="ref-33">5 nine street</_street>
 <_city id="ref-34">landyonder</_city>

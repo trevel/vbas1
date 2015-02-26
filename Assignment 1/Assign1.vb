@@ -466,7 +466,23 @@ Public Module Assign1
     End Sub
 
     Private Sub OrderShip()
-        Console.WriteLine("Implement order ship functionality!")
+        Dim recordtoedit As Short = GetChoiceID("Select an order to ship:", orderitembook.GetOrdersThatCanShip())
+        If recordtoedit = -1 Then
+            Console.WriteLine("No records found")
+            Exit Sub
+        End If
+        Dim record As Order = orderbook.GetByID(recordtoedit)
+        If record Is Nothing Then
+            Console.WriteLine("Order not found -- something went wrong")
+        Else
+            Console.WriteLine("Shipping all available items")
+            If record.customer.shipping_address_id = 0 And record.customer.mailing_address_id = 0 Then
+                Console.WriteLine("Unable to ship this order. Please add an address for this customer.")
+            Else
+                orderitembook.ShipAllItemsByOrderId(record.ID)
+            End If
+        End If
+
     End Sub
 
     Private Function GetChoice(title As String, choices As String()) As Int16
@@ -612,7 +628,7 @@ Public Module Assign1
 
     Private Sub SaveData()
         ' write out the various books to csv and soap
-        Console.WriteLine("Serialize all the books and save to csv files")
+        Console.WriteLine("Saving....................")
         If Not addressbook Is Nothing Then
             addressbook.SaveCSV(ADDRESS_CSV_PATH)
             addressbook.SaveXML(ADDRESS_XML_PATH)
