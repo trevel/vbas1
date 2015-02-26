@@ -2,8 +2,7 @@
 ' Student Names: Laurie Shields (034448142)
 '                Mark Lindan (063336143)
 ' CVB815 - OrderItemBook.vb
-' Last Updated On: Feb 24, 2015
-'**********************s*********************************************************************
+'*******************************************************************************************
 
 <Serializable()> Public Class OrderItemBook : Inherits Book(Of OrderItem)
 
