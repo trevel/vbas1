@@ -494,7 +494,11 @@ Public Module Assign1
     End Sub
 
     Private Sub OrderAddItems(record As Order)
-        Do While record.item_count <= 10
+        Do
+            If record.item_count >= 10 Then
+                Console.WriteLine("Only 10 items are allowed per order")
+                Exit Do
+            End If
             Dim product_choice As Short = GetChoiceID("Choose a Product", productbook.tostring().Split(Environment.NewLine))
             If product_choice = -1 Then
                 Console.WriteLine("No products found. You need to add some products before creating orders.")

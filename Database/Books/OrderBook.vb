@@ -10,9 +10,7 @@
     Public Event DeleteOrder(item As Order)
 
     Protected Overrides Sub Interpret(line As String)
-
         Dim entry As New Order(line)
-        RaiseEvent NewOrder(entry)
         Me.Add(entry)
     End Sub
 

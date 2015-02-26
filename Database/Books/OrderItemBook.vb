@@ -12,13 +12,17 @@
 
     Protected Overrides Sub Interpret(line As String)
         Dim entry As New OrderItem(line)
-        RaiseEvent NewItem(entry)
         Me.Add(entry)
     End Sub
 
     Public Overrides Sub Add(item As OrderItem)
         MyBase.Add(item)
         RaiseEvent NewItem(item)
+    End Sub
+
+    Public Overrides Sub Remove(item As OrderItem)
+        MyBase.Remove(item)
+        RaiseEvent DeleteItem(item)
     End Sub
 
     Public Sub RemoveByOrderID(order_id As Integer)
