@@ -71,7 +71,7 @@ Imports System.Text
     Protected Function LoadCSV(Path As String) As Book(Of T)
         Dim line As String = Nothing
 
-        Using sr As New StreamReader(Path)
+        Using sr As StreamReader = My.Computer.FileSystem.OpenTextFileReader(Path)
             ' first line is the header; for some reason we're trusting that it's right, and we're reading the right file. We like to live dangerously
             header = sr.ReadLine()
 
@@ -98,7 +98,7 @@ Imports System.Text
     Protected MustOverride Sub Interpret(line As String)
 
     Public Sub SaveCSV(Path As String)
-        Using sw As New StreamWriter(Path)
+        Using sw As StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(Path, False)
             ' first line is the header; good thing we saved it earlier, huh?
             sw.WriteLine(header)
             For Each item As T In Book
