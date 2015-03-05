@@ -40,8 +40,7 @@ of other types that have similar needs. The reading and writing of the data
 to the CSV files is handled generically with only the specific entity classes
 knowing the details of the fields being stored. The SOAP serialization is
 handled from the book classes, and just requires that any new classes that 
-are created to extend book and record are created as 'Serializable'.
-
+are created to extend book and record are created as 'Serializable'. 
 
 -- TROUBLESHOOTING --
 
@@ -56,7 +55,7 @@ launch the client, otherwise the manual changes would be lost.
 
 -- FAQ --
 
-How do I use Database.Dll in my application?
+Q: How do I use Database.Dll in my application?
 
 1. Unzip the Zip file containing the Database.dll file and store it in a local 
 directory. 
@@ -69,21 +68,47 @@ being used.
 5. Create a new book using:
 	Dim productbook As New ProductBook()
 6. Load the book from file specifying the location of the csv or SOAP XML file:
-	productbook = productbook.Load(PRODUCTS_CSV_PATH)
+	productbook = productbook.Load(PRODUCTS_PATH)
 7. Now you can add/remove entries from the book, using the Add/Remove API.
 8. Before closing your application, the book can be saved using:
 	productbook.SaveCSV(PRODUCTS_CSV_PATH) AND/OR
 	productbook.SaveXML(PRODUCTS_XML_PATH)
 
 
-I have a different kind of record I want to use in my application. Can I still
+Q: I have a different kind of record I want to use in my application. Can I still
 use Database.dll
 
 Yes! A new class can be defined to extend the 'Record' class. Declare your new
-class to be <Serializable> and Inherit from Record. Add any new attributes
-needed to your new class. Now create a corresponding 'Book' class that is also
-<Serializable> and extends 'Book'.
+class to be <Serializable> and Inherit from Record, and implement IRecord. Add 
+any new attributes needed to your new class. Now create a corresponding 'Book' 
+class that is also <Serializable> and extends 'Book'.
 
+Q: My application is loading from CSV but not from XML. 
+
+You are likely running productbook.Load but not assigning the return variable to
+anything; it is being properly loaded in a new book, but then discarded. Capture
+it and you should be fine! 
+
+
+-- INTERACTION BETWEEN BOOKS -- 
+
+Books can refer to other books; in order to keep each book ignorant of the 
+structure of other books, the following compromise was reached: 
+
+1: A record might store a reference to a record in another book (or its own,
+for customized versions of the Book/Record classes). 
+2: For our implementation, this is stored in the child record, referencing the 
+parent. This resolves complexities with a many-to-one structure: each child 
+book is given a public method to return a collection going the other way.
+3: In order to have an active reference rather than an id stored, each child
+record fires an event that can be handled by the client application, which 
+allows the client to make a link if it wishes. You can certainly use the book
+without this link -- getByID exists as a standard method for a reason -- but
+using the exceptions in this manner can give you improved transactional 
+performance. 
+
+See the NewAddress and NewOrderItem methods in the sample file to see how 
+this can happen. 
 
 -- OUR EXPERIENCES --
 

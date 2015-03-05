@@ -58,6 +58,7 @@ Imports System.Text
         Return result.ToArray()
     End Function
 
+    ' Returns a NEW object populated with the object data. 
     Public Function Load(path As String) As Book(Of T)
         If Not File.Exists(path) Then Throw New FileNotFoundException(path + " not found")
         If path.ToUpper().EndsWith(".CSV") Then
